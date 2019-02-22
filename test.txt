@@ -1,1 +1,0 @@
-[[["Home score","1 - 1","2",1.2,8.2,"C.Navrot"],["Home score","1 - 2","3",2.37,28.4,"S.Scheschuk"],["Home score","2 - 3","OT",3.19,41.76,"R.Lough"]],[["Away score","1 - 0","2",1.15,5.35,"A.Heckaman"],["Away score","2 - 2","3",2.77,19.93,"Z.Garrett"]],[["Shots","1","2","3","OT","T"],["University o","4","9","9","4","26"],["M1 Minot Sta","5","16","20","4","45"]]]

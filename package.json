@@ -1,19 +1,27 @@
 {
-  "name": "scoresheet",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
+  "name": "infographic",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "express": "^4.16.4",
-    "node-chartist": "^1.0.5",
-    "plotly.js": "^1.44.4",
-    "plotly.js-dist": "^1.44.4",
-    "request": "^2.88.0"
-  }
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1",
+    "react-plotly.js": "^2.2.0",
+    "plotly.js": "^1.40.1",
+    "react-scripts": "2.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

@@ -5,9 +5,9 @@ let homeScores = [];
 let awayScores = [];
 
 
-(async function () {
-    await scrape_table('http://d15k3om16n459i.cloudfront.net/prostats/gamesheet_full.html?gameid=3364989');
-})()
+ (async function () {
+     await scrape_table('http://pointstreak.com/prostats/gamesheet_full.html?gameid=3385040');
+ })()
 
 function getWebsiteHtml(url) {
     return new Promise((resolve, reject) => {
@@ -116,14 +116,15 @@ async function scrape_table(url) {
     getCoordinates(shots[2], homeScores);
     getCoordinates(shots[1], awayScores);
     makeJSON(homeScores, awayScores, shots);
-   
-   
-    console.log(shots);
-    console.log(score);
-    console.log(penalties);
-    //console.log(teamScore);
-    console.log(awayScores);
-    console.log(homeScores);
+    
+    //return [data1, data2];
+
+    // console.log(shots);
+    // console.log(score);
+    // console.log(penalties);
+    // //console.log(teamScore);
+    // console.log(awayScores);
+    // console.log(homeScores);
 }
 
 //removes all unecessary items from array
@@ -225,11 +226,12 @@ function getCoordinates (shots, p5) {
 
 function makeJSON(item, item2, item3) {
     let everything = [item, item2, item3];
-    myJSON = JSON.stringify(everything);
+    let myJSON = JSON.stringify(everything);
     var fs = require('fs');
     fs.writeFile("test.json", myJSON, function(err) {
     if (err) {
         console.log(err);
     }
-});
+    });
 }
+
