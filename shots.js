@@ -112,17 +112,18 @@ async function scrape_table(url) {
     removeItems(teamScore);
     makeTime(teamScore);
     getHomeScores(teamScore);
-    splitArrayIntoHomeAndAwayScores(teamScore);
     getCoordinates(shots[2], homeScores);
     getCoordinates(shots[1], awayScores);
-    makeJSON(homeScores, awayScores, shots);
+    console.log(homeScores);
+    console.log(awayScores);
+    makeJSON(homeScores, awayScores, shots, penalties);
     
     //return [data1, data2];
 
     // console.log(shots);
     // console.log(score);
     // console.log(penalties);
-    // //console.log(teamScore);
+    // console.log(teamScore);
     // console.log(awayScores);
     // console.log(homeScores);
 }
@@ -143,6 +144,7 @@ function removeItems(p1) {
     return p1;
 }
 
+//converts time from min:sec format to units of time (incorporates periods)
 function makeTime (p2) {
     for (let i = 0; i < p2.length; i++) {
         let a = p2[i][2].split(':');
@@ -168,6 +170,7 @@ function makeTime (p2) {
     return p2;
 }
 
+//Splits array into two arrays containg home or away scores
 function getHomeScores(p3) {
     let score = [];
     score.unshift(['0', '0']);
@@ -178,23 +181,37 @@ function getHomeScores(p3) {
     for (let j = 0; j < p3.length; j++) {
         if (score[j][0] == score[j+1][0]) {
             p3[j].unshift('Home score');
+            homeScores.push(p3[j]);
         } else {
             p3[j].unshift('Away score');
+            awayScores.push(p3[j]);
         }
     }
+    createScoreCount(awayScores);
+    createScoreCount(homeScores);
     return p3;
 }
 
-function splitArrayIntoHomeAndAwayScores(p4) {
-    for (let i = 0; i < p4.length; i++) {
-        if(p4[i][0] == 'Home score') {
-            homeScores.push(p4[i]);
-        } else {
-            awayScores.push(p4[i]);
-        }    
+function createScoreCount(item) {
+    for (let i = 0; i < item.length; i++) {
+        item[i].push(i+1);
     }
-    return p4, homeScores, awayScores;   
 }
+
+
+
+
+// [DEPRECATED]
+// function splitArrayIntoHomeAndAwayScores(p4) {
+//     for (let i = 0; i < p4.length; i++) {
+//         if(p4[i][0] == 'Home score') {
+//             homeScores.push(p4[i]);
+//         } else {
+//             awayScores.push(p4[i]);
+//         }    
+//     }
+//     return p4, homeScores, awayScores;   
+// }
 
 function getCoordinates (shots, p5) {
     for (let i = 0; i < p5.length; i++) {
@@ -218,14 +235,14 @@ function getCoordinates (shots, p5) {
             let z4 = Number(Math.max( Math.round(y4 * 100) / 100).toFixed(2));
             p5[i].splice(4, 0, z4);
         } else {
-            console.log('error');
+            console.log('err');
         }
     }
     return p5;
 }
 
-function makeJSON(item, item2, item3) {
-    let everything = [item, item2, item3];
+function makeJSON(item, item2, item3, item4) {
+    let everything = [item, item2, item3, item4];
     let myJSON = JSON.stringify(everything);
     var fs = require('fs');
     fs.writeFile("test.json", myJSON, function(err) {

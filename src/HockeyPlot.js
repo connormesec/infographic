@@ -115,7 +115,7 @@ function HockeyPlot(props) {
               mode: 'markers+text',
               name: '',
               text: score.title,
-              text_position:'top right',
+              textposition:'top left',
               textfont: { color: '#fff' },
               marker: {color: 'pink'}
             };
