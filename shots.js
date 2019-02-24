@@ -194,7 +194,8 @@ function getHomeScores(p3) {
 
 function createScoreCount(item) {
     for (let i = 0; i < item.length; i++) {
-        item[i].push(i+1);
+        let k = i + 1; 
+        item[i].push(String(i + 1));
     }
 }
 
