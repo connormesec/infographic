@@ -4,6 +4,8 @@ import * as serviceWorker from './serviceWorker';
 
 import Plot from 'react-plotly.js';
 
+
+
 async function scrape_table(_) {
   return formatData([[["Home score","1 - 1","2",1.3599999999999999,22.4,"S.Coulter","1"],["Home score","1 - 2","2",1.3900000000000001,22.85,"J.Warner","2"],["Home score","2 - 3","3",2.22,36.4,"J.Forbes","3"],["Home score","2 - 4","3",2.41,40.2,"L.Bing","4"],["Home score","2 - 5","3",2.46,41.2,"R.Hanson","5"],["Home score","2 - 6","3",2.81,48.2,"J.Pilskalns","6"]],[["Away score","1 - 0","2",1.07,4.28,"B.Rutherford","1"],["Away score","2 - 2","2",1.8199999999999998,7.28,"R.Bagley","2"]],[["Shots","1","2","3","T"],["Montana Tech","4","4","5","13"],["Montana Stat","17","15","20","52"]],[["Power Plays","PP","PIM"],["Montana Tech","1-7","20"],["Montana Stat","3-9","16"]]]);
 }
@@ -43,9 +45,10 @@ function formatData(data) {
   
   formattedData.scores.push(formattedHomeScores);
   formattedData.scores.push(formattedAwayScores);
-
+  console.log(formattedData);
   return formattedData;
 }
+
 /*
 *
 0: (6) ["Home score", "1 - 1", "2", 1.3599999999999999, 22.4, "S.Coulter"]
@@ -64,6 +67,13 @@ function formatData(data) {
 5: (6) [2.81, 48.2, "J.Pilskalns"]
 *
 */
+
+function test() {
+  var fs = require("fs");
+  const json = fs.readFileSync('../../test.json');
+  let obj = JSON.parse(json);
+  console.log(obj);
+}
 
 function formatScores(scores) {
   return scores.map(score => {
@@ -98,6 +108,16 @@ function HockeyPlot(props) {
     <Plot
       data={
         [
+          ...data.teams.map(team => {
+            return {
+              name: team.team_name,
+              x: team.x,
+              y: team.y,
+              type: 'scatter',
+              mode: 'lines+points',
+              marker: {color: 'green'},
+            };
+          }),
           ...data.teams.map(team => {
             return {
               name: team.team_name,
@@ -140,5 +160,4 @@ function HockeyPlot(props) {
     />
   );
 }
-
 export default HockeyPlot;
