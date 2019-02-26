@@ -108,38 +108,69 @@ function HockeyPlot(props) {
     <Plot
       data={
         [
-          ...data.teams.map(team => {
-            return {
-              name: team.team_name,
-              x: team.x,
-              y: team.y,
-              type: 'scatter',
-              mode: 'lines+points',
-              marker: {color: 'green'},
-            };
-          }),
-          ...data.teams.map(team => {
-            return {
-              name: team.team_name,
-              x: team.x,
-              y: team.y,
-              type: 'scatter',
-              mode: 'lines+points',
-              marker: {color: 'red'},
-            };
-          }),
-          ...data.scores.map(score => {
-            return {
-              x: score.x,
-              y: score.y,
-              mode: 'markers+text',
-              name: '',
-              text: score.title,
-              textposition:'top left',
-              textfont: { color: '#fff' },
-              marker: {color: 'pink'}
-            };
-          }),
+          //Home Team Shots
+          { 
+            name: data.teams[0].team_name,
+            x: data.teams[0].x,
+            y: data.teams[0].y,
+            type: 'scatter',
+            mode: 'lines+points',
+            marker: {color: 'green'},
+          },
+          //Away Team Shots 
+          { 
+            name: data.teams[1].team_name,
+            x: data.teams[1].x,
+            y: data.teams[1].y,
+            type: 'scatter',
+            mode: 'lines+points',
+            marker: {color: 'red'},
+          },     
+          // ...data.teams.map(team => {
+          //   return {
+          //     name: team.team_name,
+          //     x: team.x,
+          //     y: team.y,
+          //     type: 'scatter',
+          //     mode: 'lines+points',
+          //     marker: {color: 'red'},
+          //   };
+          // }),
+          
+          //Home Scores
+          {
+            x: data.scores[0].x,
+            y: data.scores[0].y,
+            mode: 'markers+text',
+            name: '',
+            text: data.scores[0].title,
+            textposition:'top left',
+            textfont: { color: '#fff' },
+            marker: { color: 'pink' }
+          },
+          //Away Scores
+          {
+            x: data.scores[1].x,
+            y: data.scores[1].y,
+            mode: 'markers+text',
+            name: '',
+            text: data.scores[1].title,
+            textposition:'top left',
+            textfont: { color: '#fff' },
+            marker: { color: 'pink' }
+          },
+          // ...data.scores.map(score => {
+          //   return {
+          //     x: score.x,
+          //     y: score.y,
+          //     mode: 'markers+text',
+          //     name: '',
+          //     text: score.title,
+          //     textposition:'top left',
+          //     textfont: { color: '#fff' },
+          //     marker: { color: 'pink'}
+          //   };
+          // }),
         ]
       }
       layout={{
