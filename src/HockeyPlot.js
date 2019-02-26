@@ -137,7 +137,7 @@ function HockeyPlot(props) {
           //   };
           // }),
           
-          //Home Scores
+          //Away Scores
           {
             x: data.scores[0].x,
             y: data.scores[0].y,
@@ -148,7 +148,7 @@ function HockeyPlot(props) {
             textfont: { color: '#fff' },
             marker: { color: 'pink' }
           },
-          //Away Scores
+          //Home Scores
           {
             x: data.scores[1].x,
             y: data.scores[1].y,
@@ -157,7 +157,7 @@ function HockeyPlot(props) {
             text: data.scores[1].title,
             textposition:'top left',
             textfont: { color: '#fff' },
-            marker: { color: 'pink' }
+            marker: { color: 'yellow' }
           },
           // ...data.scores.map(score => {
           //   return {
