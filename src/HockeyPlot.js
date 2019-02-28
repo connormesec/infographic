@@ -137,7 +137,7 @@ function HockeyPlot(props) {
           //   };
           // }),
           
-          //Away Scores
+          //AwayScores
           {
             x: data.scores[0].x,
             y: data.scores[0].y,
