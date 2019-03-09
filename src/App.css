@@ -31,3 +31,18 @@
     transform: rotate(360deg);
   }
 }
+
+
+.ppGoals {
+  height: 600px;
+  width: 600px;
+  background-color: #282c34;
+  float: left;
+}
+
+.ppMin {
+  height: 600px;
+  width: 600px;
+  background-color: #282c34;
+  float: left;
+}

@@ -11,26 +11,18 @@ async function scrape_table(_) {
 function formatData(data) {
   const [_, __, ___, penalties] = data;
   
-  const formattedPenalties = {
-    //teamNames: ["Montana State", "Other Team"],
+  const formattedPenaltyMinutes = {
     homeTeamName: ["Montana State"],
     awayTeamName: ["Other Team"],
-    totalHomePenalties: [],
-    totalAwayPenalties: [],
-    ppGoalsHome: [],
-    ppGoalsAway: [],
+    homePenaltyMinutes: [],
+    awayPenaltyMinutes: [],
     color: ['#00205B'],
   };
-  let a = [penalties[1][1].split('-'), penalties[2][1].split('-')];
-  let b = Number(a[0][1] - a[0][0]);
-  let c = Number(a[1][1] - a[1][0]);
+
+  formattedPenaltyMinutes.awayPenaltyMinutes = [penalties[1][2]];
+  formattedPenaltyMinutes.homePenaltyMinutes = [penalties[2][2]];
     
-  formattedPenalties.totalHomePenalties = [c];
-  formattedPenalties.totalAwayPenalties = [b];
-  formattedPenalties.ppGoalsHome = [a[1][0]];
-  formattedPenalties.ppGoalsAway = [a[0][0]];
-    
-  return formattedPenalties;
+  return formattedPenaltyMinutes;
 }
 
 /*
@@ -61,7 +53,7 @@ function test() {
 
 
 
-function HockeyGraph(props) {
+function penaltyMinutesGraph(props) {
   const [data, setData] = useState(null);
 
   useEffect(async () => {
@@ -81,33 +73,17 @@ function HockeyGraph(props) {
           //Home Team Shots
           { 
             x: data.homeTeamName,
-            y: data.ppGoalsHome,
+            y: data.homePenaltyMinutes,
             type: 'bar',
             mode: 'lines+points',
             marker: {color: data.color},
           },
           { 
-            x: data.homeTeamName,
-            y: data.totalHomePenalties,
-            type: 'bar',
-            mode: 'lines+points',
-            marker: {color: 'grey'},
-            opacity: 0.2,
-          },
-          { 
             x: data.awayTeamName,
-            y: data.ppGoalsAway,
+            y: data.awayPenaltyMinutes,
             type: 'bar',
             mode: 'lines+points',
             marker: {color: 'green'},
-          },
-          { 
-            x: data.awayTeamName,
-            y: data.totalAwayPenalties,
-            type: 'bar',
-            mode: 'lines+points',
-            marker: {color: 'grey'},
-            opacity: 0.2,
           },
         ]
       }
@@ -115,14 +91,17 @@ function HockeyGraph(props) {
         width: 600,
         height: 600,
         barmode: 'stack',
+        font: {
+            family: 'Courier New, monospace',
+            size: 72,
+            color: '#7f7f7f'
+        },
         plot_bgcolor: '#2d343e',
         paper_bgcolor: '#2d343e',
         showlegend: false,
         xaxis: {
           color: '#aaa',
           autotick: true,
-          
-          
           tickmode: 'array',
         },
         yaxis: { color: '#aaa' },
@@ -130,4 +109,4 @@ function HockeyGraph(props) {
     />
   );
 }
-export default HockeyGraph;
+export default penaltyMinutesGraph;

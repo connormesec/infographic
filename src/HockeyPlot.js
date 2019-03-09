@@ -1,6 +1,5 @@
-import React, { Component, useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
+import React, { useState, useEffect } from 'react';
+
 
 import Plot from 'react-plotly.js';
 
@@ -115,7 +114,10 @@ function HockeyPlot(props) {
             y: data.teams[0].y,
             type: 'scatter',
             mode: 'lines+points',
-            marker: {color: 'green'},
+            line: {
+              color: 'green',
+              width: 10
+            }
           },
           //Away Team Shots 
           { 
@@ -124,7 +126,10 @@ function HockeyPlot(props) {
             y: data.teams[1].y,
             type: 'scatter',
             mode: 'lines+points',
-            marker: {color: 'red'},
+            line: {
+              color: 'red',
+              width: 10
+            }
           },     
           // ...data.teams.map(team => {
           //   return {
@@ -142,22 +147,29 @@ function HockeyPlot(props) {
             x: data.scores[0].x,
             y: data.scores[0].y,
             mode: 'markers+text',
-            name: '',
             text: data.scores[0].title,
             textposition:'top left',
-            textfont: { color: '#fff' },
-            marker: { color: 'pink' }
+            textfont: { 
+              color: '#fff',
+              size: 20,
+            },
+            marker: { 
+              color: 'pink',
+              size: 20,
+           }
           },
           //Home Scores
           {
             x: data.scores[1].x,
             y: data.scores[1].y,
             mode: 'markers+text',
-            name: '',
             text: data.scores[1].title,
             textposition:'top left',
             textfont: { color: '#fff' },
-            marker: { color: 'yellow' }
+            marker: { 
+              color: 'yellow',
+              size: 20
+             },
           },
           // ...data.scores.map(score => {
           //   return {
@@ -186,7 +198,11 @@ function HockeyPlot(props) {
           ticktext: ['End of 1st', 'End of 2nd', 'End of 3rd'],
           tickmode: 'array',
         },
-        yaxis: { color: '#aaa' },
+        yaxis: { 
+          color: '#aaa',
+          zerolinecolor: '#969696',
+          zerolinewidth: 4,
+        },
       }}
     />
   );
