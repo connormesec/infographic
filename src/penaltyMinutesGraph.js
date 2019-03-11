@@ -39,6 +39,7 @@ function penaltyMinutesGraph(props) {
               }
             }
           },
+          //Away Team Shots
           {
             x: data.awayTeamName,
             y: data.awayPenaltyMinutes,
@@ -71,7 +72,10 @@ function penaltyMinutesGraph(props) {
           autotick: true,
           tickmode: 'array',
         },
-        yaxis: { color: '#aaa' },
+        yaxis: { 
+          color: 'white',
+          zerolinewidth: 4, 
+        },
       }}
     />
   );

@@ -142,7 +142,7 @@ function HockeyPlot(props) {
         ]
       }
       layout={{
-        width: 1280,
+        width: 1200,
         height: 720,
         plot_bgcolor: '#2d343e',
         paper_bgcolor: '#2d343e',

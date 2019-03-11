@@ -96,6 +96,11 @@ function HockeyGraph(props) {
         width: 600,
         height: 600,
         barmode: 'stack',
+        font: {
+          family: 'Courier New, monospace',
+          size: 72,
+          color: '#7f7f7f'
+        },
         plot_bgcolor: '#2d343e',
         paper_bgcolor: '#2d343e',
         showlegend: false,
@@ -104,7 +109,10 @@ function HockeyGraph(props) {
           autotick: true,
           tickmode: 'array',
         },
-        yaxis: { color: '#aaa' },
+        yaxis: { 
+          color: 'white',
+          zerolinewidth: 4, 
+        },
       }}
     />
   );
