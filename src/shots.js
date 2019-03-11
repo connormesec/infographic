@@ -1,12 +1,13 @@
 const request = require('request');
 const cheerio = require('cheerio');
+require('https').globalAgent.options.ca = require('ssl-root-cas').create();
 
 let homeScores = [];
 let awayScores = [];
 
 
  (async function () {
-     await scrape_table('http://pointstreak.com/prostats/gamesheet_full.html?gameid=3385040');
+     await scrape_table('https://pointstreak.com/prostats/gamesheet_full.html?gameid=3390133');
  })()
 
 function getWebsiteHtml(url) {
@@ -15,6 +16,7 @@ function getWebsiteHtml(url) {
             if (!error && response.statusCode == 200) {
                 resolve(html);
             } else {
+                console.log(error);
                 reject('no');
             }
         });
@@ -194,7 +196,6 @@ function getHomeScores(p3) {
 
 function createScoreCount(item) {
     for (let i = 0; i < item.length; i++) {
-        let k = i + 1; 
         item[i].push(String(i + 1));
     }
 }
@@ -251,5 +252,5 @@ function makeJSON(item, item2, item3, item4) {
         console.log(err);
     }
     });
+    return everything;
 }
-
