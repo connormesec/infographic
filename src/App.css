@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  position: relative;
+  width: 1200px;
 }
 
 .App-logo {
@@ -47,8 +49,8 @@
   float: left;
 }
 
-.linechart {
-  height: 1200px;
+.lineChart {
+  height: 720px;
   width: 1200px;
   background-color: #282c34;
   float: left;

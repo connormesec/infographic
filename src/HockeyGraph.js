@@ -6,8 +6,8 @@ function formatData(data) {
 
   const formattedPenalties = {
     //teamNames: ["Montana State", "Other Team"],
-    homeTeamName: ["Montana State"],
-    awayTeamName: ["Other Team"],
+    homeTeamName: [penalties[2][1].replace('-', '/')],
+    awayTeamName: [penalties[1][1].replace('-', '/')],
     totalHomePenalties: [],
     totalAwayPenalties: [],
     ppGoalsHome: [],
@@ -99,7 +99,7 @@ function HockeyGraph(props) {
         font: {
           family: 'Courier New, monospace',
           size: 72,
-          color: '#7f7f7f'
+          color: 'white'
         },
         plot_bgcolor: '#2d343e',
         paper_bgcolor: '#2d343e',
@@ -108,10 +108,14 @@ function HockeyGraph(props) {
           color: '#aaa',
           autotick: true,
           tickmode: 'array',
+          type: "category",
         },
         yaxis: { 
           color: 'white',
           zerolinewidth: 4, 
+          showgrid: false,
+          showline: false,
+          showticklabels: false,
         },
       }}
     />

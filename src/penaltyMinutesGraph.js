@@ -5,8 +5,6 @@ function formatData(data) {
   const [_, __, ___, penalties] = data;
 
   const formattedPenaltyMinutes = {
-    homeTeamName: ["Montana State"],
-    awayTeamName: ["Other Team"],
     homePenaltyMinutes: [],
     awayPenaltyMinutes: [],
     color: ['#00205B'],
@@ -27,7 +25,7 @@ function penaltyMinutesGraph(props) {
         [
           //Home Team Shots
           {
-            x: data.homeTeamName,
+            x: data.homePenaltyMinutes,
             y: data.homePenaltyMinutes,
             type: 'bar',
             mode: 'lines+points',
@@ -41,7 +39,7 @@ function penaltyMinutesGraph(props) {
           },
           //Away Team Shots
           {
-            x: data.awayTeamName,
+            x: data.awayPenaltyMinutes,
             y: data.awayPenaltyMinutes,
             type: 'bar',
             mode: 'lines+points',
@@ -62,19 +60,22 @@ function penaltyMinutesGraph(props) {
         font: {
           family: 'Courier New, monospace',
           size: 72,
-          color: '#7f7f7f'
+          color: 'white'
         },
         plot_bgcolor: '#2d343e',
         paper_bgcolor: '#2d343e',
         showlegend: false,
         xaxis: {
-          color: '#aaa',
           autotick: true,
           tickmode: 'array',
+          type: "category",
         },
         yaxis: { 
           color: 'white',
           zerolinewidth: 4, 
+          showgrid: false,
+          showline: false,
+          showticklabels: false,
         },
       }}
     />
