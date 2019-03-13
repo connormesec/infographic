@@ -16,11 +16,9 @@ function formatData(data) {
   };
 
   let a = [penalties[1][1].split('-'), penalties[2][1].split('-')];
-  let b = Number(a[0][1] - a[0][0]);
-  let c = Number(a[1][1] - a[1][0]);
 
-  formattedPenalties.totalHomePenalties = [c];
-  formattedPenalties.totalAwayPenalties = [b];
+  formattedPenalties.totalHomePenalties = [Number(a[0][1] - a[0][0])];
+  formattedPenalties.totalAwayPenalties = [Number(a[0][1] - a[0][0])];
   formattedPenalties.ppGoalsHome = [a[1][0]];
   formattedPenalties.ppGoalsAway = [a[0][0]];
 
@@ -54,13 +52,13 @@ function HockeyGraph(props) {
             type: 'bar',
             mode: 'lines+points',
             marker: { 
-              color: 'grey',
-              line: {
-                color: 'white',
-                width: 2,
-              },
+                color: 'grey',
+                opacity: 0.2,
+                line: {
+                  color: 'white',
+                  width: 2,
+                },
             },
-            opacity: 0.2,
           },
           {
             x: data.awayTeamName,
@@ -87,8 +85,7 @@ function HockeyGraph(props) {
                 color: 'white',
                 width: 2,
               },
-           },
-            
+            }, 
           },
         ]
       }
@@ -97,9 +94,9 @@ function HockeyGraph(props) {
         height: 600,
         barmode: 'stack',
         font: {
-          family: 'Courier New, monospace',
-          size: 72,
-          color: 'white'
+            family: 'Courier New, monospace',
+            size: 72,
+            color: '#ffffff'
         },
         plot_bgcolor: '#2d343e',
         paper_bgcolor: '#2d343e',

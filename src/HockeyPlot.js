@@ -9,7 +9,16 @@ function formatData(data) {
   const formattedData = {
     teams: [],
     scores: [],
+    homeLabel: 'bottom right',
+    awayLabel: 'top left',
+    homeColor: '',
+    awayColor: '',
   };
+
+  if (shots[1][4] >= shots[2][4]) {
+    formattedData.homeLabel = 'top left';
+    formattedData.awayLabel = 'bottom right';
+  }
 
   shots.slice(1, 3).forEach(team => {
     let data = team.slice(1, 4).map(i => parseInt(i));
@@ -45,7 +54,7 @@ function formatScores(scores) {
     return {
       x: [score[3]],
       y: [score[4]],
-      title: [score[6]],
+      title: [score[5]],
     };
   }).reduce((s1, s2) => {
     return {
@@ -104,7 +113,7 @@ function HockeyPlot(props) {
             y: data.scores[0].y,
             mode: 'markers+text',
             text: data.scores[0].title,
-            textposition: 'top left',
+            textposition: data.awayLabel,
             textfont: {
               color: '#fff',
               size: 20,
@@ -120,12 +129,15 @@ function HockeyPlot(props) {
             y: data.scores[1].y,
             mode: 'markers+text',
             text: data.scores[1].title,
-            textposition: 'top left',
-            textfont: { color: '#fff' },
-            marker: {
-              color: 'yellow',
-              size: 20
+            textposition: data.homeLabel,
+            textfont: {
+              color: '#fff',
+              size: 20,
             },
+            marker: {
+              color: 'pink',
+              size: 20,
+            }
           },
           // ...data.scores.map(score => {
           //   return {
@@ -158,6 +170,14 @@ function HockeyPlot(props) {
           color: '#aaa',
           zerolinecolor: '#969696',
           zerolinewidth: 4,
+          title: {
+            text: 'SHOTS + SCORES',
+            font: {
+              family: 'Courier New, monospace',
+              size: 50,
+              color: 'white',
+            }
+          }
         },
       }}
     />
