@@ -11,8 +11,8 @@ function formatData(data) {
     scores: [],
     homeLabel: 'bottom right',
     awayLabel: 'top left',
-    homeColor: '',
-    awayColor: '',
+    homeColor: '#00205B',
+    awayColor: 'pink',
   };
 
   if (shots[1][4] >= shots[2][4]) {
@@ -72,7 +72,7 @@ function HockeyPlot(props) {
     <Plot
       data={
         [
-          //Home Team Shots
+          //Away Team Shots
           {
             name: data.teams[0].team_name,
             x: data.teams[0].x,
@@ -80,11 +80,11 @@ function HockeyPlot(props) {
             type: 'scatter',
             mode: 'lines+points',
             line: {
-              color: 'green',
+              color: data.awayColor,
               width: 10
             }
           },
-          //Away Team Shots 
+          //Home Team Shots 
           {
             name: data.teams[1].team_name,
             x: data.teams[1].x,
@@ -92,7 +92,7 @@ function HockeyPlot(props) {
             type: 'scatter',
             mode: 'lines+points',
             line: {
-              color: 'red',
+              color: data.homeColor,
               width: 10
             }
           },
@@ -107,7 +107,7 @@ function HockeyPlot(props) {
           //   };
           // }),
 
-          //AwayScores
+          //Home Scores
           {
             x: data.scores[0].x,
             y: data.scores[0].y,
@@ -115,15 +115,15 @@ function HockeyPlot(props) {
             text: data.scores[0].title,
             textposition: data.awayLabel,
             textfont: {
-              color: '#fff',
+              color: 'white',
               size: 20,
             },
             marker: {
-              color: 'pink',
+              color: data.homeColor,
               size: 20,
             }
           },
-          //Home Scores
+          //Away Scores
           {
             x: data.scores[1].x,
             y: data.scores[1].y,
@@ -131,11 +131,11 @@ function HockeyPlot(props) {
             text: data.scores[1].title,
             textposition: data.homeLabel,
             textfont: {
-              color: '#fff',
+              color: 'white',
               size: 20,
             },
             marker: {
-              color: 'pink',
+              color: data.awayColor,
               size: 20,
             }
           },

@@ -1,13 +1,13 @@
 const request = require('request');
 const cheerio = require('cheerio');
-require('https').globalAgent.options.ca = require('ssl-root-cas').create();
+//require('https').globalAgent.options.ca = require('ssl-root-cas').create();
 
 let homeScores = [];
 let awayScores = [];
 
 
  (async function () {
-     await scrape_table('https://pointstreak.com/prostats/gamesheet_full.html?gameid=3390133');
+     await scrape_table('http://pointstreak.com/prostats/gamesheet_full.html?gameid=3390133');
  })()
 
 function getWebsiteHtml(url) {
@@ -30,6 +30,7 @@ async function scrape_table(url) {
     let score = [];
     let penalties = [];
     let teamScore = [];
+    let teamNames = [];
     //finds each table
     $('html').find('table').each((_, t) => {
         const table = $(t);
@@ -111,13 +112,33 @@ async function scrape_table(url) {
             });
         }
     });
+
+console.log($(".gameinfo").html().split("<br>")[4]);  
+    // $('html').find('p').each((_, p) => {
+    //     const paragraph = $(p);
+
+    //     const paraKeys = Object.keys(paragraph.attr());
+
+    //     const names = {
+    //         class: 'gameinfo',
+    //     }
+        
+    //     if (Object.keys(names).length === paraKeys.length && paraKeys.every(key => paragraph.attr(key) == `${names[key]}`)) {
+    //         paragraph.find('tr').each((_, row) => {
+    //             const rowValues = [];
+
+    //             teamNames.push(rowValues);
+    //         });
+    //     }
+    // });
+
+
     removeItems(teamScore);
     makeTime(teamScore);
     getHomeScores(teamScore);
     getCoordinates(shots[2], homeScores);
     getCoordinates(shots[1], awayScores);
-    console.log(homeScores);
-    console.log(awayScores);
+    console.log(teamNames);
     makeJSON(homeScores, awayScores, shots, penalties);
     
     //return [data1, data2];
