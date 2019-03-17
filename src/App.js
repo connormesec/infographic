@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import ColorPicker from 'material-ui-color-picker';
+
 import './App.css';
 import HockeyPlot from './HockeyPlot';
 import HockeyGraph from './HockeyGraph';
 import PenaltyMinutesGraph from './penaltyMinutesGraph';
+import ScoreTitle from './ScoreTitle';
+import HomeScore from './HomeScore';
+import AwayScore from './AwayScore';
 
 const request = require('request');
 const cheerio = require('cheerio');
@@ -16,18 +21,27 @@ function App() {
 
   if (!url) {
     return (
-      <div>
-        <input
-          placeholder='Url'
-          ref={(ref) => textInputRef = ref}
-        />
-        <button
-          onClick={() => setUrl(textInputRef.value)}
-        > Enter </button>
-      </div>
+        <div>
+            <div>
+                <input
+                placeholder='Url'
+                ref={(ref) => textInputRef = ref}
+                />
+                <button
+                onClick={() => {setUrl(textInputRef.value)}}
+                > Enter </button>
+            </div>
+            <div>
+                <ColorPicker
+                    name='color'
+                    defaultValue='#000'
+                    // value={this.state.color} - for controlled component
+                    onChange={color => console.log(color)}
+                />
+            </div>
+        </div>
     );
   }
-
   return (<Plots url={'https://cors-anywhere.herokuapp.com/' + url} />);
 }
 
@@ -46,15 +60,24 @@ function Plots(url) {
 
   return (
     <div className="App">
-      <div class="lineChart">
-        <HockeyPlot data={data} />
-      </div>
-      <div class="ppGoals">
-        <HockeyGraph data={data} />
-      </div>
-      <div class="ppMin">
-        <PenaltyMinutesGraph data={data} />
-      </div>
+        <div className="homeScore">
+            <HomeScore data={data} />
+        </div>
+        <div className="scoreTitle">  
+            <ScoreTitle data={data} />
+        </div>
+        <div className="awayScore">
+            <AwayScore data={data} />
+        </div>
+        <div className="lineChart">
+            <HockeyPlot data={data} />
+        </div>
+        <div className="ppGoals">
+            <HockeyGraph data={data} />
+        </div>
+        <div className="ppMin">
+            <PenaltyMinutesGraph data={data} />
+        </div>
     </div>
   );
 }
@@ -79,6 +102,8 @@ async function scrape_table(url) {
   let score = [];
   let penalties = [];
   let teamScore = [];
+  let teamNames = [];
+  let scores = [];
   //finds each table
   $('html').find('table').each((_, t) => {
       const table = $(t);
@@ -160,25 +185,30 @@ async function scrape_table(url) {
           });
       }
   });
+
+//   let unformattedTeamNames = $(".gameinfo").html().split("<br>")[4].split("<span class=\"big\">");
+//   for (let i = 0; i < unformattedTeamNames.length; i++) {
+//       let a = unformattedTeamNames[i].replace(/<(.|\n)*?>/g, '');
+//       let b = a.replace(/\d\sat\s/g, '');
+//       let c = b.trim();
+//       teamNames.push(c);
+//       let e = a.replace(/\D+/g, '');
+//       let f = e.trim();
+//       scores.push(f);
+//   }
+//   teamNames.pop();
+//   scores.shift();
+
   removeItems(teamScore);
+  console.log(teamScore);
   makeTime(teamScore);
   getHomeScores(teamScore);
   getCoordinates(shots[2], homeScores);
   getCoordinates(shots[1], awayScores);
-  console.log(homeScores);
-  console.log(awayScores);
-  let finalData = makeJSON(homeScores, awayScores, shots, penalties);
-  let testData = [[["Home score", "1 - 1", "2", 1.3599999999999999, 22.4, "S.Coulter", "1"], ["Home score", "1 - 2", "2", 1.3900000000000001, 22.85, "J.Warner", "2"], ["Home score", "2 - 3", "3", 2.22, 36.4, "J.Forbes", "3"], ["Home score", "2 - 4", "3", 2.41, 40.2, "L.Bing", "4"], ["Home score", "2 - 5", "3", 2.46, 41.2, "R.Hanson", "5"], ["Home score", "2 - 6", "3", 2.81, 48.2, "J.Pilskalns", "6"]], [["Away score", "1 - 0", "2", 1.07, 4.28, "B.Rutherford", "1"], ["Away score", "2 - 2", "2", 1.8199999999999998, 7.28, "R.Bagley", "2"]], [["Shots", "1", "2", "3", "T"], ["Montana Tech", "4", "4", "5", "13"], ["Montana Stat", "17", "15", "20", "52"]], [["Power Plays", "PP", "PIM"], ["Montana Tech", "1-7", "20"], ["Montana Stat", "3-9", "16"]]];
+  //let finalData = makeJSON(homeScores, awayScores, shots, penalties, teamNames, scores);
+  let testData = [[["Home score","1 - 1","1",0.33,3.3,"D.Bound","1"],["Home score","1 - 2","2",1.4,14,"T.Pompu","2"],["Home score","1 - 3","2",1.63,16.3,"K.Peters","3"],["Home score","2 - 4","3",2.02,20.32,"D.Nomerstad","4"],["Home score","2 - 5","3",2.25,24,"C.Van Kommer","5"],["Home score","2 - 6","3",2.58,29.28,"K.Peters","6"]],[["Away score","1 - 0","1",0.26,4.68,"R.Hanson","1"],["Away score","2 - 3","2",1.8900000000000001,32.24,"J.Warner","2"]],[["Shots","1","2","3","T"],["Montana Stat","18","16","15","49"],["Dakota Colle","10","10","16","36"]],[["Power Plays","PP","PIM"],["Montana Stat","0-7","17"],["Dakota Colle","2-6","16"]],["Montana State University","Dakota College"],["2","6"]];
   //return finalData;
   return testData;
-  //return [data1, data2];
-
-  // console.log(shots);
-  // console.log(score);
-  // console.log(penalties);
-  // console.log(teamScore);
-  // console.log(awayScores);
-  // console.log(homeScores);
 }
 
 //removes all unecessary items from array
@@ -294,8 +324,8 @@ function getCoordinates (shots, p5) {
   return p5;
 }
 
-function makeJSON(item, item2, item3, item4) {
-  let everything = [item, item2, item3, item4];
+function makeJSON(item, item2, item3, item4, item5, item6) {
+  let everything = [item, item2, item3, item4, item5, item6];
   // let myJSON = JSON.stringify(everything);
   // var fs = require('fs');
   // fs.writeFile("test.json", myJSON, function(err) {

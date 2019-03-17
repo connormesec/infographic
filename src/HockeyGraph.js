@@ -102,7 +102,7 @@ function HockeyGraph(props) {
         paper_bgcolor: '#2d343e',
         showlegend: false,
         xaxis: {
-          color: '#aaa',
+          color: 'white',
           autotick: true,
           tickmode: 'array',
           type: "category",

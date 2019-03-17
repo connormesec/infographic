@@ -31,6 +31,7 @@ async function scrape_table(url) {
     let penalties = [];
     let teamScore = [];
     let teamNames = [];
+    let scores = [];
     //finds each table
     $('html').find('table').each((_, t) => {
         const table = $(t);
@@ -113,42 +114,26 @@ async function scrape_table(url) {
         }
     });
 
-console.log($(".gameinfo").html().split("<br>")[4]);  
-    // $('html').find('p').each((_, p) => {
-    //     const paragraph = $(p);
-
-    //     const paraKeys = Object.keys(paragraph.attr());
-
-    //     const names = {
-    //         class: 'gameinfo',
-    //     }
-        
-    //     if (Object.keys(names).length === paraKeys.length && paraKeys.every(key => paragraph.attr(key) == `${names[key]}`)) {
-    //         paragraph.find('tr').each((_, row) => {
-    //             const rowValues = [];
-
-    //             teamNames.push(rowValues);
-    //         });
-    //     }
-    // });
-
-
+    let unformattedTeamNames = $(".gameinfo").html().split("<br>")[4].split("<span class=\"big\">");
+    for (let i = 0; i < unformattedTeamNames.length; i++) {
+        let a = unformattedTeamNames[i].replace(/<(.|\n)*?>/g, '');
+        let b = a.replace(/\d\sat\s/g, '');
+        let c = b.trim();
+        teamNames.push(c);
+        let e = a.replace(/\D+/g, '');
+        let f = e.trim();
+        scores.push(f);
+    }
+    teamNames.pop();
+    scores.shift();
+    
     removeItems(teamScore);
     makeTime(teamScore);
     getHomeScores(teamScore);
     getCoordinates(shots[2], homeScores);
     getCoordinates(shots[1], awayScores);
-    console.log(teamNames);
-    makeJSON(homeScores, awayScores, shots, penalties);
-    
-    //return [data1, data2];
-
-    // console.log(shots);
-    // console.log(score);
-    // console.log(penalties);
-    // console.log(teamScore);
-    // console.log(awayScores);
-    // console.log(homeScores);
+    console.log(scores);
+    makeJSON(homeScores, awayScores, shots, penalties, teamNames, scores);
 }
 
 //removes all unecessary items from array
@@ -264,8 +249,8 @@ function getCoordinates (shots, p5) {
     return p5;
 }
 
-function makeJSON(item, item2, item3, item4) {
-    let everything = [item, item2, item3, item4];
+function makeJSON(item, item2, item3, item4, item5, item6) {
+    let everything = [item, item2, item3, item4, item5, item6];
     let myJSON = JSON.stringify(everything);
     var fs = require('fs');
     fs.writeFile("test.json", myJSON, function(err) {

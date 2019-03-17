@@ -45,7 +45,6 @@ function formatData(data) {
 
   formattedData.scores.push(formattedHomeScores);
   formattedData.scores.push(formattedAwayScores);
-  console.log(formattedData);
   return formattedData;
 }
 
@@ -121,6 +120,10 @@ function HockeyPlot(props) {
             marker: {
               color: data.homeColor,
               size: 20,
+              line: {
+                color: 'white',
+                width: 2
+              }
             }
           },
           //Away Scores
@@ -137,6 +140,10 @@ function HockeyPlot(props) {
             marker: {
               color: data.awayColor,
               size: 20,
+              line: {
+                color: 'white',
+                width: 2
+              }
             }
           },
           // ...data.scores.map(score => {
@@ -155,28 +162,60 @@ function HockeyPlot(props) {
       }
       layout={{
         width: 1200,
-        height: 720,
+        height: 500,
         plot_bgcolor: '#2d343e',
         paper_bgcolor: '#2d343e',
         showlegend: false,
+        margin: {
+          r: 100,
+          t: 25,
+          b: 70,
+          l: 150
+        },
         xaxis: {
           color: '#aaa',
           autotick: false,
           tickvals: [1, 2, 3],
           ticktext: ['End of 1st', 'End of 2nd', 'End of 3rd'],
           tickmode: 'array',
+          ticks: 'outside',
+          tickwidth: 2,
+          ticklen: 5,
+          tickfont: {
+            family: 'Courier New, monospace',
+            size: 30,
+            color: 'white'
+          },
+          gridcolor: '#aaa',
+          gridwidth: 2,
+          showgrid: true,
+          showline: true,
+          mirror: true,
+    
         },
         yaxis: {
           color: '#aaa',
           zerolinecolor: '#969696',
           zerolinewidth: 4,
+          rangemode: 'nonnegative',
+          showgrid: false,
+          ticks: 'outside',
+          tickwidth: 2,
+          ticklen: 5,
+          showline: true,
+          mirror: true,
+          tickfont: {
+            family: 'Courier New, monospace',
+            size: 30,
+            color: 'white'
+          },
           title: {
             text: 'SHOTS + SCORES',
             font: {
               family: 'Courier New, monospace',
               size: 50,
-              color: 'white',
-            }
+              color: 'white'
+            },
           }
         },
       }}

@@ -34,6 +34,27 @@
   }
 }
 
+.homeScore {
+  float: left;
+  background-color: #282c34;
+  background-image: linear-gradient(to right, blue , #282c34);
+  width: 300px;
+  height: 200px;
+}
+
+.scoreTitle {
+  float: left;
+  background-color: #282c34;
+  width: 600px;
+  height: 200px;
+}
+
+.awayScore {
+  float: left;
+  background-color: #282c34;
+  width: 300px;
+  height: 200px;
+}
 
 .ppGoals {
   height: 600px;
@@ -50,8 +71,17 @@
 }
 
 .lineChart {
-  height: 720px;
   width: 1200px;
   background-color: #282c34;
   float: left;
+}
+
+h1 {
+  color: white;
+  line-height: 50px;
+  font-size: 100px;
+}
+
+h2 {
+  color: white;
 }
