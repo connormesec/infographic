@@ -2,12 +2,13 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 
 function formatData(data) {
-  const [_, __, ___, penalties] = data;
+  const [_, __, ___, penalties, ____, _____, colors] = data;
 
   const formattedPenaltyMinutes = {
     homePenaltyMinutes: [],
     awayPenaltyMinutes: [],
-    color: ['#00205B'],
+    homeColor: colors[0],
+    awayColor: colors[1],
   };
 
   formattedPenaltyMinutes.awayPenaltyMinutes = [penalties[1][2]];
@@ -30,7 +31,7 @@ function penaltyMinutesGraph(props) {
             type: 'bar',
             mode: 'lines+points',
             marker: { 
-              color: data.color,
+              color: data.homeColor,
               line: {
                 color: 'white',
                 width: 2,
@@ -44,7 +45,7 @@ function penaltyMinutesGraph(props) {
             type: 'bar',
             mode: 'lines+points',
             marker: { 
-              color: 'green',
+              color: data.awayColor,
               line: {
                 color: 'white',
                 width: 2,

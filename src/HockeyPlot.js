@@ -2,7 +2,7 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 
 function formatData(data) {
-  const [homeScores, awayScores, shots] = data;
+  const [homeScores, awayScores, shots, _, __, ___, colors] = data;
 
   const xValues = shots[0].slice(1, 4);
 
@@ -11,8 +11,8 @@ function formatData(data) {
     scores: [],
     homeLabel: 'bottom right',
     awayLabel: 'top left',
-    homeColor: '#00205B',
-    awayColor: 'pink',
+    homeColor: colors[0],
+    awayColor: colors[1],
   };
 
   if (shots[1][4] >= shots[2][4]) {

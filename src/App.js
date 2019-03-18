@@ -17,6 +17,8 @@ let awayScores = [];
 
 function App() {
   const [url, setUrl] = useState();
+  const [homeColor, setHomeColor]= useState();
+  const [awayColor, setAwayColor]= useState();
   let textInputRef = React.createRef();
 
   if (!url) {
@@ -24,33 +26,41 @@ function App() {
         <div>
             <div>
                 <input
-                placeholder='Url'
-                ref={(ref) => textInputRef = ref}
+                    placeholder='Url'
+                    ref={(ref) => textInputRef = ref}
                 />
-                <button
-                onClick={() => {setUrl(textInputRef.value)}}
-                > Enter </button>
+                <button onClick={() => {setUrl(textInputRef.value)}}> Enter </button>
             </div>
             <div>
                 <ColorPicker
-                    name='color'
+                    name='home color'
                     defaultValue='#000'
                     // value={this.state.color} - for controlled component
-                    onChange={color => console.log(color)}
+                    onChange={homeColor => homeColor && setHomeColor(homeColor)}
+
+                />
+            </div>
+            <div>
+                <ColorPicker
+                    name='away color'
+                    defaultValue='#000'
+                    // value={this.state.color} - for controlled component
+                    onChange={awayColor => awayColor && setAwayColor(awayColor)}
+
                 />
             </div>
         </div>
     );
   }
-  return (<Plots url={'https://cors-anywhere.herokuapp.com/' + url} />);
+  return (<Plots url={'https://cors-anywhere.herokuapp.com/' + url} homeColor={homeColor} awayColor={awayColor} />);
 }
 
-function Plots(url) {
+function Plots({url, homeColor, awayColor}) {
   const [data, setData] = useState();
 
   useEffect(async () => {
-    const data = await scrape_table(url);
-
+    const data = await scrape_table(url); 
+    data.push([homeColor, awayColor]);
     console.log(`data ${data}`);
 
     setData(data);
@@ -66,7 +76,7 @@ function Plots(url) {
         <div className="scoreTitle">  
             <ScoreTitle data={data} />
         </div>
-        <div className="awayScore">
+        <div className="awayScore" >
             <AwayScore data={data} />
         </div>
         <div className="lineChart">

@@ -2,7 +2,7 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 
 function formatData(data) {
-  const [_, __, ___, penalties] = data;
+  const [_, __, ___, penalties, ____, _____, color] = data;
 
   const formattedPenalties = {
     //teamNames: ["Montana State", "Other Team"],
@@ -12,7 +12,8 @@ function formatData(data) {
     totalAwayPenalties: [],
     ppGoalsHome: [],
     ppGoalsAway: [],
-    color: ['#00205B'],
+    homeColor: color[0],
+    awayColor: color[1],
   };
 
   let a = [penalties[1][1].split('-'), penalties[2][1].split('-')];
@@ -39,7 +40,7 @@ function HockeyGraph(props) {
             type: 'bar',
             mode: 'lines+points',
             marker: { 
-              color: data.color,
+              color: data.homeColor,
               line: {
                 color: 'white',
                 width: 2,
@@ -66,7 +67,7 @@ function HockeyGraph(props) {
             type: 'bar',
             mode: 'lines+points',
             marker: { 
-              color: 'green',
+              color:data.awayColor,
               line: {
                 color: 'white',
                 width: 2,
