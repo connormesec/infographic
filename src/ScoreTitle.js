@@ -15,8 +15,8 @@ function ScoreTitle(props) {
     const data = formatData(props.data);
     console.log('this thingd' + data);
     return (
-        <h2>{data.awayTeam}<br></br>
-        at {data.homeTeam}</h2>
+        <h3>{data.awayTeam}<br></br>
+        at {data.homeTeam}</h3>
     )
     //React.createElement('h1', {}, data.awayTeam + " at " + data.homeTeam);
   }

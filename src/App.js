@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ColorPicker from 'material-ui-color-picker';
 
 import './App.css';
+import Header from './Header';
 import HockeyPlot from './HockeyPlot';
 import HockeyGraph from './HockeyGraph';
 import PenaltyMinutesGraph from './penaltyMinutesGraph';
@@ -61,7 +62,7 @@ function Plots({url, homeColor, awayColor}) {
   useEffect(async () => {
     const data = await scrape_table(url); 
     data.push([homeColor, awayColor]);
-    console.log(`data ${data}`);
+    console.log(data);
 
     setData(data);
   }, []);
@@ -70,13 +71,16 @@ function Plots({url, homeColor, awayColor}) {
 
   return (
     <div className="App">
-        <div className="homeScore">
+        <div className="header">
+            <Header data={data} />
+        </div>
+        <div className="homeScore" style={{background: `linear-gradient(to right, ${data[6][0]}, #282c34)`}}>
             <HomeScore data={data} />
         </div>
         <div className="scoreTitle">  
             <ScoreTitle data={data} />
         </div>
-        <div className="awayScore" >
+        <div className="awayScore" style={{background: `linear-gradient(to left, ${data[6][1]}, #282c34)`}}>
             <AwayScore data={data} />
         </div>
         <div className="lineChart">
