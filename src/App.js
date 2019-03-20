@@ -7,6 +7,7 @@ import HockeyPlot from './HockeyPlot';
 import HockeyGraph from './HockeyGraph';
 import PenaltyMinutesGraph from './penaltyMinutesGraph';
 import ScoreTitle from './ScoreTitle';
+import SavePercentage from './SavePercentage';
 import HomeScore from './HomeScore';
 import AwayScore from './AwayScore';
 
@@ -91,6 +92,9 @@ function Plots({url, homeColor, awayColor}) {
         </div>
         <div className="ppMin">
             <PenaltyMinutesGraph data={data} />
+        </div>
+        <div>
+            <SavePercentage data={data} />
         </div>
     </div>
   );
