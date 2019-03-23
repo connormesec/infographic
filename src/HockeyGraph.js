@@ -91,8 +91,9 @@ function HockeyGraph(props) {
         ]
       }
       layout={{
-        width: 600,
-        height: 600,
+        title: 'Goaltending',
+        width: 400,
+        height: 400,
         barmode: 'stack',
         font: {
             family: 'Courier New, monospace',

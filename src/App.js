@@ -93,7 +93,7 @@ function Plots({url, homeColor, awayColor}) {
         <div className="ppMin">
             <PenaltyMinutesGraph data={data} />
         </div>
-        <div>
+        <div className="savePercentage">
             <SavePercentage data={data} />
         </div>
     </div>

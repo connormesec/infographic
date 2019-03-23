@@ -64,14 +64,21 @@
 
 .ppGoals {
   height: 600px;
-  width: 600px;
+  width: 400px;
   background-color: #282c34;
   float: left;
 }
 
 .ppMin {
   height: 600px;
-  width: 600px;
+  width: 400px;
+  background-color: #282c34;
+  float: left;
+}
+
+.savePercentage {
+  height: 600px;
+  width: 400px;
   background-color: #282c34;
   float: left;
 }

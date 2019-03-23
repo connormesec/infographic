@@ -13,8 +13,8 @@ function formatData(data) {
         awaySavedShots: [],
         awaySavePercentage: '',
         homeSavePercentage: '',
-        homeColor: ['white', colors[0]],
-        awayColor: ['white', colors[1]],
+        homeColor: ['#2d343e', colors[0]],
+        awayColor: ['#2d343e', colors[1]],
         homeDonut: [],
         awayDonut: [],
     };
@@ -31,9 +31,6 @@ function formatData(data) {
     let o = Math.round(((shots[2][4] - score[1])/shots[2][4]) * 1000) / 1000;
     let p = o.toString();
     formattedShots.awaySavePercentage = p.replace(/^0+/, '');
-    
-
-    console.log(n);
     return formattedShots;
 }
 
@@ -53,7 +50,7 @@ function SavePercentage(props) {
                 marker: {
                     colors: data.homeColor,
                   },
-                hole: .4,
+                hole: .6,
                 type: 'pie',
                 textinfo: 'none'
             }, {
@@ -68,42 +65,70 @@ function SavePercentage(props) {
                 marker: {
                     colors: data.awayColor,
                   },
-                hole: .4,
+                hole: .6,
                 type: 'pie',
                 textinfo: 'none'
             }]
         }
-        layout = {
-            {
-                title: 'Goaltending',
-                annotations: [{
-                        font: {
-                            size: 20
-                        },
-                        showarrow: false,
-                        text: data.homeSavePercentage,
-                        x: 0.18,
-                        y: 0.5,
+        layout = {{
+            title: 'Goaltending',
+            font: {
+                family: 'Courier New, monospace',
+                size: 30,
+                color: '#ffffff'
+            },
+            annotations: [{
+                    font: {
+                        size: 20
                     },
-                    {
-                        font: {
-                            size: 20
-                        },
-                        showarrow: false,
-                        text: data.awaySavePercentage,
-                        x: 0.82,
-                        y: 0.5
-                    }
-                ],
-                height: 600,
-                width: 600,
-                showlegend: false,
-                grid: {
-                    rows: 1,
-                    columns: 2
+                    showarrow: false,
+                    text: data.homeSavePercentage,
+                    x: 0.16,
+                    y: 0.5,
+                },
+                {
+                    font: {
+                        size: 20
+                    },
+                    showarrow: false,
+                    text: data.awaySavePercentage,
+                    x: 0.80,
+                    y: 0.5
+                },
+                {
+                    font: {
+                        size: 20
+                    },
+                    showarrow: false,
+                    text: 'Home Goalie and this is long but will it go off the page',
+                    x: 0.0,
+                    y: 0,
+                },
+                {
+                    font: {
+                        size: 20
+                    },
+                    showarrow: false,
+                    text: 'Away Goalie',
+                    x: 1,
+                    y: 0,
                 }
+            ],
+            height: 400,
+            width: 400,
+            margin: {
+                l: 40,
+                r: 40,
+                //pad: 2,
+            },
+            showlegend: false,
+            plot_bgcolor: '#2d343e',
+            paper_bgcolor: '#2d343e',
+            grid: {
+                rows: 1,
+                columns: 2
             }
-        }
+        }}
         />
     );
 }
