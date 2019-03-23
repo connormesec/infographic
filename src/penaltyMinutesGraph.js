@@ -55,13 +55,13 @@ function penaltyMinutesGraph(props) {
         ]
       }
       layout={{
-        title: 'Goaltending',
+        title: 'Penalties',
         width: 400,
         height: 400,
         barmode: 'stack',
         font: {
           family: 'Courier New, monospace',
-          size: 72,
+          size: 30,
           color: 'white'
         },
         plot_bgcolor: '#2d343e',

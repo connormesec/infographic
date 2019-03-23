@@ -7,7 +7,7 @@ let awayScores = [];
 
 
  (async function () {
-     await scrape_table('http://pointstreak.com/prostats/gamesheet_full.html?gameid=3390133');
+     await scrape_table('http://pointstreak.com/prostats/gamesheet_full.html?gameid=3388762');
  })()
 
 function getWebsiteHtml(url) {
@@ -32,6 +32,7 @@ async function scrape_table(url) {
     let teamScore = [];
     let teamNames = [];
     let scores = [];
+    let goalieValues = [];
     //finds each table
     $('html').find('table').each((_, t) => {
         const table = $(t);
@@ -112,6 +113,33 @@ async function scrape_table(url) {
                 teamScore.push(rowValues);
             });
         }
+
+        const goalies = {
+            width: '99%',
+            cellspacing: 0,
+            cellpadding: 0,
+            border: 0,
+        };
+
+        if (Object.keys(goalies).length === tableKeys.length && tableKeys.every(key => table.attr(key) == `${goalies[key]}`)) {
+            table.find('tr').each((_, row) => {
+                const rowValues = [];
+
+                $(row).find('td').each((_, td) => {
+                    rowValues.push($(td).html().trim().replace(/&#xA0;/g, ''));
+                });
+                let a = [];
+                a.push(rowValues);
+                console.log(a);
+                for (let i = 0; i < a.length; i++) {
+                    if (a[i][0] == /(win|loss)/g) {
+                        goalieValues.push(a[i][0]);
+                    }
+
+                    //let b = a[i][0].match(/(win|loss)/g);
+                }
+            });
+        }
     });
 
     let unformattedTeamNames = $(".gameinfo").html().split("<br>")[4].split("<span class=\"big\">");
@@ -126,13 +154,12 @@ async function scrape_table(url) {
     }
     teamNames.pop();
     scores.shift();
-    
+    console.log(goalieValues);
     removeItems(teamScore);
     makeTime(teamScore);
     getHomeScores(teamScore);
     getCoordinates(shots[2], homeScores);
     getCoordinates(shots[1], awayScores);
-    console.log(scores);
     makeJSON(homeScores, awayScores, shots, penalties, teamNames, scores);
 }
 

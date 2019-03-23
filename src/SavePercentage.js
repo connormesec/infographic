@@ -79,20 +79,20 @@ function SavePercentage(props) {
             },
             annotations: [{
                     font: {
-                        size: 20
+                        size: 30
                     },
                     showarrow: false,
                     text: data.homeSavePercentage,
-                    x: 0.16,
+                    x: 0.1,
                     y: 0.5,
                 },
                 {
                     font: {
-                        size: 20
+                        size: 30
                     },
                     showarrow: false,
                     text: data.awaySavePercentage,
-                    x: 0.80,
+                    x: 0.87,
                     y: 0.5
                 },
                 {

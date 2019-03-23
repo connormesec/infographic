@@ -91,13 +91,13 @@ function HockeyGraph(props) {
         ]
       }
       layout={{
-        title: 'Goaltending',
+        title: 'Power Play',
         width: 400,
         height: 400,
         barmode: 'stack',
         font: {
             family: 'Courier New, monospace',
-            size: 72,
+            size: 30,
             color: '#ffffff'
         },
         plot_bgcolor: '#2d343e',
