@@ -49,6 +49,10 @@ function SavePercentage(props) {
                 name: 'GHG Emissions',
                 marker: {
                     colors: data.homeColor,
+                    line: {
+                        color: 'white',
+                        width: 2
+                    }
                   },
                 hole: .6,
                 type: 'pie',
@@ -64,10 +68,14 @@ function SavePercentage(props) {
                 name: 'CO2 Emissions',
                 marker: {
                     colors: data.awayColor,
+                    line: {
+                        color: 'white',
+                        width: 2
+                    }
                   },
                 hole: .6,
                 type: 'pie',
-                textinfo: 'none'
+                textinfo: 'none',
             }]
         }
         layout = {{
