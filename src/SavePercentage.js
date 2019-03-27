@@ -2,7 +2,7 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 
 function formatData(data) {
-    const [_, __, shots, ______, ____, score, colors] = data;
+    const [_, __, shots, ______, ____, score, goalies, colors ] = data;
 
     const formattedShots = {
         homeScore: score[1],
@@ -17,6 +17,8 @@ function formatData(data) {
         awayColor: ['#2d343e', colors[1]],
         homeDonut: [],
         awayDonut: [],
+        homeGoalie: goalies[1],
+        awayGoalie: goalies[0],
     };
 
     formattedShots.homeSavedShots = shots[2][4] - score[1];
@@ -108,7 +110,7 @@ function SavePercentage(props) {
                         size: 20
                     },
                     showarrow: false,
-                    text: 'Home Goalie and this is long but will it go off the page',
+                    text: data.homeGoalie,
                     x: 0.0,
                     y: 0,
                 },
@@ -117,7 +119,7 @@ function SavePercentage(props) {
                         size: 20
                     },
                     showarrow: false,
-                    text: 'Away Goalie',
+                    text: data.awayGoalie,
                     x: 1,
                     y: 0,
                 }

@@ -75,13 +75,13 @@ function Plots({url, homeColor, awayColor}) {
         <div className="header">
             <Header data={data} />
         </div>
-        <div className="homeScore" style={{background: `linear-gradient(to right, ${data[6][0]}, #282c34)`}}>
+        <div className="homeScore" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
             <HomeScore data={data} />
         </div>
         <div className="scoreTitle">  
             <ScoreTitle data={data} />
         </div>
-        <div className="awayScore" style={{background: `linear-gradient(to left, ${data[6][1]}, #282c34)`}}>
+        <div className="awayScore" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
             <AwayScore data={data} />
         </div>
         <div className="lineChart">
@@ -122,6 +122,7 @@ async function scrape_table(url) {
   let teamScore = [];
   let teamNames = [];
   let scores = [];
+  let goalieValues = [];
   //finds each table
   $('html').find('table').each((_, t) => {
       const table = $(t);
@@ -202,6 +203,30 @@ async function scrape_table(url) {
               teamScore.push(rowValues);
           });
       }
+      
+      const goalies = {
+        width: '99%',
+        cellspacing: 0,
+        cellpadding: 0,
+        border: 0,
+    };
+
+    if (Object.keys(goalies).length === tableKeys.length && tableKeys.every(key => table.attr(key) == `${goalies[key]}`)) {
+        table.find('tr').each((_, row) => {
+            const rowValues = [];
+
+            $(row).find('td').each((_, td) => {
+                rowValues.push($(td).html().trim().replace(/&#xA0;/g, ''));
+            });
+            
+            const regex = RegExp('.*\(win\).*|.*\(loss\).*','g')
+            for (let i = 0; i < rowValues.length; i++) {
+                if (regex.test(rowValues[i])) {
+                    goalieValues.push(rowValues[i].replace(/\d+|\(.*\)/g,'').trim());
+                }
+            }
+        });
+    }
   });
 
 //   let unformattedTeamNames = $(".gameinfo").html().split("<br>")[4].split("<span class=\"big\">");
@@ -223,8 +248,8 @@ async function scrape_table(url) {
   getHomeScores(teamScore);
   getCoordinates(shots[2], homeScores);
   getCoordinates(shots[1], awayScores);
-  //let finalData = makeJSON(homeScores, awayScores, shots, penalties, teamNames, scores);
-  let testData = [[["Home score","1 - 1","1",0.33,3.3,"D.Bound","1"],["Home score","1 - 2","2",1.4,14,"T.Pompu","2"],["Home score","1 - 3","2",1.63,16.3,"K.Peters","3"],["Home score","2 - 4","3",2.02,20.32,"D.Nomerstad","4"],["Home score","2 - 5","3",2.25,24,"C.Van Kommer","5"],["Home score","2 - 6","3",2.58,29.28,"K.Peters","6"]],[["Away score","1 - 0","1",0.26,4.68,"R.Hanson","1"],["Away score","2 - 3","2",1.8900000000000001,32.24,"J.Warner","2"]],[["Shots","1","2","3","T"],["Montana Stat","18","16","15","49"],["Dakota Colle","10","10","16","36"]],[["Power Plays","PP","PIM"],["Montana Stat","0-7","17"],["Dakota Colle","2-6","16"]],["Montana State University","Dakota College"],["2","6"]];
+  //let finalData = makeJSON(homeScores, awayScores, shots, penalties, teamNames, scores, goalieValues);
+  let testData = [[["Home score","2 - 1","1",0.96,10.56,"R.Hanson","1"],["Home score","2 - 2","2",1.03,11.54,"R.Perius","2"],["Home score","2 - 3","2",1.34,17.12,"R.Hanson","3"],["Home score","2 - 4","2",1.3599999999999999,17.48,"C.Stefan","4"],["Home score","2 - 5","3",2.4699999999999998,31.82,"T.Padden","5"]],[["Away score","1 - 0","1",0.77,5.39,"B.LaRue","1"],["Away score","2 - 0","1",0.93,6.51,"B.LaRue","2"]],[["Shots","1","2","3","T"],["Eastern Wash","7","8","13","28"],["Montana Stat","11","18","6","35"]],[["Power Plays","PP","PIM"],["Eastern Wash","0-5","34"],["Montana Stat","2-8","22"]],["Eastern Washington University","Montana State University"],["2","5"],["A.Kirby","C.Butler"]];
   //return finalData;
   return testData;
 }
@@ -342,8 +367,8 @@ function getCoordinates (shots, p5) {
   return p5;
 }
 
-function makeJSON(item, item2, item3, item4, item5, item6) {
-  let everything = [item, item2, item3, item4, item5, item6];
+function makeJSON(item, item2, item3, item4, item5, item6, item7) {
+  let everything = [item, item2, item3, item4, item5, item6, item7];
   // let myJSON = JSON.stringify(everything);
   // var fs = require('fs');
   // fs.writeFile("test.json", myJSON, function(err) {

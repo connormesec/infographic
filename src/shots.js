@@ -7,7 +7,7 @@ let awayScores = [];
 
 
  (async function () {
-     await scrape_table('http://pointstreak.com/prostats/gamesheet_full.html?gameid=3388762');
+     await scrape_table('http://pointstreak.com/prostats/gamesheet_full.html?gameid=3414750');
  })()
 
 function getWebsiteHtml(url) {
@@ -128,15 +128,12 @@ async function scrape_table(url) {
                 $(row).find('td').each((_, td) => {
                     rowValues.push($(td).html().trim().replace(/&#xA0;/g, ''));
                 });
-                let a = [];
-                a.push(rowValues);
-                console.log(a);
-                for (let i = 0; i < a.length; i++) {
-                    if (a[i][0] == /(win|loss)/g) {
-                        goalieValues.push(a[i][0]);
+                
+                const regex = RegExp('.*\(win\).*|.*\(loss\).*','g')
+                for (let i = 0; i < rowValues.length; i++) {
+                    if (regex.test(rowValues[i])) {
+                        goalieValues.push(rowValues[i].replace(/\d+|\(.*\)/g,'').trim());
                     }
-
-                    //let b = a[i][0].match(/(win|loss)/g);
                 }
             });
         }
@@ -160,7 +157,7 @@ async function scrape_table(url) {
     getHomeScores(teamScore);
     getCoordinates(shots[2], homeScores);
     getCoordinates(shots[1], awayScores);
-    makeJSON(homeScores, awayScores, shots, penalties, teamNames, scores);
+    makeJSON(homeScores, awayScores, shots, penalties, teamNames, scores, goalieValues);
 }
 
 //removes all unecessary items from array
@@ -276,8 +273,8 @@ function getCoordinates (shots, p5) {
     return p5;
 }
 
-function makeJSON(item, item2, item3, item4, item5, item6) {
-    let everything = [item, item2, item3, item4, item5, item6];
+function makeJSON(item, item2, item3, item4, item5, item6, item7) {
+    let everything = [item, item2, item3, item4, item5, item6, item7];
     let myJSON = JSON.stringify(everything);
     var fs = require('fs');
     fs.writeFile("test.json", myJSON, function(err) {

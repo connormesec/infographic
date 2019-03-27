@@ -2,7 +2,7 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 
 function formatData(data) {
-  const [_, __, ___, penalties, ____, _____, colors] = data;
+  const [_, __, ___, penalties, ____, _____, ______, colors] = data;
 
   const formattedPenaltyMinutes = {
     homePenaltyMinutes: [],
