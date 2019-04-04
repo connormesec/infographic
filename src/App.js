@@ -10,6 +10,7 @@ import ScoreTitle from './ScoreTitle';
 import SavePercentage from './SavePercentage';
 import HomeScore from './HomeScore';
 import AwayScore from './AwayScore';
+import Screenshot from './Screenshot';
 
 const request = require('request');
 const cheerio = require('cheerio');
@@ -95,6 +96,9 @@ function Plots({url, homeColor, awayColor}) {
         </div>
         <div className="savePercentage">
             <SavePercentage data={data} />
+        </div>
+        <div className="screenshot">
+            <Screenshot />
         </div>
     </div>
   );
