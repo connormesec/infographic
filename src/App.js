@@ -97,9 +97,6 @@ function Plots({url, homeColor, awayColor}) {
         <div className="savePercentage">
             <SavePercentage data={data} />
         </div>
-        <div className="screenshot">
-            <Screenshot />
-        </div>
     </div>
   );
 }
