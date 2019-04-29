@@ -2,6 +2,8 @@
   text-align: center;
   position: relative;
   width: 1200px;
+  overflow: hidden;
+  background-color: #282c34;
 }
 
 .App-logo {
@@ -39,6 +41,7 @@
   height: 200px;
   background-color: #282c34;
   float: left;
+  display: block;
 }
 
 .homeScore {
@@ -46,6 +49,7 @@
   background-color: #282c34;
   width: 400px;
   height: 300px;
+  display: block;
 }
 
 .scoreTitle {
@@ -53,6 +57,7 @@
   background-color: #282c34;
   width: 400px;
   height: 300px;
+  display: block;
 }
 
 .awayScore {
@@ -60,6 +65,7 @@
   background-color: #282c34;
   width: 400px;
   height: 300px;
+  display: block;
 }
 
 .ppGoals {
@@ -67,6 +73,7 @@
   width: 400px;
   background-color: #282c34;
   float: left;
+  display: block;
 }
 
 .ppMin {
@@ -98,7 +105,6 @@ h1 {
 h2 {
   color: white;
   margin: 0px;
- 
   font-size: 150px;
 }
 
