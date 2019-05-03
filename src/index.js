@@ -7,8 +7,8 @@ import Screenshot from './Screenshot';
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<Screenshot></Screenshot>,
-document.getElementById('screenshot'));
+// ReactDOM.render(<Screenshot></Screenshot>,
+// document.getElementById('screenshot'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

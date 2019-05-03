@@ -2,22 +2,22 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 
 function formatData(data) {
-  const [_, __, ___, penalties, ____, _____, ______, colors] = data;
+  const [_, __, shots, ___, ____, _____, ______, colors] = data;
 
-  const formattedPenaltyMinutes = {
-    homePenaltyMinutes: [],
-    awayPenaltyMinutes: [],
+  const formattedShots = {
+    homeShots: [],
+    awayShots: [],
     homeColor: colors[0],
     awayColor: colors[1],
   };
 
-  formattedPenaltyMinutes.awayPenaltyMinutes = [penalties[1][2]];
-  formattedPenaltyMinutes.homePenaltyMinutes = [penalties[2][2]];
+  formattedShots.awayShots = [shots[1][2]];
+  formattedShots.homeShots = [shots[2][2]];
 
-  return formattedPenaltyMinutes;
+  return formattedShots;
 }
 
-function penaltyMinutesGraph(props) {
+function shotsGraph(props) {
   const data = formatData(props.data);
 
   return (
@@ -26,8 +26,8 @@ function penaltyMinutesGraph(props) {
         [
           //Home Team Shots
           {
-            x: data.homePenaltyMinutes,
-            y: data.homePenaltyMinutes,
+            x: data.homeShots,
+            y: data.homeShots,
             type: 'bar',
             mode: 'lines+points',
             marker: { 
@@ -40,8 +40,8 @@ function penaltyMinutesGraph(props) {
           },
           //Away Team Shots
           {
-            x: data.awayPenaltyMinutes,
-            y: data.awayPenaltyMinutes,
+            x: data.awayShots,
+            y: data.awayShots,
             type: 'bar',
             mode: 'lines+points',
             marker: { 
@@ -55,7 +55,7 @@ function penaltyMinutesGraph(props) {
         ]
       }
       layout={{
-        title: 'Penalties',
+        title: 'Shots',
         width: 300,
         height: 400,
         barmode: 'stack',
@@ -83,4 +83,4 @@ function penaltyMinutesGraph(props) {
     />
   );
 }
-export default penaltyMinutesGraph;
+export default shotsGraph;

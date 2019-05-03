@@ -1,4 +1,4 @@
-.App {
+.AppBody {
   text-align: center;
   position: relative;
   width: 1200px;
@@ -50,14 +50,31 @@
   width: 400px;
   height: 300px;
   display: block;
+  border-bottom: 5px solid silver;
+}
+
+.scoreTitleWrapper {
+  width: 400px;
+  height: 300px;
+  display: block;
+  float: left;
+  border-bottom: 5px solid silver;
 }
 
 .scoreTitle {
   float: left;
   background-color: #282c34;
   width: 400px;
-  height: 300px;
+  height: 250px;
   display: block;
+}
+
+.scoringSummaryTitle{
+  width: 400px;
+  height: 50px;
+  float: left;
+  background-color: silver;
+  border-radius: 15px 15px 0px 0px;
 }
 
 .awayScore {
@@ -66,11 +83,12 @@
   width: 400px;
   height: 300px;
   display: block;
+  border-bottom: 5px solid silver;
 }
 
 .ppGoals {
   height: 600px;
-  width: 400px;
+  width: 300px;
   background-color: #282c34;
   float: left;
   display: block;
@@ -78,28 +96,49 @@
 
 .ppMin {
   height: 600px;
-  width: 400px;
+  width: 300px;
+  background-color: #282c34;
+  float: left;
+}
+
+.shotsGraph {
+  height: 600px;
+  width: 300px;
   background-color: #282c34;
   float: left;
 }
 
 .savePercentage {
   height: 600px;
-  width: 400px;
+  width: 300px;
   background-color: #282c34;
   float: left;
 }
 
+.homePlayerScores {
+  width: 200px;
+  height: 400px;
+  float: left;
+}
+
 .lineChart {
-  width: 1200px;
+  width: 800px;
+  height: 400px;
   background-color: #282c34;
   float: left;
+}
+
+.awayPlayerScores {
+  width: 200px;
+  height: 400px;
+  float: right;
 }
 
 h1 {
   color: white;
   font-size: 240px;
   margin: 0px;
+  text-shadow: 2px 2px black;
 }
 
 h2 {
@@ -111,5 +150,12 @@ h2 {
 h3 {
   color: white;
   font-size: 40px;
+  margin: 0px;
+}
+
+h4 {
+  color: #282c34;
+  font-size: 30px;
+  padding-top: 10px;
   margin: 0px;
 }

@@ -11,6 +11,7 @@ import SavePercentage from './SavePercentage';
 import HomeScore from './HomeScore';
 import AwayScore from './AwayScore';
 import Screenshot from './Screenshot';
+import ShotsGraph from './shotsGraph';
 
 const request = require('request');
 const cheerio = require('cheerio');
@@ -73,29 +74,46 @@ function Plots({url, homeColor, awayColor}) {
 
   return (
     <div className="App">
-        <div className="header">
-            <Header data={data} />
+        <div id="screenshot">
+            <Screenshot />
         </div>
-        <div className="homeScore" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
-            <HomeScore data={data} />
-        </div>
-        <div className="scoreTitle">  
-            <ScoreTitle data={data} />
-        </div>
-        <div className="awayScore" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
-            <AwayScore data={data} />
-        </div>
-        <div className="lineChart">
-            <HockeyPlot data={data} />
-        </div>
-        <div className="ppGoals">
-            <HockeyGraph data={data} />
-        </div>
-        <div className="ppMin">
-            <PenaltyMinutesGraph data={data} />
-        </div>
-        <div className="savePercentage">
-            <SavePercentage data={data} />
+        <div className="AppBody">
+            <div className="header">
+                <Header data={data} />
+            </div>
+            <div className="homeScore" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+                <HomeScore data={data} />
+            </div>
+            <div className="scoreTitleWrapper">
+                <div className="scoreTitle">  
+                    <ScoreTitle data={data} />
+                </div>
+                <div className="scoringSummaryTitle">
+                    <h4>Scoring Summary</h4>
+                </div>
+            </div>
+            <div className="awayScore" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
+                <AwayScore data={data} />
+            </div>
+            <div className="homePlayerScores" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+            </div>
+            <div className="lineChart">
+                <HockeyPlot data={data} />
+            </div>
+            <div className="awayPlayerScores" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
+            </div>
+            <div className="ppGoals">
+                <HockeyGraph data={data} />
+            </div>
+            <div className="ppMin">
+                <PenaltyMinutesGraph data={data} />
+            </div>
+            <div className="shotsGraph">
+                <ShotsGraph data={data} />
+            </div>
+            <div className="savePercentage">
+                <SavePercentage data={data} />
+            </div>
         </div>
     </div>
   );

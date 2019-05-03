@@ -1,5 +1,6 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
+import { NONAME } from 'dns';
 
 function formatData(data) {
   const [homeScores, awayScores, shots, _, __, ___, ____, colors] = data;
@@ -161,16 +162,16 @@ function HockeyPlot(props) {
         ]
       }
       layout={{
-        width: 1200,
-        height: 500,
-        plot_bgcolor: '#2d343e',
-        paper_bgcolor: '#2d343e',
+        width: 800,
+        height: 400,
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        paper_bgcolor: 'rgba(0,0,0,0)',
         showlegend: false,
         margin: {
-          r: 100,
-          t: 25,
-          b: 70,
-          l: 150
+          r: 75,
+          t: 10,
+          b: 50,
+          l: 50,
         },
         xaxis: {
           color: '#aaa',
@@ -183,7 +184,7 @@ function HockeyPlot(props) {
           ticklen: 5,
           tickfont: {
             family: 'Courier New, monospace',
-            size: 30,
+            size: 20,
             color: 'white'
           },
           gridcolor: '#aaa',
@@ -191,7 +192,6 @@ function HockeyPlot(props) {
           showgrid: true,
           showline: true,
           mirror: true,
-    
         },
         yaxis: {
           color: '#aaa',
@@ -206,17 +206,9 @@ function HockeyPlot(props) {
           mirror: true,
           tickfont: {
             family: 'Courier New, monospace',
-            size: 30,
+            size: 20,
             color: 'white'
           },
-          title: {
-            text: 'SHOTS + SCORES',
-            font: {
-              family: 'Courier New, monospace',
-              size: 50,
-              color: 'white'
-            },
-          }
         },
       }}
     />

@@ -92,7 +92,7 @@ function HockeyGraph(props) {
       }
       layout={{
         title: 'Power Play',
-        width: 400,
+        width: 300,
         height: 400,
         barmode: 'stack',
         font: {

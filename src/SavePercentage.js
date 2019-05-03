@@ -111,7 +111,7 @@ function SavePercentage(props) {
                     },
                     showarrow: false,
                     text: data.homeGoalie,
-                    x: 0.0,
+                    x: 0.05,
                     y: 0,
                 },
                 {
@@ -120,12 +120,12 @@ function SavePercentage(props) {
                     },
                     showarrow: false,
                     text: data.awayGoalie,
-                    x: 1,
+                    x: 0.9,
                     y: 0,
                 }
             ],
             height: 400,
-            width: 400,
+            width: 300,
             margin: {
                 l: 40,
                 r: 40,
