@@ -12,6 +12,8 @@ import HomeScore from './HomeScore';
 import AwayScore from './AwayScore';
 import Screenshot from './Screenshot';
 import ShotsGraph from './shotsGraph';
+import HomePlayerScores from './HomePlayerScores';
+import AwayPlayerScores from './AwayPlayerScores';
 
 const request = require('request');
 const cheerio = require('cheerio');
@@ -96,11 +98,17 @@ function Plots({url, homeColor, awayColor}) {
                 <AwayScore data={data} />
             </div>
             <div className="homePlayerScores" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+                <div>
+                    <HomePlayerScores data={data} />
+                </div>
             </div>
             <div className="lineChart">
                 <HockeyPlot data={data} />
             </div>
             <div className="awayPlayerScores" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
+                <div>
+                    <AwayPlayerScores data={data} />
+                </div>
             </div>
             <div className="ppGoals">
                 <HockeyGraph data={data} />

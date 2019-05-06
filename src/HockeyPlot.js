@@ -112,8 +112,8 @@ function HockeyPlot(props) {
             x: data.scores[0].x,
             y: data.scores[0].y,
             mode: 'markers+text',
-            text: data.scores[0].title,
-            textposition: data.awayLabel,
+            //text: data.scores[0].title,
+            //textposition: data.awayLabel,
             textfont: {
               color: 'white',
               size: 20,
@@ -132,8 +132,8 @@ function HockeyPlot(props) {
             x: data.scores[1].x,
             y: data.scores[1].y,
             mode: 'markers+text',
-            text: data.scores[1].title,
-            textposition: data.homeLabel,
+            //text: data.scores[1].title,
+            //textposition: data.homeLabel,
             textfont: {
               color: 'white',
               size: 20,

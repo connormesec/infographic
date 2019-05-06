@@ -58,7 +58,6 @@
   height: 300px;
   display: block;
   float: left;
-  border-bottom: 5px solid silver;
 }
 
 .scoreTitle {
@@ -70,11 +69,12 @@
 }
 
 .scoringSummaryTitle{
-  width: 400px;
+  width: 390px;
   height: 50px;
   float: left;
-  background-color: silver;
   border-radius: 15px 15px 0px 0px;
+  border: 5px solid silver;
+  padding-top: 10px;
 }
 
 .awayScore {
@@ -119,6 +119,9 @@
   width: 200px;
   height: 400px;
   float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .lineChart {
@@ -132,6 +135,9 @@
   width: 200px;
   height: 400px;
   float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
@@ -154,8 +160,15 @@ h3 {
 }
 
 h4 {
-  color: #282c34;
+  color: white;
   font-size: 30px;
-  padding-top: 10px;
+  padding-top: 0px;
+  margin: 0px;
+}
+
+h5 {
+  color: white;
+  font-size: 20px;
+  padding-top: 5px;
   margin: 0px;
 }
