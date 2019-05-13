@@ -80,8 +80,14 @@ function Plots({url, homeColor, awayColor}) {
             <Screenshot />
         </div>
         <div className="AppBody">
+            <div className="homeLogo">
+                <img src="https://cors-anywhere.herokuapp.com/https://upload.wikimedia.org/wikipedia/en/thumb/2/2f/Montana_State_Bobcats_logo.svg/1200px-Montana_State_Bobcats_logo.svg.png"></img>
+            </div>
             <div className="header">
                 <Header data={data} />
+            </div>
+            <div className="awayLogo">
+                
             </div>
             <div className="homeScore" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
                 <HomeScore data={data} />
@@ -109,6 +115,17 @@ function Plots({url, homeColor, awayColor}) {
                 <div>
                     <AwayPlayerScores data={data} />
                 </div>
+            </div>
+            <div className="underPlayerScores"style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+            </div>
+            <div className="spacer">
+            </div>
+            <div className="scoringSummaryTitle">
+                    <h4>Game Statistics</h4>
+            </div>
+            <div className="spacer">
+            </div>
+            <div className="underPlayerScores" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
             </div>
             <div className="ppGoals">
                 <HockeyGraph data={data} />

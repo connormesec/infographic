@@ -33,7 +33,6 @@ function HockeyGraph(props) {
     <Plot
       data={
         [
-          //Home Team Shots
           {
             x: data.homeTeamName,
             y: data.ppGoalsHome,
@@ -91,23 +90,35 @@ function HockeyGraph(props) {
         ]
       }
       layout={{
-        title: 'Power Play',
         width: 300,
-        height: 400,
+        height: 300,
         barmode: 'stack',
+        margin: {
+            t: 20,
+        },
         font: {
             family: 'Courier New, monospace',
             size: 30,
             color: '#ffffff'
         },
-        plot_bgcolor: '#2d343e',
-        paper_bgcolor: '#2d343e',
+        plot_bgcolor: '#282c34',
+        paper_bgcolor: '#282c34',
         showlegend: false,
         xaxis: {
           color: 'white',
           autotick: true,
           tickmode: 'array',
           type: "category",
+          showgrid: false,
+          showline: false,
+          title: {
+            text: 'Power Play',
+            font: {
+              family: 'Courier New, monospace',
+              size: 25,
+              color: 'white',
+            }
+          },
         },
         yaxis: { 
           color: 'white',

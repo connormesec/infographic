@@ -1,5 +1,6 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
+import { withTheme } from '@material-ui/core';
 
 function formatData(data) {
     const [_, __, shots, ______, ____, score, goalies, colors ] = data;
@@ -13,12 +14,12 @@ function formatData(data) {
         awaySavedShots: [],
         awaySavePercentage: '',
         homeSavePercentage: '',
-        homeColor: ['#2d343e', colors[0]],
-        awayColor: ['#2d343e', colors[1]],
+        homeColor: colors[0],
+        awayColor: colors[1],
         homeDonut: [],
         awayDonut: [],
-        homeGoalie: goalies[1],
-        awayGoalie: goalies[0],
+        homeGoalie: [goalies[1]],
+        awayGoalie: [goalies[0]],
     };
 
     formattedShots.homeSavedShots = shots[2][4] - score[1];
@@ -27,10 +28,10 @@ function formatData(data) {
     formattedShots.homeSavePercentage = formattedShots.awaySavedShots / formattedShots.awayTotalShots;
     formattedShots.homeDonut = [score[0], shots[1][4]];
     formattedShots.awayDonut = [score[1], shots[2][4]];
-    let m = Math.round(((shots[1][4] - score[0])/shots[1][4]) * 1000) / 1000;
+    let m = Math.round(((shots[1][4] - score[0])/shots[1][4]) * 100) / 100;
     let n = m.toString();
     formattedShots.homeSavePercentage = n.replace(/^0+/, '');
-    let o = Math.round(((shots[2][4] - score[1])/shots[2][4]) * 1000) / 1000;
+    let o = Math.round(((shots[2][4] - score[1])/shots[2][4]) * 100) / 100;
     let p = o.toString();
     formattedShots.awaySavePercentage = p.replace(/^0+/, '');
     return formattedShots;
@@ -42,103 +43,115 @@ function SavePercentage(props) {
     return ( 
         <Plot 
             data = {
-            [{
-                values: data.homeDonut,
-                labels: ["hello", "world"],
-                domain: {
-                    column: 0
-                },
-                name: 'GHG Emissions',
-                marker: {
-                    colors: data.homeColor,
-                    line: {
+            [
+                {
+                    x: [data.homeSavePercentage + " "],
+                    y: [data.homeSavePercentage],
+                    type: 'bar',
+                    mode: 'lines+points',
+                    text: data.homeGoalie,
+                    textposition: 'auto',
+                    hoverinfo: 'none',
+                    marker: { 
+                      color: data.homeColor,
+                      line: {
                         color: 'white',
-                        width: 2
+                        width: 2,
+                      }
                     }
-                  },
-                hole: .6,
-                type: 'pie',
-                textinfo: 'none'
-            }, {
-                values: data.awayDonut,
-                labels: ['US', 'China'],
-                text: data.awaySavePercentage,
-                textposition: 'inside',
-                domain: {
-                    column: 1
                 },
-                name: 'CO2 Emissions',
-                marker: {
-                    colors: data.awayColor,
-                    line: {
+                {
+                    x: [data.homeSavePercentage + " "],
+                    y: [1 - data.homeSavePercentage],
+                    type: 'bar',
+                    mode: 'lines+points',
+                    marker: { 
+                        color: 'grey',
+                        opacity: 0.2,
+                        line: {
+                          color: 'white',
+                          width: 2,
+                        },
+                    },
+                },
+                {
+                    x: [data.awaySavePercentage],
+                    y: [data.awaySavePercentage],
+                    type: 'bar',
+                    mode: 'lines+points',
+                    text: data.awayGoalie,
+                    textposition: 'auto',
+                    hoverinfo: 'none',
+                    marker: { 
+                      color: data.awayColor,
+                      line: {
                         color: 'white',
-                        width: 2
+                        width: 2,
+                      }
                     }
-                  },
-                hole: .6,
-                type: 'pie',
-                textinfo: 'none',
-            }]
+                },
+                {
+                    x: [data.awaySavePercentage],
+                    y: [1 - data.awaySavePercentage],
+                    type: 'bar',
+                    mode: 'lines+points',
+                    marker: { 
+                        color: 'grey',
+                        opacity: 0.2,
+                        line: {
+                          color: 'white',
+                          width: 2,
+                        },
+                    },
+                },
+            ]
         }
-        layout = {{
-            title: 'Goaltending',
+        layout={{
+            width: 300,
+            height: 300,
+            barmode: 'stack',
+            margin: {
+                t: 20,
+            },
             font: {
                 family: 'Courier New, monospace',
                 size: 30,
                 color: '#ffffff'
             },
-            annotations: [{
-                    font: {
-                        size: 30
-                    },
-                    showarrow: false,
-                    text: data.homeSavePercentage,
-                    x: 0.1,
-                    y: 0.5,
-                },
-                {
-                    font: {
-                        size: 30
-                    },
-                    showarrow: false,
-                    text: data.awaySavePercentage,
-                    x: 0.87,
-                    y: 0.5
-                },
-                {
-                    font: {
-                        size: 20
-                    },
-                    showarrow: false,
-                    text: data.homeGoalie,
-                    x: 0.05,
-                    y: 0,
-                },
-                {
-                    font: {
-                        size: 20
-                    },
-                    showarrow: false,
-                    text: data.awayGoalie,
-                    x: 0.9,
-                    y: 0,
-                }
-            ],
-            height: 400,
-            width: 300,
-            margin: {
-                l: 40,
-                r: 40,
-                //pad: 2,
-            },
+            plot_bgcolor: '#282c34',
+            paper_bgcolor: '#282c34',
             showlegend: false,
-            plot_bgcolor: '#2d343e',
-            paper_bgcolor: '#2d343e',
-            grid: {
-                rows: 1,
-                columns: 2
-            }
-        }}
+            xaxis: {
+              color: 'white',
+              autotick: true,
+              tickmode: 'array',
+              type: "category",
+            },
+            xaxis: {
+                color: 'white',
+                autotick: true,
+                tickmode: 'array',
+                type: "category",
+                showgrid: false,
+                showline: false,
+                title: {
+                  text: 'Goaltending',
+                  font: {
+                    family: 'Courier New, monospace',
+                    size: 25,
+                    color: 'white',
+                  }
+                },
+              },
+            yaxis: { 
+              color: 'white',
+              zerolinewidth: 4, 
+              showgrid: false,
+              showline: false,
+              showticklabels: false,
+              textangle: 45,
+            },
+          }}
         />
     );
 }

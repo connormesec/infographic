@@ -169,7 +169,7 @@ function HockeyPlot(props) {
         showlegend: false,
         margin: {
           r: 75,
-          t: 10,
+          t: 20,
           b: 50,
           l: 50,
         },

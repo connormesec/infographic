@@ -11,8 +11,8 @@ function formatData(data) {
     awayColor: colors[1],
   };
 
-  formattedShots.awayShots = [shots[1][2]];
-  formattedShots.homeShots = [shots[2][2]];
+  formattedShots.awayShots = [shots[1][4]];
+  formattedShots.homeShots = [shots[2][4]];
 
   return formattedShots;
 }
@@ -55,26 +55,44 @@ function shotsGraph(props) {
         ]
       }
       layout={{
-        title: 'Shots',
         width: 300,
-        height: 400,
+        height: 300,
         barmode: 'stack',
+        margin: {
+          t: 20,
+        },
         font: {
           family: 'Courier New, monospace',
           size: 30,
           color: 'white'
         },
-        plot_bgcolor: '#2d343e',
-        paper_bgcolor: '#2d343e',
+        plot_bgcolor: '#282c34',
+        paper_bgcolor: '#282c34',
         showlegend: false,
         xaxis: {
           autotick: true,
           tickmode: 'array',
           type: "category",
         },
+        xaxis: {
+          color: 'white',
+          autotick: true,
+          tickmode: 'array',
+          type: "category",
+          showgrid: false,
+          showline: false,
+          title: {
+            text: 'Shots',
+            font: {
+              family: 'Courier New, monospace',
+              size: 25,
+              color: 'white',
+            }
+          },
+        },
         yaxis: { 
           color: 'white',
-          zerolinewidth: 4, 
+          zerolinewidth: 4,
           showgrid: false,
           showline: false,
           showticklabels: false,

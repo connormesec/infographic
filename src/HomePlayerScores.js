@@ -4,18 +4,12 @@ function formatData(data) {
     const [homeScores, __, ___, ____, _____] = data;
     const score = {
         scorers: [],
-    }
-    
+    } 
     for (let i = 0; i < homeScores.length; i++) {
         score.scorers.push(homeScores[i][5].replace(/\./g, '. '));
     }
-    
-    
-
-
     return score;
 }  
-
 
 function HomePlayerScores(props) {
     const data = formatData(props.data);
@@ -23,7 +17,7 @@ function HomePlayerScores(props) {
         return (
           <h5>{data}</h5>
         );
-      });
+    });
     return (
         reactElementsArray
     )
