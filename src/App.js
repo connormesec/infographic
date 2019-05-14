@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ColorPicker from "material-ui-color-picker";
-
 import "./App.css";
 import Header from "./Header";
 import HockeyPlot from "./HockeyPlot";
@@ -21,11 +20,13 @@ const cheerio = require("cheerio");
 
 let homeScores = [];
 let awayScores = [];
+let homeColor = '';
+let awayColor = '';
 
 function App() {
   const [url, setUrl] = useState();
-  const [homeColor, setHomeColor] = useState();
-  const [awayColor, setAwayColor] = useState();
+  // const [homeColor, setHomeColor] = useState();
+  // const [awayColor, setAwayColor] = useState();
   let textInputRef = React.createRef();
 
   if (!url) {
@@ -38,7 +39,7 @@ function App() {
             Enter
           </button>
         </div>
-        <div>
+        {/* <div>
           <ColorPicker
             name="home color"
             defaultValue="#000"
@@ -53,24 +54,25 @@ function App() {
             // value={this.state.color} - for controlled component
             onChange={awayColor => awayColor && setAwayColor(awayColor)}
           />
-        </div>
+        </div> */}
       </div>
     );
   }
   return (
     <Plots
       url={"https://cors-anywhere.herokuapp.com/" + url}
-      homeColor={homeColor}
-      awayColor={awayColor}
+      // homeColor={homeColor}
+      // awayColor={awayColor}
     />
   );
 }
 
-function Plots({ url, homeColor, awayColor }) {
+function Plots({ url }) {
   const [data, setData] = useState();
 
   useEffect(async () => {
     const data = await scrape_table(url);
+    getColors(data[4][1], data[4][0]);
     data.push([homeColor, awayColor]);
     console.log(data);
 
@@ -170,6 +172,16 @@ function getWebsiteHtml(url) {
     });
   });
 }
+
+function getColors(homeColor1, awayColor1) {
+  if (homeColor1 == "Montana State University") {
+    homeColor = ("#00205B");
+  }else{
+    homeColor = ("#ffffff");
+  }
+  console.log("Yo pay attention" + homeColor1);
+}
+
 
 async function scrape_table(url) {
   const html = await getWebsiteHtml(url);
