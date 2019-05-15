@@ -70,11 +70,6 @@ function shotsGraph(props) {
         paper_bgcolor: '#282c34',
         showlegend: false,
         xaxis: {
-          autotick: true,
-          tickmode: 'array',
-          type: "category",
-        },
-        xaxis: {
           color: 'white',
           autotick: true,
           tickmode: 'array',

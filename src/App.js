@@ -39,30 +39,12 @@ function App() {
             Enter
           </button>
         </div>
-        {/* <div>
-          <ColorPicker
-            name="home color"
-            defaultValue="#000"
-            // value={this.state.color} - for controlled component
-            onChange={homeColor => homeColor && setHomeColor(homeColor)}
-          />
-        </div>
-        <div>
-          <ColorPicker
-            name="away color"
-            defaultValue="#000"
-            // value={this.state.color} - for controlled component
-            onChange={awayColor => awayColor && setAwayColor(awayColor)}
-          />
-        </div> */}
       </div>
     );
   }
   return (
     <Plots
       url={"https://cors-anywhere.herokuapp.com/" + url}
-      // homeColor={homeColor}
-      // awayColor={awayColor}
     />
   );
 }
@@ -87,7 +69,7 @@ function Plots({ url }) {
         <Screenshot />
       </div>
       <div className="AppBody">
-        <div className="homeLogo" id="homeImageBox" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+        <div className="homeLogo" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
           <HomeImage data={data} />
         </div>
         <div className="header">
@@ -176,13 +158,16 @@ function getWebsiteHtml(url) {
 
 function getColors(homeColor1, awayColor1) {
   let json = require('./test.json');
-  let myMap = JSON.parse(json);
-
-  homeColor = myMap.get(homeColor1);
-  awayColor = myMap.get(awayColor1);
-  console.log(myMap);
+  console.log(json);
+  for (let i = 0; i < json.length; i++) {
+    if (homeColor1 == json[i][0]) {
+      homeColor = json[i][1]
+    } 
+    if (awayColor1 == json[i][0]) {
+      awayColor = json[i][1]
+    }
+  }
 }
-
 
 async function scrape_table(url) {
   const html = await getWebsiteHtml(url);

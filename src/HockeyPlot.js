@@ -177,7 +177,7 @@ function HockeyPlot(props) {
           color: '#aaa',
           autotick: false,
           tickvals: [1, 2, 3],
-          ticktext: ['End of 1st', 'End of 2nd', 'End of 3rd'],
+          ticktext: ['End of 1st', 'End of 2nd', 'Final'],
           tickmode: 'array',
           ticks: 'outside',
           tickwidth: 2,
