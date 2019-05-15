@@ -87,13 +87,14 @@ function Plots({ url }) {
         <Screenshot />
       </div>
       <div className="AppBody">
-        <div className="homeLogo" id="homeImageBox">
+        <div className="homeLogo" id="homeImageBox" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
           <HomeImage data={data} />
         </div>
         <div className="header">
           <Header data={data} />
         </div>
-        <div className="awayLogo" />
+        <div className="awayLogo" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
+        </div>
         <div className="homeScore" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
           <HomeScore data={data} />
         </div>
@@ -174,12 +175,12 @@ function getWebsiteHtml(url) {
 }
 
 function getColors(homeColor1, awayColor1) {
-  if (homeColor1 == "Montana State University") {
-    homeColor = ("#00205B");
-  }else{
-    homeColor = ("#ffffff");
-  }
-  console.log("Yo pay attention" + homeColor1);
+  let json = require('./test.json');
+  let myMap = JSON.parse(json);
+
+  homeColor = myMap.get(homeColor1);
+  awayColor = myMap.get(awayColor1);
+  console.log(myMap);
 }
 
 
@@ -506,16 +507,17 @@ function getCoordinates(shots, p5) {
   return p5;
 }
 
-function makeJSON(item, item2, item3, item4, item5, item6, item7) {
-  let everything = [item, item2, item3, item4, item5, item6, item7];
-  // let myJSON = JSON.stringify(everything);
-  // var fs = require('fs');
-  // fs.writeFile("test.json", myJSON, function(err) {
-  // if (err) {
-  //     console.log(err);
-  // }
-  // });
-  return everything;
-}
+//  [DEPRECATED]
+// function makeJSON(item, item2, item3, item4, item5, item6, item7) {
+//   let everything = [item, item2, item3, item4, item5, item6, item7];
+//   let myJSON = JSON.stringify(everything);
+//   var fs = require('fs');
+//   fs.writeFile("test.json", myJSON, function(err) {
+//   if (err) {
+//       console.log(err);
+//   }
+//   });
+//   return everything;
+// }
 
 export default App;
