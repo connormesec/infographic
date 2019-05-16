@@ -2,16 +2,15 @@ import React from 'react';
 
 function formatData(data) {
     const [_, __, ___, ____, teamNames] = data;
-    console.log(teamNames);
-    const homeTeamName = {
-        name: teamNames[1].replace(/\s/g, "_"),
+    const awayTeamName = {
+        name: teamNames[0].replace(/\s/g, "_"),
     }
-    
-    return homeTeamName;
+    console.log(awayTeamName);
+    return awayTeamName;
 }  
 
 
-function HomeImage(props) {
+function AwayImage(props) {
     const data = formatData(props.data);
     //document.getElementById('homeImageBox').src = 'images/' + data.name + '.png';
     //document.write('<img src="images/' data.name '.png"></img>');
@@ -19,5 +18,5 @@ function HomeImage(props) {
         <img src={`images/${data.name}.png`}/>
     )
   }
-  export default HomeImage;
+  export default AwayImage;
  

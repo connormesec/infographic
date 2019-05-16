@@ -9,7 +9,7 @@ function Screenshot(props) {
         <button onClick={() => {
             html2canvas(document.querySelector(".AppBody")).then(canvas => {
                 document.body.appendChild(canvas);
-                saveAs(canvas.toDataURL(), 'file-name.png');
+                //saveAs(canvas.toDataURL(), 'file-name.png');
             });
         }}> Create Image </button>
         

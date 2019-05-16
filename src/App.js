@@ -14,6 +14,7 @@ import ShotsGraph from "./shotsGraph";
 import HomePlayerScores from "./HomePlayerScores";
 import AwayPlayerScores from "./AwayPlayerScores";
 import HomeImage from './HomeImage';
+import AwayImage from './AwayImage';
 
 const request = require("request");
 const cheerio = require("cheerio");
@@ -25,8 +26,6 @@ let awayColor = '';
 
 function App() {
   const [url, setUrl] = useState();
-  // const [homeColor, setHomeColor] = useState();
-  // const [awayColor, setAwayColor] = useState();
   let textInputRef = React.createRef();
 
   if (!url) {
@@ -76,6 +75,7 @@ function Plots({ url }) {
           <Header data={data} />
         </div>
         <div className="awayLogo" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
+          <AwayImage data={data} />
         </div>
         <div className="homeScore" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
           <HomeScore data={data} />
@@ -337,54 +337,54 @@ async function scrape_table(url) {
       }
     });
 
-  //   let unformattedTeamNames = $(".gameinfo").html().split("<br>")[4].split("<span class=\"big\">");
-  //   for (let i = 0; i < unformattedTeamNames.length; i++) {
-  //       let a = unformattedTeamNames[i].replace(/<(.|\n)*?>/g, '');
-  //       let b = a.replace(/\d\sat\s/g, '');
-  //       let c = b.trim();
-  //       teamNames.push(c);
-  //       let e = a.replace(/\D+/g, '');
-  //       let f = e.trim();
-  //       scores.push(f);
-  //   }
-  //   teamNames.pop();
-  //   scores.shift();
+    let unformattedTeamNames = $(".gameinfo").html().split("<br>")[4].split("<span class=\"big\">");
+    for (let i = 0; i < unformattedTeamNames.length; i++) {
+        let a = unformattedTeamNames[i].replace(/<(.|\n)*?>/g, '');
+        let b = a.replace(/\d\sat\s/g, '');
+        let c = b.trim();
+        teamNames.push(c);
+        let e = a.replace(/\D+/g, '');
+        let f = e.trim();
+        scores.push(f);
+    }
+    teamNames.pop();
+    scores.shift();
 
   removeItems(teamScore);
-  console.log(teamScore);
+  console.log('Team score: ' + teamScore);
   makeTime(teamScore);
   getHomeScores(teamScore);
   getCoordinates(shots[2], homeScores);
   getCoordinates(shots[1], awayScores);
-  //let finalData = makeJSON(homeScores, awayScores, shots, penalties, teamNames, scores, goalieValues);
-  let testData = [
-    [
-      ["Home score", "2 - 1", "1", 0.96, 10.56, "R.Hanson", "1"],
-      ["Home score", "2 - 2", "2", 1.03, 11.54, "R.Perius", "2"],
-      ["Home score", "2 - 3", "2", 1.34, 17.12, "R.Hanson", "3"],
-      ["Home score", "2 - 4", "2", 1.3599999999999999, 17.48, "C.Stefan", "4"],
-      ["Home score", "2 - 5", "3", 2.4699999999999998, 31.82, "T.Padden", "5"]
-    ],
-    [
-      ["Away score", "1 - 0", "1", 0.77, 5.39, "B.LaRue", "1"],
-      ["Away score", "2 - 0", "1", 0.93, 6.51, "B.LaRue", "2"]
-    ],
-    [
-      ["Shots", "1", "2", "3", "T"],
-      ["Eastern Wash", "7", "8", "13", "28"],
-      ["Montana Stat", "11", "18", "6", "35"]
-    ],
-    [
-      ["Power Plays", "PP", "PIM"],
-      ["Eastern Wash", "0-5", "34"],
-      ["Montana Stat", "2-8", "22"]
-    ],
-    ["Eastern Washington University", "Montana State University"],
-    ["2", "5"],
-    ["A.Kirby", "C.Butler"]
-  ];
-  //return finalData;
-  return testData;
+  let finalData = [homeScores, awayScores, shots, penalties, teamNames, scores, goalieValues];
+  // let testData = [
+  //   [
+  //     ["Home score", "2 - 1", "1", 0.96, 10.56, "R.Hanson", "1"],
+  //     ["Home score", "2 - 2", "2", 1.03, 11.54, "R.Perius", "2"],
+  //     ["Home score", "2 - 3", "2", 1.34, 17.12, "R.Hanson", "3"],
+  //     ["Home score", "2 - 4", "2", 1.3599999999999999, 17.48, "C.Stefan", "4"],
+  //     ["Home score", "2 - 5", "3", 2.4699999999999998, 31.82, "T.Padden", "5"]
+  //   ],
+  //   [
+  //     ["Away score", "1 - 0", "1", 0.77, 5.39, "B.LaRue", "1"],
+  //     ["Away score", "2 - 0", "1", 0.93, 6.51, "B.LaRue", "2"]
+  //   ],
+  //   [
+  //     ["Shots", "1", "2", "3", "T"],
+  //     ["Eastern Wash", "7", "8", "13", "28"],
+  //     ["Montana Stat", "11", "18", "6", "35"]
+  //   ],
+  //   [
+  //     ["Power Plays", "PP", "PIM"],
+  //     ["Eastern Wash", "0-5", "34"],
+  //     ["Montana Stat", "2-8", "22"]
+  //   ],
+  //   ["Eastern Washington University", "Montana State University"],
+  //   ["2", "5"],
+  //   ["A.Kirby", "C.Butler"]
+  // ];
+  return finalData;
+  //return testData;
 }
 
 //removes all unecessary items from array

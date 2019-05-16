@@ -168,7 +168,7 @@ function HockeyPlot(props) {
         paper_bgcolor: 'rgba(0,0,0,0)',
         showlegend: false,
         margin: {
-          r: 75,
+          r: 50,
           t: 20,
           b: 50,
           l: 50,
