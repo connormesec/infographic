@@ -96,24 +96,11 @@ function HockeyPlot(props) {
               width: 10
             }
           },
-          // ...data.teams.map(team => {
-          //   return {
-          //     name: team.team_name,
-          //     x: team.x,
-          //     y: team.y,
-          //     type: 'scatter',
-          //     mode: 'lines+points',
-          //     marker: {color: 'red'},
-          //   };
-          // }),
-
           //Home Scores
           {
             x: data.scores[0].x,
             y: data.scores[0].y,
             mode: 'markers+text',
-            //text: data.scores[0].title,
-            //textposition: data.awayLabel,
             textfont: {
               color: 'white',
               size: 20,
@@ -147,23 +134,12 @@ function HockeyPlot(props) {
               }
             }
           },
-          // ...data.scores.map(score => {
-          //   return {
-          //     x: score.x,
-          //     y: score.y,
-          //     mode: 'markers+text',
-          //     name: '',
-          //     text: score.title,
-          //     textposition:'top left',
-          //     textfont: { color: '#fff' },
-          //     marker: { color: 'pink'}
-          //   };
-          // }),
         ]
       }
       layout={{
         width: 800,
         height: 400,
+        staticPlot: true,
         plot_bgcolor: 'rgba(0,0,0,0)',
         paper_bgcolor: 'rgba(0,0,0,0)',
         showlegend: false,
@@ -180,6 +156,7 @@ function HockeyPlot(props) {
           ticktext: ['End of 1st', 'End of 2nd', 'Final'],
           tickmode: 'array',
           ticks: 'outside',
+          fixedrange: true,
           tickwidth: 2,
           ticklen: 5,
           tickfont: {
@@ -198,6 +175,7 @@ function HockeyPlot(props) {
           zerolinecolor: '#969696',
           zerolinewidth: 4,
           rangemode: 'nonnegative',
+          fixedrange: true,
           showgrid: false,
           ticks: 'outside',
           tickwidth: 2,
