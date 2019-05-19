@@ -1,5 +1,4 @@
 import React from 'react';
-var ReactFitText = require('react-fittext');
 
 function formatData(data) {
     const [_, __, ___, ____, names] = data;
@@ -24,18 +23,21 @@ function ScoreTitle(props) {
 
   function createMarkup(away, home) {
     let characters = away.length + home.length + 4;
-    if (characters <= 24) {
+    if (characters <= 26) {
         n = 60;
     }    
-    
-    if (characters <= 40) {
-            n = 30;
-        }
-        if (characters > 40 && characters < 60) {
-            n = 20;
-        }
-    let n = 50;
-    return {__html: '<h3 style="font-size: ' + n + 'px;">RKrQUPvp ICWCzvn<br /> at RKrQUPvpIC WCzvn<h3>'};
+    if (characters <= 36 && characters > 26) {
+        n = 50;
+    }
+    if (characters <= 45 && characters > 36) {
+        n = 45;
+    }
+
+    if (characters > 40 && characters < 60) {
+        n = 20;
+    }
+    let n = 45;
+    return {__html: '<h3 style="font-size: ' + n + 'px;">University YWt4scylI wVt<br /> at University Dy9YWt4sc ylIwVt<h3>'};
   }
   
   
