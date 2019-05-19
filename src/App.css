@@ -8,7 +8,8 @@
 
 .homeLogo {
   width: 400px;
-  height: 200px;
+  height: 180px;
+  padding-top: 20px;
   float: left;
   display: block;
 }
@@ -23,7 +24,8 @@
 
 .awayLogo {
   width: 400px;
-  height: 200px;
+  height: 180px;
+  padding-top: 20px;
   float: left;
   display: block;
 }
@@ -32,9 +34,11 @@
   float: left;
   background-color: #282c34;
   width: 400px;
-  height: 310px;
-  display: block;
+  height: 300px;
   border-bottom: 5px solid silver;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .scoreTitleWrapper {
@@ -66,9 +70,12 @@
   float: left;
   background-color: #282c34;
   width: 400px;
-  height: 310px;
+  height: 300px;
   display: block;
   border-bottom: 5px solid silver;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ppGoals {
@@ -148,8 +155,12 @@ img {
 
 h1 {
   color: white;
-  font-size: 240px;
-  margin: 0px;
+  font-size: 250px;
+  overflow:hidden;
+  font-family: 'Times New Roman';
+  line-height: 200px;
+  height: 200px;
+  margin: 0;
   text-shadow: 5px 5px 10px black;
 }
 
@@ -161,8 +172,8 @@ h2 {
 
 h3 {
   color: white;
-  font-size: 40px;
   margin: 0px;
+  line-height: 1;
 }
 
 h4 {

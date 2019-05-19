@@ -45,7 +45,7 @@ function SavePercentage(props) {
             data = {
             [
                 {
-                    x: [data.homeSavePercentage + " "],
+                    x: [data.homeSavePercentage + "\u200b"],
                     y: [data.homeSavePercentage],
                     type: 'bar',
                     mode: 'lines+points',
@@ -61,7 +61,7 @@ function SavePercentage(props) {
                     }
                 },
                 {
-                    x: [data.homeSavePercentage + " "],
+                    x: [data.homeSavePercentage + "\u200b"],
                     y: [1 - data.homeSavePercentage],
                     type: 'bar',
                     mode: 'lines+points',

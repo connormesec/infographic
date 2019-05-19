@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ColorPicker from "material-ui-color-picker";
+
 import "./App.css";
 import Header from "./Header";
 import HockeyPlot from "./HockeyPlot";
@@ -61,7 +61,7 @@ function Plots({ url }) {
   }, []);
 
   if (!data) return <div> Loading... </div>;
-
+  
   return (
     <div className="App">
       <div id="screenshot">

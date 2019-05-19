@@ -153,6 +153,7 @@ function HockeyPlot(props) {
           color: '#aaa',
           autotick: false,
           tickvals: [1, 2, 3],
+          range: [0, 3],
           ticktext: ['End of 1st', 'End of 2nd', 'Final'],
           tickmode: 'array',
           ticks: 'outside',
@@ -168,7 +169,9 @@ function HockeyPlot(props) {
           gridwidth: 2,
           showgrid: true,
           showline: true,
-          mirror: true,
+          linecolor: '#969696',
+          linewidth: 3,
+          mirror: true
         },
         yaxis: {
           color: '#aaa',
@@ -182,6 +185,8 @@ function HockeyPlot(props) {
           ticklen: 5,
           showline: true,
           mirror: true,
+          linecolor: '#969696',
+          linewidth: 3,
           tickfont: {
             family: 'Courier New, monospace',
             size: 20,
