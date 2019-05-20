@@ -14,38 +14,36 @@ function formatData(data) {
 function ScoreTitle(props) {
     const data = formatData(props.data);
     
-    return <div dangerouslySetInnerHTML={createMarkup(data.awayTeam, data.homeTeam)} />;
+    return <div dangerouslySetInnerHTML={ghettoAssFontSizing(data.awayTeam, data.homeTeam)} />;
   }
 
-  function ghettoAssFontSizing(home, away) {
-      return ('fuck the police' + home + away)
-  }
-
-  function createMarkup(away, home) {
+function ghettoAssFontSizing(away, home) {
     let characters = away.length + home.length + 4;
+    
+    let n = '';
     if (characters <= 26) {
-        n = 60;
+        n = '60';
+        
     }    
-    if (characters <= 36 && characters > 26) {
-        n = 50;
+    else if (characters <= 36 && characters > 26) {
+        n = '50';
+        
     }
-    if (characters <= 45 && characters > 36) {
-        n = 45;
+    else if (characters <= 45 && characters > 36) {
+        n = '45';
+        
     }
-
-    if (characters > 40 && characters < 60) {
-        n = 20;
+    else if (characters <=80  && characters > 45) {
+        n = '40';
+        
+    }else{
+        n = '35';
+        
     }
-    let n = 45;
-    return {__html: '<h3 style="font-size: ' + n + 'px;">University YWt4scylI wVt<br /> at University Dy9YWt4sc ylIwVt<h3>'};
-  }
-  
-  
-  
-  
-  
-  
-  export default ScoreTitle;
+    console.log("There are " + characters + " characters and n= " + n)
+    return {__html: '<h3 style="font-size: ' + n + 'px;">' + away + '<br /> at ' + home + '</h3>'};
+}
+export default ScoreTitle;
 
 //   <h3>{data.awayTeam}<br></br>
 //   at {data.homeTeam}</h3>

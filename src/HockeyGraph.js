@@ -28,7 +28,9 @@ function formatData(data) {
 
 function HockeyGraph(props) {
   const data = formatData(props.data);
-
+  console.log('Home team name: ' + data.homeTeamName)
+  console.log('ppGoals: ' + data.ppGoalsHome)
+  console.log('total home penalties: ' + data.totalHomePenalties)
   return (
     <Plot
       data={

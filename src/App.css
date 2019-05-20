@@ -53,7 +53,9 @@
   background-color: #282c34;
   width: 400px;
   height: 250px;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .scoringSummaryTitle{
