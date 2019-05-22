@@ -38,7 +38,6 @@ function ghettoAssFontSizing(away, home) {
         
     }else{
         n = '35';
-        
     }
     console.log("There are " + characters + " characters and n= " + n)
     return {__html: '<h3 style="font-size: ' + n + 'px;">' + away + '<br /> at ' + home + '</h3>'};

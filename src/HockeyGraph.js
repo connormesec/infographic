@@ -5,7 +5,6 @@ function formatData(data) {
   const [_, __, ___, penalties, ____, _____, ______, color] = data;
 
   const formattedPenalties = {
-    //teamNames: ["Montana State", "Other Team"],
     homeTeamName: [penalties[2][1].replace('-', '/')],
     awayTeamName: [penalties[1][1].replace('-', '/')],
     totalHomePenalties: [],
@@ -17,8 +16,7 @@ function formatData(data) {
   };
 
   let a = [penalties[1][1].split('-'), penalties[2][1].split('-')];
-
-  formattedPenalties.totalHomePenalties = [Number(a[0][1] - a[0][0])];
+  formattedPenalties.totalHomePenalties = [Number(a[1][1] - a[1][0])];
   formattedPenalties.totalAwayPenalties = [Number(a[0][1] - a[0][0])];
   formattedPenalties.ppGoalsHome = [a[1][0]];
   formattedPenalties.ppGoalsAway = [a[0][0]];
@@ -28,9 +26,6 @@ function formatData(data) {
 
 function HockeyGraph(props) {
   const data = formatData(props.data);
-  console.log('Home team name: ' + data.homeTeamName)
-  console.log('ppGoals: ' + data.ppGoalsHome)
-  console.log('total home penalties: ' + data.totalHomePenalties)
   return (
     <Plot
       data={
