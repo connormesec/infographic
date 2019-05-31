@@ -1,3 +1,41 @@
+.field {
+    width: 50%;
+    height: 56px;
+    font-size: 30px;
+}
+.field:focus {
+  width: 50%;
+  height: 56px;
+  font-size: 30px;
+  
+  background: #fafafa;
+  border-color: #999999;
+  outline: none;
+  box-shadow: 0 0 5px #999999;
+}
+
+.button, .button:focus {
+  width: 20%;
+  height: 56px;
+  font-size: 30px;
+  cursor: pointer;
+    font-family: "museo-sans-fontspring", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-weight: normal;
+    line-height: normal;
+    margin: 0 0 1.25rem;
+    position: relative;
+    display: inline-block;
+    background-color: #00c7e4;
+    border-color: #009fb6;
+    color: #FFFFFF;
+    border-radius: 3px;
+    border-bottom: 1px solid #008194;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background-color 300ms ease-out;
+    outline: none !important;
+}
+
 .AppBody {
   text-align: center;
   position: relative;
@@ -6,12 +44,28 @@
   background-color: #282c34;
 }
 
+.homeWrapper {
+  display: inline-block;
+  vertical-align: middle;
+  float: left;
+}
+
+.middleWrapper {
+  display: inline-block;
+  vertical-align: middle;
+  float: left;
+}
+
+.awayWrapper {
+  display: inline-block;
+  vertical-align: middle;
+  float: right;
+}
+
 .homeLogo {
   width: 400px;
   height: 180px;
   padding-top: 20px;
-  float: left;
-  display: block;
 }
 
 .header {
@@ -26,8 +80,6 @@
   width: 400px;
   height: 180px;
   padding-top: 20px;
-  float: left;
-  display: block;
 }
 
 .homeScore {
@@ -44,15 +96,14 @@
 .scoreTitleWrapper {
   width: 400px;
   height: 300px;
-  display: block;
-  float: left;
+  
 }
 
 .scoreTitle {
   float: left;
   background-color: #282c34;
   width: 400px;
-  height: 250px;
+  height: 240px;
   display: flex;
   justify-content: center;
   align-items: center;

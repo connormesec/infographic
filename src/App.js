@@ -32,8 +32,8 @@ function App() {
     return (
       <div>
         <div>
-          <input placeholder="Url" ref={ref => (textInputRef = ref)} />
-          <button
+          <input className="field" placeholder="Paste in a URL to generate an infographic" ref={ref => (textInputRef = ref)} />
+          <button className="button"
             onClick={() => {setUrl(textInputRef.value);}}>
             Enter
           </button>
@@ -68,28 +68,34 @@ function Plots({ url }) {
         <Screenshot />
       </div>
       <div className="AppBody">
-        <div className="homeLogo" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
-          <HomeImage data={data} />
+        <div className="homeWrapper" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+          <div className="homeLogo" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+            <HomeImage data={data} />
+          </div>
+          <div className="homeScore" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+            <HomeScore data={data} />
+          </div>
         </div>
-        <div className="header">
-          <Header data={data} />
+        <div className="middleWrapper">
+          <div className="header">
+            <Header data={data} />
+          </div>
+          <div className="scoreTitleWrapper">
+           <div className="scoreTitle">
+              <ScoreTitle data={data} />
+            </div>
+            <div className="scoringSummaryTitle">
+             <h4> Scoring Summary </h4>
+            </div>
+          </div>
         </div>
-        <div className="awayLogo" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
+        <div className="awayWrapper" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
+        <div className="awayLogo">
           <AwayImage data={data} />
-        </div>
-        <div className="homeScore" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
-          <HomeScore data={data} />
-        </div>
-        <div className="scoreTitleWrapper">
-          <div className="scoreTitle">
-            <ScoreTitle data={data} />
-          </div>
-          <div className="scoringSummaryTitle">
-            <h4> Scoring Summary </h4>
-          </div>
         </div>
         <div className="awayScore" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
           <AwayScore data={data} />
+        </div>
         </div>
         <div className="homePlayerScores" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
           <div>
