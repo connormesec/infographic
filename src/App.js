@@ -30,12 +30,12 @@ function App() {
 
   if (!url) {
     return (
-      <div>
+      <div className="contentWrapper">
         <div>
           <input className="field" placeholder="Paste in a URL to generate an infographic" ref={ref => (textInputRef = ref)} />
           <button className="button"
             onClick={() => {setUrl(textInputRef.value);}}>
-            Enter
+            Generate
           </button>
         </div>
       </div>
@@ -69,10 +69,10 @@ function Plots({ url }) {
       </div>
       <div className="AppBody">
         <div className="homeWrapper" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
-          <div className="homeLogo" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+          <div className="homeLogo">
             <HomeImage data={data} />
           </div>
-          <div className="homeScore" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+          <div className="homeScore">
             <HomeScore data={data} />
           </div>
         </div>
@@ -93,7 +93,7 @@ function Plots({ url }) {
         <div className="awayLogo">
           <AwayImage data={data} />
         </div>
-        <div className="awayScore" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
+        <div className="awayScore">
           <AwayScore data={data} />
         </div>
         </div>
@@ -105,33 +105,18 @@ function Plots({ url }) {
         <div className="lineChart">
           <HockeyPlot data={data} />
         </div>
-        <div
-          className="awayPlayerScores"
-          style={{
-            background: `linear-gradient(to left, ${data[7][1]}, #282c34)`
-          }}
-        >
+        <div className="awayPlayerScores" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
           <div>
             <AwayPlayerScores data={data} />
           </div>
         </div>
-        <div
-          className="underPlayerScores"
-          style={{
-            background: `linear-gradient(to right, ${data[7][0]}, #282c34)`
-          }}
-        />
+        <div className="underPlayerScores" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}} />
         <div className="spacer" />
         <div className="scoringSummaryTitle">
           <h4> Game Statistics </h4>
         </div>
         <div className="spacer" />
-        <div
-          className="underPlayerScores"
-          style={{
-            background: `linear-gradient(to left, ${data[7][1]}, #282c34)`
-          }}
-        />
+        <div className="underPlayerScores" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}} />
         <div className="ppGoals">
           <HockeyGraph data={data} />
         </div>
