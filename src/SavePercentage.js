@@ -3,7 +3,7 @@ import Plot from 'react-plotly.js';
 import { withTheme } from '@material-ui/core';
 
 function formatData(data) {
-    const [_, __, shots, ______, ____, score, goalies, colors ] = data;
+    const [_, __, shots, ______, ____, score, goalies, _______, colors ] = data;
 
     const formattedShots = {
         homeScore: score[1],

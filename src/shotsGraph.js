@@ -2,7 +2,7 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 
 function formatData(data) {
-  const [_, __, shots, ___, ____, _____, ______, colors] = data;
+  const [_, __, shots, ___, ____, _____, ______, _______, colors] = data;
 
   const formattedShots = {
     homeShots: [],

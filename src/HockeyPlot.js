@@ -3,7 +3,7 @@ import Plot from 'react-plotly.js';
 import { NONAME } from 'dns';
 
 function formatData(data) {
-  const [homeScores, awayScores, shots, _, __, ___, ____, colors] = data;
+  const [homeScores, awayScores, shots, _, __, ___, ____, _____, colors] = data;
 
   const xValues = shots[0].slice(1, 4);
 

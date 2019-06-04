@@ -3,21 +3,15 @@ import html2canvas from 'html2canvas';
 
 
 
-function Screenshot() {
+function DownloadImage() {
     
-    const [shouldDraw, setShouldDraw] = useState(true);
-    useEffect(() => {
-        // Call html canvas function here
-        html2canvas(document.querySelector(".AppBody")).then(canvas => {
-            document.querySelector(".AppBody").replaceWith(canvas);
-            //saveAs(canvas.toDataURL(), 'file-name.png');
-        });
-        setShouldDraw(false);
-    }, []);
-
-    if (!shouldDraw) return <> </>;
-
-    return <div> Hello </div>;
+    return (
+        <button onClick={() => {
+            
+                //saveAs(document.getElementById("canvas").toDataURL(), 'file-name.png');
+        
+        }}> Create Image </button>
+    )
 
     
     // return (
@@ -55,4 +49,4 @@ function Screenshot() {
 
     }
 }
-  export default Screenshot;
+  export default DownloadImage;

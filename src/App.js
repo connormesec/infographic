@@ -15,6 +15,9 @@ import HomePlayerScores from "./HomePlayerScores";
 import AwayPlayerScores from "./AwayPlayerScores";
 import HomeImage from './HomeImage';
 import AwayImage from './AwayImage';
+import GameDate from './GameDate';
+import html2canvas from 'html2canvas';
+import DownloadImage from "./DownloadImage";
 
 const request = require("request");
 const cheerio = require("cheerio");
@@ -32,11 +35,13 @@ function App() {
     return (
       <div className="contentWrapper">
         <div>
+        <p class ="h7"><strong>Infographics</strong> provide a clean, visually appealing way to show game scores and results</p>
           <input className="field" placeholder="Paste in a URL to generate an infographic" ref={ref => (textInputRef = ref)} />
           <button className="button"
             onClick={() => {setUrl(textInputRef.value);}}>
             Generate
           </button>
+          <p class ="h7">See <strong>examples</strong> below...</p>
         </div>
       </div>
     );
@@ -67,8 +72,10 @@ function Plots({ url }) {
       <div id="screenshot">
         <Screenshot />
       </div>
+      <p class="h7">Your image preview is below</p>
+      <DownloadImage />
       <div className="AppBody">
-        <div className="homeWrapper" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+        <div className="homeWrapper" style={{background: `linear-gradient(to right, ${data[8][0]}, #282c34)`}}>
           <div className="homeLogo">
             <HomeImage data={data} />
           </div>
@@ -85,11 +92,11 @@ function Plots({ url }) {
               <ScoreTitle data={data} />
             </div>
             <div className="scoringSummaryTitle">
-             <h4> Scoring Summary </h4>
+             <GameDate data={data} />
             </div>
           </div>
         </div>
-        <div className="awayWrapper" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
+        <div className="awayWrapper" style={{background: `linear-gradient(to left, ${data[8][1]}, #282c34)`}}>
         <div className="awayLogo">
           <AwayImage data={data} />
         </div>
@@ -97,7 +104,7 @@ function Plots({ url }) {
           <AwayScore data={data} />
         </div>
         </div>
-        <div className="homePlayerScores" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}}>
+        <div className="homePlayerScores" style={{background: `linear-gradient(to right, ${data[8][0]}, #282c34)`}}>
           <div>
             <HomePlayerScores data={data} />
           </div>
@@ -105,18 +112,11 @@ function Plots({ url }) {
         <div className="lineChart">
           <HockeyPlot data={data} />
         </div>
-        <div className="awayPlayerScores" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}}>
+        <div className="awayPlayerScores" style={{background: `linear-gradient(to left, ${data[8][1]}, #282c34)`}}>
           <div>
             <AwayPlayerScores data={data} />
           </div>
         </div>
-        <div className="underPlayerScores" style={{background: `linear-gradient(to right, ${data[7][0]}, #282c34)`}} />
-        <div className="spacer" />
-        <div className="scoringSummaryTitle">
-          <h4> Game Statistics </h4>
-        </div>
-        <div className="spacer" />
-        <div className="underPlayerScores" style={{background: `linear-gradient(to left, ${data[7][1]}, #282c34)`}} />
         <div className="ppGoals">
           <HockeyGraph data={data} />
         </div>
@@ -133,6 +133,14 @@ function Plots({ url }) {
     </div>
   );
 }
+
+function showImage() {
+  html2canvas(document.querySelector(".AppBody")).then(canvas => {
+    document.querySelector(".AppBody").replaceWith(canvas);
+    //saveAs(canvas.toDataURL(), 'file-name.png');
+});
+}
+
 
 function getWebsiteHtml(url) {
   return new Promise((resolve, reject) => {
@@ -328,6 +336,7 @@ async function scrape_table(url) {
       }
     });
 
+    //Code from here to "end" collects team names and scores
     let unformattedTeamNames = $(".gameinfo").html().split("<br>")[4].split("<span class=\"big\">");
     for (let i = 0; i < unformattedTeamNames.length; i++) {
         let a = unformattedTeamNames[i].replace(/<(.|\n)*?>/g, '');
@@ -340,14 +349,16 @@ async function scrape_table(url) {
     }
     teamNames.pop();
     scores.shift();
+    //end
+    let unformattedGameDate = $(".gameinfo").html().split("<br>")[2];
+    let gameDate = unformattedGameDate.replace(/, 20\d\d(.*)/g, '');
 
   removeItems(teamScore);
-  console.log('Team score: ' + teamScore);
   makeTime(teamScore);
   getHomeScores(teamScore);
   getCoordinates(shots[2], homeScores);
   getCoordinates(shots[1], awayScores);
-  let finalData = [homeScores, awayScores, shots, penalties, teamNames, scores, goalieValues];
+  let finalData = [homeScores, awayScores, shots, penalties, teamNames, scores, goalieValues, gameDate];
   // let testData = [
   //   [
   //     ["Home score", "2 - 1", "1", 0.96, 10.56, "R.Hanson", "1"],
@@ -482,18 +493,5 @@ function getCoordinates(shots, p5) {
   }
   return p5;
 }
-
-//  [DEPRECATED]
-// function makeJSON(item, item2, item3, item4, item5, item6, item7) {
-//   let everything = [item, item2, item3, item4, item5, item6, item7];
-//   let myJSON = JSON.stringify(everything);
-//   var fs = require('fs');
-//   fs.writeFile("test.json", myJSON, function(err) {
-//   if (err) {
-//       console.log(err);
-//   }
-//   });
-//   return everything;
-// }
 
 export default App;

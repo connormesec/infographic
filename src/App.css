@@ -1,7 +1,7 @@
 .contentWrapper {
   width: 1200px;
   margin: 0 auto;
-  padding-top: 100px;
+  padding-top: 10px;
 }
 
 .App {
@@ -130,12 +130,11 @@
 }
 
 .scoringSummaryTitle{
-  width: 390px;
+  width: 400px;
   height: 50px;
   float: left;
   border-radius: 15px 15px 0px 0px;
-  border: 5px solid silver;
-  border-bottom: 0;
+  border-bottom: 5px solid silver;;
   padding-top: 10px;
 }
 
@@ -192,7 +191,9 @@
   width: 800px;
   height: 400px;
   background-color: #282c34;
+  border-bottom: 5px solid silver;
   float: left;
+
 }
 
 .awayPlayerScores {
@@ -225,6 +226,10 @@ img {
   max-height: 100%;
   /* This could cause problems with the logos */
   min-height: 100%;
+}
+
+.homePlayerScores, .awayPlayerScores {
+  border-bottom: 5px solid silver;
 }
 
 h1 {
@@ -280,5 +285,11 @@ h6 {
   color: #00c7e4;
   font-size: 30px;
   padding-top: 0px;
+  margin: 0px;
+}
+
+h7 {
+  color: #00c7e4;
+  font-size: 30px;
   margin: 0px;
 }
