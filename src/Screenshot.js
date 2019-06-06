@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import html2canvas from 'html2canvas';
+import DownloadImage from "./DownloadImage";
 
 
 
@@ -15,19 +16,9 @@ function Screenshot() {
         setShouldDraw(false);
     }, []);
 
-    if (!shouldDraw) return <> </>;
+    if (!shouldDraw) return <></>;
 
     return <div> Hello </div>;
-
-    
-    // return (
-    //     <button onClick={() => {
-    //         html2canvas(document.querySelector(".AppBody")).then(canvas => {
-    //             document.querySelector(".AppBody").replaceWith(canvas);
-    //             //saveAs(canvas.toDataURL(), 'file-name.png');
-    //         });
-    //     }}> Create Image </button>
-    // )
   }
 
 

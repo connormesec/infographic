@@ -16,7 +16,6 @@ import AwayPlayerScores from "./AwayPlayerScores";
 import HomeImage from './HomeImage';
 import AwayImage from './AwayImage';
 import GameDate from './GameDate';
-import html2canvas from 'html2canvas';
 import DownloadImage from "./DownloadImage";
 
 const request = require("request");
@@ -36,12 +35,11 @@ function App() {
       <div className="contentWrapper">
         <div>
         <p class ="h7"><strong>Infographics</strong> provide a clean, visually appealing way to show game scores and results</p>
-          <input className="field" placeholder="Paste in a URL to generate an infographic" ref={ref => (textInputRef = ref)} />
+          <input className="field" type="url" placeholder="Paste in a URL to generate an infographic" ref={ref => (textInputRef = ref)} />
           <button className="button"
             onClick={() => {setUrl(textInputRef.value);}}>
             Generate
           </button>
-          <p class ="h7">See <strong>examples</strong> below...</p>
         </div>
       </div>
     );
@@ -69,6 +67,7 @@ function Plots({ url }) {
   
   return (
     <div className="App">
+      <App />
       <div id="screenshot">
         <Screenshot />
       </div>
@@ -133,14 +132,6 @@ function Plots({ url }) {
     </div>
   );
 }
-
-function showImage() {
-  html2canvas(document.querySelector(".AppBody")).then(canvas => {
-    document.querySelector(".AppBody").replaceWith(canvas);
-    //saveAs(canvas.toDataURL(), 'file-name.png');
-});
-}
-
 
 function getWebsiteHtml(url) {
   return new Promise((resolve, reject) => {
@@ -492,6 +483,17 @@ function getCoordinates(shots, p5) {
     }
   }
   return p5;
+}
+
+function isURL(str) {
+  let pattern = new RegExp('^((ft|htt)ps?:\\/\\/)?'+ // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name and extension
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+  '(\\:\\d+)?'+ // port
+  '(\\/[-a-z\\d%@_.~+&:]*)*'+ // path
+  '(\\?[;&a-z\\d%@_.,~+&:=-]*)?'+ // query string
+  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return pattern.test(str);
 }
 
 export default App;

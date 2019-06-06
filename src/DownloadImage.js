@@ -6,22 +6,13 @@ import html2canvas from 'html2canvas';
 function DownloadImage() {
     
     return (
-        <button onClick={() => {
-            
-                //saveAs(document.getElementById("canvas").toDataURL(), 'file-name.png');
-        
-        }}> Create Image </button>
-    )
+        <button className="button"
+            onClick={() => {
+                let can = document.getElementsByTagName("canvas");
+                saveAs(can[0].toDataURL(), 'file-name.png');
 
-    
-    // return (
-    //     <button onClick={() => {
-    //         html2canvas(document.querySelector(".AppBody")).then(canvas => {
-    //             document.querySelector(".AppBody").replaceWith(canvas);
-    //             //saveAs(canvas.toDataURL(), 'file-name.png');
-    //         });
-    //     }}> Create Image </button>
-    // )
+            }}> Download Image </button>
+    )
   }
 
 
