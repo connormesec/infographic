@@ -42,7 +42,6 @@ function App() {
             className="field"
             type="url"
             placeholder="Paste in a URL to generate an infographic"
-            value="http://pointstreak.com/prostats/gamesheet_full.html?gameid=3390133"
             ref={ref => (textInputRef = ref)}
           />
           <button
