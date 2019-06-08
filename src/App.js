@@ -41,6 +41,7 @@ function App() {
             Generate
           </button>
         </div>
+        <p class ="h7">See <strong>examples</strong> below...</p>
       </div>
     );
   }
@@ -67,7 +68,6 @@ function Plots({ url }) {
   
   return (
     <div className="App">
-      <App />
       <div id="screenshot">
         <Screenshot />
       </div>
