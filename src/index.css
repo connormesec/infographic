@@ -4,6 +4,11 @@
   scroll-behavior: smooth;
 }
 
+body {
+  margin: 0;
+  background-color: #e9ebee;
+}
+
 #navbar {
   position: fixed;
   overflow: hidden;
@@ -12,50 +17,37 @@
   background-color: rgb(48, 48, 48);
   box-shadow: 0 10px 20px rgba(32, 32, 32, 0.77);
 }
+
 #navbar .nav {
   display: block;
   background-color: rgb(48, 48, 48);
   padding: 1.5em 2em;
   transition: 300ms;
 }
+
 #navbar .nav:hover {
   background-color: rgb(43, 78, 133);
 }
+
 .nav {
   text-decoration: none;
   color: #fff;
 }
+
 .nav-tabs {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
+
 li {
   list-style-type: none;
   font-size: 1.2em;
 }
 
-
-
-
-
-
-
-
-
-body {
-  margin: 0;
-  background-color: #e9ebee;
-}
-
 .active {
   color: black;
 }
-
-/* .pageContent {
-  width: 1200px;
-  margin: 0 auto;
-} */
 
 .h7 {
   color: rgb(36, 36, 36);

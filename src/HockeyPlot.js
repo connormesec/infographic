@@ -1,9 +1,9 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import { NONAME } from 'dns';
 
 function formatData(data) {
-  const [homeScores, awayScores, shots, _, __, ___, ____, _____, colors] = data;
+  const [homeScores, awayScores, shots] = data;
+  const colors = data[8];
 
   const xValues = shots[0].slice(1, 4);
 
@@ -13,7 +13,7 @@ function formatData(data) {
     homeLabel: 'bottom right',
     awayLabel: 'top left',
     homeColor: colors[0],
-    awayColor: colors[1],
+    awayColor: colors[1]
   };
 
   if (shots[1][4] >= shots[2][4]) {
@@ -33,7 +33,7 @@ function formatData(data) {
 
     formattedData.teams.push({
       team_name: team[0],
-      y: [0, ...out],
+      y: [0, ...out]
     });
   });
 
@@ -50,19 +50,21 @@ function formatData(data) {
 }
 
 function formatScores(scores) {
-  return scores.map(score => {
-    return {
-      x: [score[3]],
-      y: [score[4]],
-      title: [score[5]],
-    };
-  }).reduce((s1, s2) => {
-    return {
-      x: [...s1.x, ...s2.x],
-      y: [...s1.y, ...s2.y],
-      title: [...s1.title, ...s2.title],
-    };
-  });
+  return scores
+    .map(score => {
+      return {
+        x: [score[3]],
+        y: [score[4]],
+        title: [score[5]]
+      };
+    })
+    .reduce((s1, s2) => {
+      return {
+        x: [...s1.x, ...s2.x],
+        y: [...s1.y, ...s2.y],
+        title: [...s1.title, ...s2.title]
+      };
+    });
 }
 
 function HockeyPlot(props) {
@@ -70,72 +72,52 @@ function HockeyPlot(props) {
 
   return (
     <Plot
-      data={
-        [
-          //Away Team Shots
-          {
-            name: data.teams[0].team_name,
-            x: data.teams[0].x,
-            y: data.teams[0].y,
-            type: 'scatter',
-            mode: 'lines+points',
-            line: {
-              color: data.awayColor,
-              width: 10
-            }
-          },
-          //Home Team Shots 
-          {
-            name: data.teams[1].team_name,
-            x: data.teams[1].x,
-            y: data.teams[1].y,
-            type: 'scatter',
-            mode: 'lines+points',
-            line: {
-              color: data.homeColor,
-              width: 10
-            }
-          },
-          //Home Scores
-          {
-            x: data.scores[0].x,
-            y: data.scores[0].y,
-            mode: 'markers+text',
-            textfont: {
-              color: 'white',
-              size: 20,
-            },
-            marker: {
-              color: data.homeColor,
-              size: 20,
-              line: {
-                color: 'white',
-                width: 2
-              }
-            }
-          },
-          //Away Scores
-          {
-            x: data.scores[1].x,
-            y: data.scores[1].y,
-            mode: 'markers+text',
-            //text: data.scores[1].title,
-            //textposition: data.homeLabel,
-            textfont: {
-              color: 'white',
-              size: 20,
-            },
-            marker: {
-              color: data.awayColor,
-              size: 20,
-              line: {
-                color: 'white',
-                width: 2
-              }
-            }
-          },
-        ]
-      }
+      data={[
+        //Away Team Shots
+        {
+          name: data.teams[0].team_name,
+          x: data.teams[0].x,
+          y: data.teams[0].y,
+          type: 'scatter',
+          mode: 'lines+points',
+          line: { color: data.awayColor, width: 10 }
+        },
+        //Home Team Shots
+        {
+          name: data.teams[1].team_name,
+          x: data.teams[1].x,
+          y: data.teams[1].y,
+          type: 'scatter',
+          mode: 'lines+points',
+          line: { color: data.homeColor, width: 10 }
+        },
+        //Home Scores
+        {
+          x: data.scores[0].x,
+          y: data.scores[0].y,
+          mode: 'markers+text',
+          textfont: { color: 'white', size: 20 },
+          marker: {
+            color: data.homeColor,
+            size: 20,
+            line: { color: 'white', width: 2 }
+          }
+        },
+        //Away Scores
+        {
+          x: data.scores[1].x,
+          y: data.scores[1].y,
+          mode: 'markers+text',
+          //text: data.scores[1].title,
+          //textposition: data.homeLabel,
+          textfont: { color: 'white', size: 20 },
+          marker: {
+            color: data.awayColor,
+            size: 20,
+            line: { color: 'white', width: 2 }
+          }
+        }
+      ]}
       layout={{
         width: 800,
         height: 400,
@@ -143,12 +125,7 @@ function HockeyPlot(props) {
         plot_bgcolor: 'rgba(0,0,0,0)',
         paper_bgcolor: 'rgba(0,0,0,0)',
         showlegend: false,
-        margin: {
-          r: 50,
-          t: 20,
-          b: 50,
-          l: 50,
-        },
+        margin: { r: 50, t: 20, b: 50, l: 50 },
         xaxis: {
           color: '#aaa',
           autotick: false,
@@ -191,10 +168,11 @@ function HockeyPlot(props) {
             family: 'Courier New, monospace',
             size: 20,
             color: 'white'
-          },
-        },
+          }
+        }
       }}
     />
   );
 }
+
 export default HockeyPlot;

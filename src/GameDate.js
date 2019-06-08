@@ -1,19 +1,9 @@
 import React from 'react';
 
-function formatData(data) {
-    const [_, __, ___, ____, _____, ______, _______, date] = data;
-    const gameDate = {
-        theDate: date,
-    }
-    console.log("aaaaaaa" + date);
-    return gameDate;
-}  
+function Date({ data }) {
+  const date = data[7];
 
+  return <h4>{date}</h4>;
+}
 
-function Date(props) {
-    const data = formatData(props.data);
-    return (
-        <h4>{data.theDate}</h4>
-    )
-  }
-  export default Date;
+export default Date;
