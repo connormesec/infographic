@@ -282,7 +282,7 @@ async function scrape_table(url) {
 
       if (
         Object.keys(penaltyValues).length === tableKeys.length &&
-        tableKeys.every(key => table.attr(key) == `${penaltyValues[key]}`)
+        tableKeys.every(key => table.attr(key) === `${penaltyValues[key]}`)
       ) {
         table.find('tr').each((_, row) => {
           const rowValues = [];
@@ -429,16 +429,16 @@ function makeTime(p2) {
     let a = p2[i][2].split(':');
     let b = (+a[0] * 60 + +a[1]) / 1200;
     let seconds = Number(Math.max(Math.round(b * 100) / 100).toFixed(2));
-    if (p2[i][1] == 1) {
+    if (p2[i][1] === '1') {
       let c = seconds;
       p2[i][2] = c;
-    } else if (p2[i][1] == 2) {
+    } else if (p2[i][1] === '2') {
       let d = seconds + 1;
       p2[i][2] = d;
-    } else if (p2[i][1] == 3) {
+    } else if (p2[i][1] === '3') {
       let e = seconds + 2;
       p2[i][2] = e;
-    } else if (p2[i][1] == 'OT') {
+    } else if (p2[i][1] === 'OT') {
       let f = seconds + 3;
       p2[i][2] = f;
     }
