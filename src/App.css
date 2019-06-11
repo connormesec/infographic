@@ -145,7 +145,7 @@
 }
 
 .ppGoals {
-  height: 600px;
+  height: 310px;
   width: 300px;
   background-color: #282c34;
   float: left;
@@ -153,21 +153,21 @@
 }
 
 .ppMin {
-  height: 600px;
+  height: 310px;
   width: 300px;
   background-color: #282c34;
   float: left;
 }
 
 .shotsGraph {
-  height: 600px;
+  height: 310px;
   width: 300px;
   background-color: #282c34;
   float: left;
 }
 
 .savePercentage {
-  height: 600px;
+  height: 310px;
   width: 300px;
   background-color: #282c34;
   float: left;

@@ -4,13 +4,13 @@ import './App.css';
 import Header from './Header';
 import HockeyPlot from './HockeyPlot';
 import HockeyGraph from './HockeyGraph';
-import PenaltyMinutesGraph from './PenaltyMinutesGraph';
+import PenaltyMinutesGraph from './penaltyMinutesGraph';
 import ScoreTitle from './ScoreTitle';
 import SavePercentage from './SavePercentage';
 import HomeScore from './HomeScore';
 import AwayScore from './AwayScore';
 import Screenshot from './Screenshot';
-import ShotsGraph from './ShotsGraph';
+import ShotsGraph from './shotsGraph';
 import HomePlayerScores from './HomePlayerScores';
 import AwayPlayerScores from './AwayPlayerScores';
 import HomeImage from './HomeImage';
@@ -43,6 +43,14 @@ function App() {
             type="url"
             placeholder="Paste in a URL to generate an infographic"
             ref={ref => (textInputRef = ref)}
+            onKeyPress={(ev) => {
+              console.log(`Pressed keyCode ${ev.key}`);
+              if (ev.key === 'Enter') {
+                // Do code here
+                setUrl(textInputRef.value);
+                ev.preventDefault();
+              }
+            }}
           />
           <button
             className="button"
@@ -70,8 +78,8 @@ function Plots({ url }) {
     getColors(data[4][1], data[4][0]);
     data.push([homeColor, awayColor]);
     console.log(data);
-
-    setData(data);
+    const filteredData = dataFilter(data);
+    setData(filteredData);
   }
 
   useEffect(() => {
@@ -376,7 +384,7 @@ async function scrape_table(url) {
     let b = a.replace(/\d\sat\s/g, '');
     let c = b.trim();
     teamNames.push(c);
-    let e = a.replace(/\D+/g, '');
+    let e = a.replace(/(?=at).*$/g, '');
     let f = e.trim();
     scores.push(f);
   }
@@ -465,7 +473,7 @@ function getHomeScores(p3) {
   }
   createScoreCount(awayScores);
   createScoreCount(homeScores);
-  return p3;
+  console.log(p3);
 }
 
 function createScoreCount(item) {
@@ -479,7 +487,7 @@ function getCoordinates(shots, p5) {
       let z1 = Number(Math.max(Math.round(y1 * 100) / 100).toFixed(2));
       v.splice(4, 0, z1);
     } else if (v[2] === '2') {
-      let y2 = (v[3] - 1) * +shots[2] + + shots[1];
+      let y2 = (v[3] - 1) * +shots[2] + +shots[1];
       let z2 = Number(Math.max(Math.round(y2 * 100) / 100).toFixed(2));
       v.splice(4, 0, z2);
     } else if (v[2] === '3') {
@@ -497,5 +505,47 @@ function getCoordinates(shots, p5) {
   
   return p5;
 }
+
+function dataFilter(data) {
+  console.log(data);
+  //check for shutouts
+  if (data[0] === undefined || data[0].length == 0) {
+    // array empty or does not exist
+    data[0].push(['', '', '', , , '', ''])
+  }
+  if (data[1] === undefined || data[1].length == 0) {
+    data[1].push(['', '', '', , , '', ''])
+  }
+  //Shots table filtering
+  //check to see if shots field was filled out
+  if (data[2] === undefined || data[2].length == 0) {
+    // array empty or does not exist then some fun stuff is going to happen
+    console.log("Err: the shots table is empty")
+  }
+  //check to see if shots table has 5 columns. If there are 5 columns we can assume all is well, if not, do the following...
+  if (data[2][0].length !== 5) {
+    console.log('The shots table is whack ' + data[2][0].length);
+    // maybe have this stuff search for a "final" column and pass in values if found to make this work with hockeyplot.js
+    // for (let i = 0; i < data[2].length; i++) {
+    //   if (data[2][0][i] ){}
+    // }
+  }
+  //check to see if penalty table has 3 columns. If there are 3 columns we can assume all is well, if not, do the following...
+  if (data[3][0].length !== 3) {
+    console.log('Shots table FAILED its check: ' + data[3][0].length);
+    // maybe have this stuff search for column names and pass in values if found to make this work with the rest of the app
+    // for (let i = 0; i < data[2].length; i++) {
+    //   if (data[3][0][i] ){}
+    // }
+  }else{
+    console.log('Shots table PASSED its check');
+  }
+  //check team names to make sure there are two strings here
+  if (data[4].length == 2 && data[4].every(function(i){ return typeof i === "string" })) {
+    console.log('Team Names PASSED its check');
+  }
+  return(data);
+}
+
 
 export default App;

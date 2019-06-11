@@ -20,14 +20,14 @@ function formatData(data) {
 
 function ShotsGraph(props) {
   const data = formatData(props.data);
-
   return (
     <Plot
       data={[
         //Home Team Shots
         {
-          x: data.homeShots,
+          x: [data.homeShots  + '\u200b'],
           y: data.homeShots,
+           
           type: 'bar',
           mode: 'lines+points',
           marker: {
@@ -37,7 +37,7 @@ function ShotsGraph(props) {
         },
         //Away Team Shots
         {
-          x: data.awayShots,
+          x: [data.awayShots],
           y: data.awayShots,
           type: 'bar',
           mode: 'lines+points',

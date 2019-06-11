@@ -12,13 +12,13 @@ const routing = (
       <div id="navbarWrapper">
       <div id="navbar">
         <ul class="nav-tabs">
-          <li>
+          <li class="navList">
             <Link class="nav" to="/">Home</Link>
           </li>
-          <li>
+          <li class="navList">
             <Link class="nav" to="/howToUse">How To Use</Link>
           </li>
-          <li>
+          <li class="navList">
             <Link class="nav" to="/about">About</Link>
           </li>
         </ul>
@@ -28,7 +28,6 @@ const routing = (
       <Route path="/howToUse" component={Usage} />
       <Route path="/about" component={About} />
     </Router>
-    
 )
 
 ReactDOM.render(routing, document.getElementById('root'));

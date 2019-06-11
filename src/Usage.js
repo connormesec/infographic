@@ -1,7 +1,11 @@
 import React from 'react';
 
 function Usage() {
-  return <h1>How To Use</h1>;
-}
+  return (
+    <div class="contentWrapper">
+      <p class="h2">How To Use</p>
+    </div>
+  );
+  }
 
 export default Usage;

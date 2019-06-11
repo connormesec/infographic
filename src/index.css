@@ -9,6 +9,10 @@ body {
   background-color: #e9ebee;
 }
 
+.paddingWrapper {
+  padding: 0px 50px
+}
+
 #navbar {
   position: fixed;
   overflow: hidden;
@@ -16,6 +20,7 @@ body {
   width: 100%;
   background-color: rgb(48, 48, 48);
   box-shadow: 0 10px 20px rgba(32, 32, 32, 0.77);
+  z-index: 1;
 }
 
 #navbar .nav {
@@ -32,6 +37,7 @@ body {
 .nav {
   text-decoration: none;
   color: #fff;
+  font-family: 'Roboto', sans-serif;
 }
 
 .nav-tabs {
@@ -40,17 +46,50 @@ body {
   align-items: center;
 }
 
-li {
+.navList {
   list-style-type: none;
   font-size: 1.2em;
 }
-
-.active {
-  color: black;
+.browser{
+  display: list-item;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: calc(1.5rem / 2);
 }
 
+.browserList {
+  margin-left: 1.5rem;
+  margin-right: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  margin-bottom: 1.5rem;
+  list-style-position: outside;
+  list-style-image: none;
+}
+.p {
+  font-family: 'Roboto', sans-serif;
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+}
 .h7 {
+  font-family: 'Roboto', sans-serif;
   color: rgb(36, 36, 36);
   font-size: 30px;
   margin-bottom: 30px;
+}
+
+.h2 {
+  font-family: 'Roboto', sans-serif;
+  display: block;
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
 }
