@@ -17,14 +17,14 @@ import HomeImage from './HomeImage';
 import AwayImage from './AwayImage';
 import GameDate from './GameDate';
 import DownloadImage from './DownloadImage';
+import NoShots from './NoShots';
 
 const request = require('request');
 const cheerio = require('cheerio');
 
 let homeScores = [];
 let awayScores = [];
-let homeColor = '';
-let awayColor = '';
+let teamColors = [];
 
 function App() {
   const [url, setUrl] = useState();
@@ -75,8 +75,6 @@ function Plots({ url }) {
 
   async function fetchTableData() {
     const data = await scrape_table(url);
-    getColors(data[4][1], data[4][0]);
-    data.push([homeColor, awayColor]);
     console.log(data);
     const filteredData = dataFilter(data);
     setData(filteredData);
@@ -90,7 +88,8 @@ function Plots({ url }) {
 
   return (
     <div className="App">
-      <div id="screenshot">
+      <NoShots data={data}/>
+      {/* <div id="screenshot">
         <Screenshot />
       </div>
       <p class="h7">Your image preview is below</p>
@@ -170,7 +169,7 @@ function Plots({ url }) {
         <div className="savePercentage">
           <SavePercentage data={data} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -191,6 +190,8 @@ function getWebsiteHtml(url) {
 function getColors(homeColor1, awayColor1) {
   let json = require('./test.json');
   console.log(json);
+  let homeColor;
+  let awayColor;
   for (let i = 0; i < json.length; i++) {
     if (homeColor1 === json[i][0]) {
       homeColor = json[i][1];
@@ -199,13 +200,12 @@ function getColors(homeColor1, awayColor1) {
       awayColor = json[i][1];
     }
   }
+  teamColors = [homeColor, awayColor];
 }
 
 async function scrape_table(url) {
   homeScores = [];
   awayScores = [];
-  homeColor = '';
-  awayColor = '';
 
   const html = await getWebsiteHtml(url);
   const $ = cheerio.load(html);
@@ -395,12 +395,13 @@ async function scrape_table(url) {
     .html()
     .split('<br>')[2];
   let gameDate = unformattedGameDate.replace(/, 20\d\d(.*)/g, '');
-
+console.log("team names " + teamNames[0])
   removeItems(teamScore);
   makeTime(teamScore);
   getHomeScores(teamScore);
   getCoordinates(shots[2], homeScores);
   getCoordinates(shots[1], awayScores);
+  getColors(teamNames[1], teamNames[0]);
   let finalData = [
     homeScores,
     awayScores,
@@ -409,9 +410,9 @@ async function scrape_table(url) {
     teamNames,
     scores,
     goalieValues,
-    gameDate
+    gameDate,
+    teamColors
   ];
-  
   return finalData;
 }
 
@@ -507,7 +508,6 @@ function getCoordinates(shots, p5) {
 }
 
 function dataFilter(data) {
-  console.log(data);
   //check for shutouts
   if (data[0] === undefined || data[0].length == 0) {
     // array empty or does not exist
@@ -532,18 +532,30 @@ function dataFilter(data) {
   }
   //check to see if penalty table has 3 columns. If there are 3 columns we can assume all is well, if not, do the following...
   if (data[3][0].length !== 3) {
-    console.log('Shots table FAILED its check: ' + data[3][0].length);
+    console.log('Shots Table FAILED its check: ' + data[3][0].length);
     // maybe have this stuff search for column names and pass in values if found to make this work with the rest of the app
     // for (let i = 0; i < data[2].length; i++) {
     //   if (data[3][0][i] ){}
     // }
   }else{
-    console.log('Shots table PASSED its check');
+    console.log('Shots Table PASSED its check');
   }
   //check team names to make sure there are two strings here
   if (data[4].length == 2 && data[4].every(function(i){ return typeof i === "string" })) {
     console.log('Team Names PASSED its check');
   }
+  //check team scores to make sure there are two ints here
+  if (data[5].length == 2 && data[5].every(function(i){ return typeof i === "string" })) {
+    console.log('Team Scores PASSED its check');
+  }
+  if (data[6].length == 2 && data[6].every(function(i){ return typeof i === "string" })) {
+    console.log('Goalie Name PASSED its check');
+  }
+  //check game date to make sure it's a string and doesn't contain any funky characters
+  if (typeof data[7] === "string" && /[~`!#$%\^&*+=\-\[\]\\';/{}|\\":<>\?]/g.test(data[7]) === false) {
+    console.log('Game Date PASSED its check');
+  }
+
   return(data);
 }
 
