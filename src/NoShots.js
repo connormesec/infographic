@@ -89,7 +89,7 @@ function NoShots({data}) {
               <AwayPlayerScores data={data} />
             </div>
           </div>
-          {/* <div className="ppGoals">
+          <div className="ppGoals">
             <HockeyGraph data={data} />
           </div>
           <div className="ppMin">
@@ -100,7 +100,7 @@ function NoShots({data}) {
           </div>
           <div className="savePercentage">
             <SavePercentage data={data} />
-          </div> */}
+          </div>
         </div>
       </div>
     );

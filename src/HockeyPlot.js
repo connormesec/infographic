@@ -46,6 +46,7 @@ function formatData(data) {
 
   formattedData.scores.push(formattedHomeScores);
   formattedData.scores.push(formattedAwayScores);
+  console.log(formattedData.scores);
   return formattedData;
 }
 

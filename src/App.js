@@ -391,11 +391,13 @@ async function scrape_table(url) {
   teamNames.pop();
   scores.shift();
   // end
+  // Get game date
   let unformattedGameDate = $('.gameinfo')
     .html()
     .split('<br>')[2];
   let gameDate = unformattedGameDate.replace(/, 20\d\d(.*)/g, '');
-console.log("team names " + teamNames[0])
+  console.log(shots)
+  shotTableValidator(shots);
   removeItems(teamScore);
   makeTime(teamScore);
   getHomeScores(teamScore);
@@ -430,6 +432,29 @@ function removeItems(p1) {
     }
   }
   return p1;
+}
+
+function shotTableValidator(shotTable) {
+  console.log(shotTable)
+   if (shotTable[0].length == 2 && shotTable[0][1] == 'Total') {
+      let homeShotPlaceholder = parseInt(shotTable[2][1]) / 3;
+      let awayShotPlaceholder = parseInt(shotTable[1][1]) / 3;
+      shotTable[0].splice(1, 0, '1');
+      shotTable[0].splice(2, 0, '2');
+      shotTable[0].splice(3, 0, '3');
+      shotTable[1].splice(1, 0, awayShotPlaceholder.toString() );
+      shotTable[1].splice(2, 0, awayShotPlaceholder.toString() );
+      shotTable[1].splice(3, 0, awayShotPlaceholder.toString() );
+      shotTable[2].splice(1, 0, homeShotPlaceholder.toString() );
+      shotTable[2].splice(2, 0, homeShotPlaceholder.toString() );
+      shotTable[2].splice(3, 0, homeShotPlaceholder.toString() );
+    }
+    // maybe have this stuff search for a "final" column and pass in values if found to make this work with hockeyplot.js
+    // for (let i = 0; i < data[2].length; i++) {
+    //   if (data[2][0][i] ){}
+    // }
+    console.log(shotTable) 
+  return shotTable;
 }
 
 // converts time from min:sec format to units of time (incorporates periods)
@@ -474,7 +499,6 @@ function getHomeScores(p3) {
   }
   createScoreCount(awayScores);
   createScoreCount(homeScores);
-  console.log(p3);
 }
 
 function createScoreCount(item) {
@@ -501,30 +525,45 @@ function getCoordinates(shots, p5) {
       v.splice(4, 0, z4);
     } else {
       console.log('err');
+      console.log(v)
     }
   });
-  
+  console.log(p5)
   return p5;
 }
 
 function dataFilter(data) {
+  console.log(data)
   //check for shutouts
   if (data[0] === undefined || data[0].length == 0) {
     // array empty or does not exist
-    data[0].push(['', '', '', , , '', ''])
+    data[0].push(['', '', '', '', '', '', ''])
   }
   if (data[1] === undefined || data[1].length == 0) {
-    data[1].push(['', '', '', , , '', ''])
+    data[1].push(['', '', '', '', '', '', ''])
   }
   //Shots table filtering
-  //check to see if shots field was filled out
-  if (data[2] === undefined || data[2].length == 0) {
-    // array empty or does not exist then some fun stuff is going to happen
-    console.log("Err: the shots table is empty")
-  }
   //check to see if shots table has 5 columns. If there are 5 columns we can assume all is well, if not, do the following...
-  if (data[2][0].length !== 5) {
+  if (data[2].length !== 3 || data[2][0].length !== 5) {
     console.log('The shots table is whack ' + data[2][0].length);
+    //check to see if shots table was filled out
+    if (data[2] === undefined || data[2].length == 0) {
+      // array empty or does not exist then some fun stuff is going to happen
+      console.log("Err: the shots table is empty")
+    }
+    // else if (data[2][0].length == 2 && data[2][0][1] == 'Total') {
+    //   let homeShotPlaceholder = parseInt(data[2][2][1]) / 3;
+    //   let awayShotPlaceholder = parseInt(data[2][1][1]) / 3;
+    //   data[2][0].splice(1, 0, '1');
+    //   data[2][0].splice(2, 0, '2');
+    //   data[2][0].splice(3, 0, '3');
+    //   data[2][1].splice(1, 0, awayShotPlaceholder );
+    //   data[2][1].splice(2, 0, awayShotPlaceholder );
+    //   data[2][1].splice(3, 0, awayShotPlaceholder );
+    //   data[2][2].splice(1, 0, homeShotPlaceholder );
+    //   data[2][2].splice(2, 0, homeShotPlaceholder );
+    //   data[2][2].splice(3, 0, homeShotPlaceholder );
+    // }
     // maybe have this stuff search for a "final" column and pass in values if found to make this work with hockeyplot.js
     // for (let i = 0; i < data[2].length; i++) {
     //   if (data[2][0][i] ){}
@@ -532,13 +571,13 @@ function dataFilter(data) {
   }
   //check to see if penalty table has 3 columns. If there are 3 columns we can assume all is well, if not, do the following...
   if (data[3][0].length !== 3) {
-    console.log('Shots Table FAILED its check: ' + data[3][0].length);
+    console.log('Penalty Table FAILED its check: ' + data[3][0].length);
     // maybe have this stuff search for column names and pass in values if found to make this work with the rest of the app
     // for (let i = 0; i < data[2].length; i++) {
     //   if (data[3][0][i] ){}
     // }
   }else{
-    console.log('Shots Table PASSED its check');
+    console.log('Penalty Table PASSED its check');
   }
   //check team names to make sure there are two strings here
   if (data[4].length == 2 && data[4].every(function(i){ return typeof i === "string" })) {
