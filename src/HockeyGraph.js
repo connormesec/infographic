@@ -83,7 +83,7 @@ function HockeyGraph(props) {
         },
         font: {
           family: 'Courier New, monospace',
-          size: 30,
+          size: 25,
           color: '#ffffff'
         },
         plot_bgcolor: '#282c34',
@@ -96,6 +96,7 @@ function HockeyGraph(props) {
           type: 'category',
           showgrid: false,
           showline: false,
+          tickangle: 0,
           title: {
             text: 'Power Play',
             font: { family: 'Courier New, monospace', size: 25, color: 'white' }

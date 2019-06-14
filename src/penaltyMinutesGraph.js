@@ -6,15 +6,29 @@ function formatData(data) {
   const colors = data[8];
 
   const formattedPenaltyMinutes = {
+    homePenaltyMinutesTitle: [],
+    awayPenaltyMinutesTitle: [],
     homePenaltyMinutes: [],
     awayPenaltyMinutes: [],
     homeColor: colors[0],
-    awayColor: colors[1]
+    awayColor: colors[1],
+    opacity: [1],
   };
 
+  formattedPenaltyMinutes.awayPenaltyMinutesTitle = [penalties[1][2]];
+  formattedPenaltyMinutes.homePenaltyMinutesTitle = [penalties[2][2]];
   formattedPenaltyMinutes.awayPenaltyMinutes = [penalties[1][2]];
   formattedPenaltyMinutes.homePenaltyMinutes = [penalties[2][2]];
-  console.log(formattedPenaltyMinutes)
+  console.log(formattedPenaltyMinutes.homePenaltyMinutes)
+
+  //handle cases where there are no penalties
+  if (formattedPenaltyMinutes.homePenaltyMinutes == 0 && formattedPenaltyMinutes.awayPenaltyMinutes == 0) {
+    formattedPenaltyMinutes.homePenaltyMinutes = [1];
+    formattedPenaltyMinutes.awayPenaltyMinutes = [1];
+    formattedPenaltyMinutes.opacity = [0];
+    console.log("hit the if")
+  }
+  
   return formattedPenaltyMinutes;
 }
 
@@ -26,24 +40,26 @@ function PenaltyMinutesGraph(props) {
       data={[
         //Home Team Shots
         {
-          x: [data.homePenaltyMinutes + '\u200b'],
+          x: [data.homePenaltyMinutesTitle + '\u200b'],
           y: data.homePenaltyMinutes,
           type: 'bar',
           mode: 'lines+points',
           marker: {
             color: data.homeColor,
-            line: { color: 'white', width: 2 }
+            opacity: data.opacity,
+            line: { color: 'white', width: 2, opacity: data.opacity, }
           }
         },
         //Away Team Shots
         {
-          x: [data.awayPenaltyMinutes],
+          x: [data.awayPenaltyMinutesTitle],
           y: data.awayPenaltyMinutes,
           type: 'bar',
           mode: 'lines+points',
           marker: {
             color: data.awayColor,
-            line: { color: 'white', width: 2 }
+            opacity: data.opacity,
+            line: { color: 'white', width: 2, opacity: data.opacity, }
           }
         }
       ]}
