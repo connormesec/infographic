@@ -14,7 +14,7 @@ function formatData(data) {
 
   formattedShots.awayShots = [shots[1][4]];
   formattedShots.homeShots = [shots[2][4]];
-
+  
   return formattedShots;
 }
 

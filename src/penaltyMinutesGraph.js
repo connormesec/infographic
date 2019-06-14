@@ -14,7 +14,7 @@ function formatData(data) {
 
   formattedPenaltyMinutes.awayPenaltyMinutes = [penalties[1][2]];
   formattedPenaltyMinutes.homePenaltyMinutes = [penalties[2][2]];
-
+  console.log(formattedPenaltyMinutes)
   return formattedPenaltyMinutes;
 }
 
@@ -26,7 +26,7 @@ function PenaltyMinutesGraph(props) {
       data={[
         //Home Team Shots
         {
-          x: data.homePenaltyMinutes,
+          x: [data.homePenaltyMinutes + '\u200b'],
           y: data.homePenaltyMinutes,
           type: 'bar',
           mode: 'lines+points',
@@ -37,7 +37,7 @@ function PenaltyMinutesGraph(props) {
         },
         //Away Team Shots
         {
-          x: data.awayPenaltyMinutes,
+          x: [data.awayPenaltyMinutes],
           y: data.awayPenaltyMinutes,
           type: 'bar',
           mode: 'lines+points',

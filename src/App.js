@@ -395,8 +395,8 @@ async function scrape_table(url) {
   let unformattedGameDate = $('.gameinfo')
     .html()
     .split('<br>')[2];
-  let gameDate = unformattedGameDate.replace(/, 20\d\d(.*)/g, '');
-  console.log(shots)
+  let gameDate = unformattedGameDate.replace(/, 20\d\d(.*)|at/g, '');
+  console.log(unformattedGameDate)
   shotTableValidator(shots);
   removeItems(teamScore);
   makeTime(teamScore);

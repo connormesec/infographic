@@ -32,7 +32,7 @@ function HockeyGraph(props) {
     <Plot
       data={[
         {
-          x: data.homeTeamName,
+          x: [data.homeTeamName + '\u200b'],
           y: data.ppGoalsHome,
           type: 'bar',
           mode: 'lines+points',
@@ -42,7 +42,7 @@ function HockeyGraph(props) {
           }
         },
         {
-          x: data.homeTeamName,
+          x: [data.homeTeamName + '\u200b'],
           y: data.totalHomePenalties,
           type: 'bar',
           mode: 'lines+points',
