@@ -5,24 +5,17 @@ function formatData(data) {
   const [homeScores, awayScores, shots] = data;
   const colors = data[8];
 
-  const xValues = shots[0].slice(1, 4);
-
+  const xValues = ["1", "2", "3", "3.25"];
+ 
   const formattedData = {
     teams: [],
     scores: [],
-    homeLabel: 'bottom right',
-    awayLabel: 'top left',
     homeColor: colors[0],
     awayColor: colors[1]
   };
 
-  if (shots[1][4] >= shots[2][4]) {
-    formattedData.homeLabel = 'top left';
-    formattedData.awayLabel = 'bottom right';
-  }
-
-  shots.slice(1, 3).forEach(team => {
-    let data = team.slice(1, 4).map(i => parseInt(i));
+  shots.slice(1, 4).forEach(team => {
+    let data = team.slice(1, 5).map(i => parseInt(i));
 
     let out = [];
     let sum = 0;
@@ -46,7 +39,7 @@ function formatData(data) {
 
   formattedData.scores.push(formattedHomeScores);
   formattedData.scores.push(formattedAwayScores);
- 
+  console.log(formattedData)
   return formattedData;
 }
 
@@ -68,9 +61,9 @@ function formatScores(scores) {
     });
 }
 
-function HockeyPlot(props) {
+function OvertimePlot(props) {
   const data = formatData(props.data);
-
+    console.log(data.teams)
   return (
     <Plot
       data={[
@@ -130,9 +123,9 @@ function HockeyPlot(props) {
         xaxis: {
           color: '#aaa',
           autotick: false,
-          tickvals: [1, 2, 3],
-          range: [0, 3],
-          ticktext: ['End of 1st', 'End of 2nd', 'Final'],
+          tickvals: [1, 2, 3,3.25],
+          range: [0, 3.25],
+          ticktext: ['End of 1st', 'End of 2nd', 'Final', 'OT'],
           tickmode: 'array',
           ticks: 'outside',
           fixedrange: true,
@@ -143,6 +136,7 @@ function HockeyPlot(props) {
             size: 20,
             color: 'white'
           },
+          tickangle: 0,
           gridcolor: '#aaa',
           gridwidth: 2,
           showgrid: true,
@@ -176,4 +170,4 @@ function HockeyPlot(props) {
   );
 }
 
-export default HockeyPlot;
+export default OvertimePlot;

@@ -1,23 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import './App.css';
-import Header from './Header';
-import HockeyPlot from './HockeyPlot';
-import HockeyGraph from './HockeyGraph';
-import PenaltyMinutesGraph from './penaltyMinutesGraph';
-import ScoreTitle from './ScoreTitle';
-import SavePercentage from './SavePercentage';
-import HomeScore from './HomeScore';
-import AwayScore from './AwayScore';
-import Screenshot from './Screenshot';
-import ShotsGraph from './shotsGraph';
-import HomePlayerScores from './HomePlayerScores';
-import AwayPlayerScores from './AwayPlayerScores';
-import HomeImage from './HomeImage';
-import AwayImage from './AwayImage';
-import GameDate from './GameDate';
-import DownloadImage from './DownloadImage';
-import NoShots from './NoShots';
+import OverTime from './OverTime';
+import NormalGame from './NormalGame';
 
 const request = require('request');
 const cheerio = require('cheerio');
@@ -25,6 +10,9 @@ const cheerio = require('cheerio');
 let homeScores = [];
 let awayScores = [];
 let teamColors = [];
+let noShots = false;
+let overtime = false;
+let shootout = false;
 
 function App() {
   const [url, setUrl] = useState();
@@ -75,8 +63,8 @@ function Plots({ url }) {
 
   async function fetchTableData() {
     const data = await scrape_table(url);
-    console.log(data);
     const filteredData = dataFilter(data);
+    console.log(filteredData);
     setData(filteredData);
   }
 
@@ -85,93 +73,28 @@ function Plots({ url }) {
   }, []);
 
   if (!data) return <div> Loading... </div>;
-
-  return (
-    <div className="App">
-      <NoShots data={data}/>
-      {/* <div id="screenshot">
-        <Screenshot />
+  console.log(noShots)
+  //need more conditions
+  if (overtime == true) {
+    return (
+      <div className="App">
+        <OverTime data={data}/>
       </div>
-      <p class="h7">Your image preview is below</p>
-      <DownloadImage />
-      <div className="AppBody">
-        <div
-          className="homeWrapper"
-          style={{
-            background: `linear-gradient(to right, ${data[8][0]}, #282c34)`
-          }}
-        >
-          <div className="homeLogo">
-            <HomeImage data={data} />
-          </div>
-          <div className="homeScore">
-            <HomeScore data={data} />
-          </div>
-        </div>
-        <div className="middleWrapper">
-          <div className="header">
-            <Header data={data} />
-          </div>
-          <div className="scoreTitleWrapper">
-            <div className="scoreTitle">
-              <ScoreTitle data={data} />
-            </div>
-            <div className="scoringSummaryTitle">
-              <GameDate data={data} />
-            </div>
-          </div>
-        </div>
-        <div
-          className="awayWrapper"
-          style={{
-            background: `linear-gradient(to left, ${data[8][1]}, #282c34)`
-          }}
-        >
-          <div className="awayLogo">
-            <AwayImage data={data} />
-          </div>
-          <div className="awayScore">
-            <AwayScore data={data} />
-          </div>
-        </div>
-        <div
-          className="homePlayerScores"
-          style={{
-            background: `linear-gradient(to right, ${data[8][0]}, #282c34)`
-          }}
-        >
-          <div>
-            <HomePlayerScores data={data} />
-          </div>
-        </div>
-        <div className="lineChart">
-          <HockeyPlot data={data} />
-        </div>
-        <div
-          className="awayPlayerScores"
-          style={{
-            background: `linear-gradient(to left, ${data[8][1]}, #282c34)`
-          }}
-        >
-          <div>
-            <AwayPlayerScores data={data} />
-          </div>
-        </div>
-        <div className="ppGoals">
-          <HockeyGraph data={data} />
-        </div>
-        <div className="ppMin">
-          <PenaltyMinutesGraph data={data} />
-        </div>
-        <div className="shotsGraph">
-          <ShotsGraph data={data} />
-        </div>
-        <div className="savePercentage">
-          <SavePercentage data={data} />
-        </div>
-      </div> */}
-    </div>
-  );
+    );
+  }
+  else if (shootout == true) {
+    return (
+      <div className="App">
+        <OverTime data={data}/>
+      </div>
+    );
+  } else {
+    return (
+      <div className="App">
+        <NormalGame data={data}/>
+      </div>
+    );
+  }
 }
 
 function getWebsiteHtml(url) {
@@ -189,7 +112,6 @@ function getWebsiteHtml(url) {
 
 function getColors(homeColor1, awayColor1) {
   let json = require('./test.json');
-  console.log(json);
   let homeColor;
   let awayColor;
   for (let i = 0; i < json.length; i++) {
@@ -363,8 +285,7 @@ async function scrape_table(url) {
                   .replace(/&#xA0;/g, '')
               );
             });
-
-          const regex = RegExp('.*(win).*|.*(loss).*', 'g');
+          const regex = RegExp('.*(win).*|.*(loss).*|.*(tie).*|.*(otl).*', 'g');
           for (let i = 0; i < rowValues.length; i++) {
             if (regex.test(rowValues[i])) {
               goalieValues.push(rowValues[i].replace(/\d+|\(.*\)/g, '').trim());
@@ -395,8 +316,8 @@ async function scrape_table(url) {
   let unformattedGameDate = $('.gameinfo')
     .html()
     .split('<br>')[2];
-  let gameDate = unformattedGameDate.replace(/, 20\d\d(.*)|at/g, '');
-  console.log(unformattedGameDate)
+  let gameDate = unformattedGameDate.replace(/, 20\d\d(.*)|\sat\s/g, '');
+
   shotTableValidator(shots);
   removeItems(teamScore);
   makeTime(teamScore);
@@ -413,8 +334,10 @@ async function scrape_table(url) {
     scores,
     goalieValues,
     gameDate,
-    teamColors
+    teamColors,
+    noShots
   ];
+  console.log(finalData.noShots)
   return finalData;
 }
 
@@ -435,7 +358,6 @@ function removeItems(p1) {
 }
 
 function shotTableValidator(shotTable) {
-  console.log(shotTable)
    if (shotTable[0].length == 2 && shotTable[0][1] == 'Total') {
       let homeShotPlaceholder = parseInt(shotTable[2][1]) / 3;
       let awayShotPlaceholder = parseInt(shotTable[1][1]) / 3;
@@ -449,11 +371,10 @@ function shotTableValidator(shotTable) {
       shotTable[2].splice(2, 0, homeShotPlaceholder.toString() );
       shotTable[2].splice(3, 0, homeShotPlaceholder.toString() );
     }
-    // maybe have this stuff search for a "final" column and pass in values if found to make this work with hockeyplot.js
-    // for (let i = 0; i < data[2].length; i++) {
-    //   if (data[2][0][i] ){}
-    // }
-    console.log(shotTable) 
+    if(shotTable[0][4] == "OT") {
+      overtime = true;
+    }
+    console.log(shotTable)
   return shotTable;
 }
 
@@ -520,7 +441,7 @@ function getCoordinates(shots, p5) {
       let z3 = Number(Math.max(Math.round(y3 * 100) / 100).toFixed(2));
       v.splice(4, 0, z3);
     } else if (v[2] === 'OT') {
-      let y4 = (v[3] - 3) * shots[4] + (shots[1] + shots[2] + shots[3]);
+      let y4 = (v[3] - 3) * (+shots[4] / 0.25) + (+shots[1] + +shots[2] + +shots[3]);
       let z4 = Number(Math.max(Math.round(y4 * 100) / 100).toFixed(2));
       v.splice(4, 0, z4);
     } else {
@@ -528,12 +449,10 @@ function getCoordinates(shots, p5) {
       console.log(v)
     }
   });
-  console.log(p5)
   return p5;
 }
 
 function dataFilter(data) {
-  console.log(data)
   //check for shutouts
   if (data[0] === undefined || data[0].length == 0) {
     // array empty or does not exist
@@ -550,28 +469,17 @@ function dataFilter(data) {
     if (data[2] === undefined || data[2].length == 0) {
       // array empty or does not exist then some fun stuff is going to happen
       console.log("Err: the shots table is empty")
+      data[9] = true;
     }
-    // else if (data[2][0].length == 2 && data[2][0][1] == 'Total') {
-    //   let homeShotPlaceholder = parseInt(data[2][2][1]) / 3;
-    //   let awayShotPlaceholder = parseInt(data[2][1][1]) / 3;
-    //   data[2][0].splice(1, 0, '1');
-    //   data[2][0].splice(2, 0, '2');
-    //   data[2][0].splice(3, 0, '3');
-    //   data[2][1].splice(1, 0, awayShotPlaceholder );
-    //   data[2][1].splice(2, 0, awayShotPlaceholder );
-    //   data[2][1].splice(3, 0, awayShotPlaceholder );
-    //   data[2][2].splice(1, 0, homeShotPlaceholder );
-    //   data[2][2].splice(2, 0, homeShotPlaceholder );
-    //   data[2][2].splice(3, 0, homeShotPlaceholder );
-    // }
-    // maybe have this stuff search for a "final" column and pass in values if found to make this work with hockeyplot.js
-    // for (let i = 0; i < data[2].length; i++) {
-    //   if (data[2][0][i] ){}
-    // }
+    if (data[2][0][5] == 'T' && data[2][1][5] == 0 && data[2][1][5] == 0) {
+      console.log("Err: No total in the ot shots table")
+      data[9] = true;
+    }
   }
   //check to see if penalty table has 3 columns. If there are 3 columns we can assume all is well, if not, do the following...
   if (data[3][0].length !== 3) {
     console.log('Penalty Table FAILED its check: ' + data[3][0].length);
+    data[9] = true;
     // maybe have this stuff search for column names and pass in values if found to make this work with the rest of the app
     // for (let i = 0; i < data[2].length; i++) {
     //   if (data[3][0][i] ){}
@@ -586,9 +494,13 @@ function dataFilter(data) {
   //check team scores to make sure there are two ints here
   if (data[5].length == 2 && data[5].every(function(i){ return typeof i === "string" })) {
     console.log('Team Scores PASSED its check');
+  }else{
+    data[9] = true;
   }
   if (data[6].length == 2 && data[6].every(function(i){ return typeof i === "string" })) {
     console.log('Goalie Name PASSED its check');
+  }else{
+    //noShots = true;
   }
   //check game date to make sure it's a string and doesn't contain any funky characters
   if (typeof data[7] === "string" && /[~`!#$%\^&*+=\-\[\]\\';/{}|\\":<>\?]/g.test(data[7]) === false) {

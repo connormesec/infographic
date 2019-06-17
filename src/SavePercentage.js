@@ -18,8 +18,6 @@ function formatData(data) {
     homeSavePercentage: '',
     homeColor: colors[0],
     awayColor: colors[1],
-    homeDonut: [],
-    awayDonut: [],
     homeGoalie: [goalies[1]],
     awayGoalie: [goalies[0]]
   };
@@ -31,14 +29,32 @@ function formatData(data) {
     formattedShots.homeSavedShots / formattedShots.homeTotalShots;
   formattedShots.homeSavePercentage =
     formattedShots.awaySavedShots / formattedShots.awayTotalShots;
-  formattedShots.homeDonut = [score[0], shots[1][4]];
-  formattedShots.awayDonut = [score[1], shots[2][4]];
   let m = Math.round(((shots[1][4] - score[0]) / shots[1][4]) * 100) / 100;
   let n = m.toString();
   formattedShots.homeSavePercentage = n.replace(/^0+/, '');
   let o = Math.round(((shots[2][4] - score[1]) / shots[2][4]) * 100) / 100;
   let p = o.toString();
   formattedShots.awaySavePercentage = p.replace(/^0+/, '');
+  
+  //handle OT scenarios
+  for (let i = 0; i < shots[0].length; i++) {
+    if (shots[0][i] == "OT") {
+      formattedShots.homeSavedShots = shots[2][5] - score[1];
+      formattedShots.awaySavedShots =
+        formattedShots.awayTotalShots - formattedShots.homeScore;
+      formattedShots.awaySavePercentage =
+        formattedShots.homeSavedShots / formattedShots.homeTotalShots;
+      formattedShots.homeSavePercentage =
+        formattedShots.awaySavedShots / formattedShots.awayTotalShots;
+      let m = Math.round(((shots[1][5] - score[0]) / shots[1][5]) * 100) / 100;
+      let n = m.toString();
+      formattedShots.homeSavePercentage = n.replace(/^0+/, '');
+      let o = Math.round(((shots[2][5] - score[1]) / shots[2][5]) * 100) / 100;
+      let p = o.toString();
+      formattedShots.awaySavePercentage = p.replace(/^0+/, '');
+    }
+  }
+  
   return formattedShots;
 }
 

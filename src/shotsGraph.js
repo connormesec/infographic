@@ -15,6 +15,14 @@ function formatData(data) {
   formattedShots.awayShots = [shots[1][4]];
   formattedShots.homeShots = [shots[2][4]];
   
+  for (let i = 0; i < shots[0].length; i++) {
+    if (shots[0][i] == "OT") {
+      formattedShots.awayShots = [shots[1][5]];
+      formattedShots.homeShots = [shots[2][5]];
+      console.log("Made it to thsi stupic fucking if")
+    }}
+
+  console.log(shots[1][5])
   return formattedShots;
 }
 
