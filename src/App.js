@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import OverTime from './OverTime';
 import NormalGame from './NormalGame';
+import Shootout from './ShootOut';
 
 const request = require('request');
 const cheerio = require('cheerio');
@@ -12,7 +13,8 @@ let awayScores = [];
 let teamColors = [];
 let noShots = false;
 let overtime = false;
-let shootout = false;
+let shootout = [];
+let shootoutBool = false;
 
 function App() {
   const [url, setUrl] = useState();
@@ -63,6 +65,7 @@ function Plots({ url }) {
 
   async function fetchTableData() {
     const data = await scrape_table(url);
+    console.log(data);
     const filteredData = dataFilter(data);
     console.log(filteredData);
     setData(filteredData);
@@ -75,14 +78,14 @@ function Plots({ url }) {
   if (!data) return <div> Loading... </div>;
   console.log(noShots)
   //need more conditions
-  if (overtime == true) {
+  
+  if (shootoutBool == true) {
     return (
       <div className="App">
-        <OverTime data={data}/>
+        <Shootout data={data}/>
       </div>
     );
-  }
-  else if (shootout == true) {
+  } else if (overtime == true) {
     return (
       <div className="App">
         <OverTime data={data}/>
@@ -285,13 +288,45 @@ async function scrape_table(url) {
                   .replace(/&#xA0;/g, '')
               );
             });
-          const regex = RegExp('.*(win).*|.*(loss).*|.*(tie).*|.*(otl).*', 'g');
+          const regex = RegExp('.*(win).*|.*(loss).*|.*(tie).*|.*(otl).*|.*(sol).*', 'g');
           for (let i = 0; i < rowValues.length; i++) {
             if (regex.test(rowValues[i])) {
               goalieValues.push(rowValues[i].replace(/\d+|\(.*\)/g, '').trim());
             }
           }
         });
+      }
+      
+      const shootOutScrape = {
+        width: '100%',
+        cellspacing: 0,
+        cellpadding: 1,
+      };
+      try {
+        if (
+          Object.keys(shootOutScrape).length === tableKeys.length &&
+          tableKeys.every(key => table.attr(key) === `${shootOutScrape[key]}`)
+        ) {
+          table.find('tr').each((_, row) => {
+            const rowValues = [];
+  
+            $(row)
+              .find('td')
+              .each((_, td) => {
+                rowValues.push(
+                  $(td)
+                    .html()
+                    .trim()
+                    .replace(/&#xA0;/g, '')
+                );
+              });
+              shootout.push(rowValues);
+            });
+          
+            console.log(shootout)
+        }
+      } catch {
+        console.log('Err: No shootout values')
       }
     });
 
@@ -311,12 +346,14 @@ async function scrape_table(url) {
   }
   teamNames.pop();
   scores.shift();
-  // end
+
   // Get game date
   let unformattedGameDate = $('.gameinfo')
     .html()
     .split('<br>')[2];
   let gameDate = unformattedGameDate.replace(/, 20\d\d(.*)|\sat\s/g, '');
+
+  // Get shootout results
 
   shotTableValidator(shots);
   removeItems(teamScore);
@@ -335,7 +372,8 @@ async function scrape_table(url) {
     goalieValues,
     gameDate,
     teamColors,
-    noShots
+    noShots,
+    shootout,
   ];
   console.log(finalData.noShots)
   return finalData;
@@ -461,6 +499,24 @@ function dataFilter(data) {
   if (data[1] === undefined || data[1].length == 0) {
     data[1].push(['', '', '', '', '', '', ''])
   }
+  //check team names for a shootout (SHO) and remove that line
+  let badValue;
+  for (let i = 0; i < data[0].length; i++) {
+    for (let j = 0; j < data[0][i].length; j++) {
+      if (data[0][i][j] === "SHO") {
+        badValue = i;
+      }
+    }
+  }
+  for (let i = 0; i < data[1].length; i++) {
+    for (let j = 0; j < data[1][i].length; j++) {
+      if (data[1][i][j] === "SHO") {
+        badValue = i;
+      }
+    }
+  }
+  delete data[0][badValue];
+  delete data[1][badValue];
   //Shots table filtering
   //check to see if shots table has 5 columns. If there are 5 columns we can assume all is well, if not, do the following...
   if (data[2].length !== 3 || data[2][0].length !== 5) {

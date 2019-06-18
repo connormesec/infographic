@@ -22,6 +22,7 @@ function formatData(data) {
     awayGoalie: [goalies[0]]
   };
 
+  //TODO There has to be a better way of doing this
   formattedShots.homeSavedShots = shots[2][4] - score[1];
   formattedShots.awaySavedShots =
     formattedShots.awayTotalShots - formattedShots.homeScore;
@@ -35,7 +36,6 @@ function formatData(data) {
   let o = Math.round(((shots[2][4] - score[1]) / shots[2][4]) * 100) / 100;
   let p = o.toString();
   formattedShots.awaySavePercentage = p.replace(/^0+/, '');
-  
   //handle OT scenarios
   for (let i = 0; i < shots[0].length; i++) {
     if (shots[0][i] == "OT") {
@@ -53,8 +53,23 @@ function formatData(data) {
       let p = o.toString();
       formattedShots.awaySavePercentage = p.replace(/^0+/, '');
     }
+     //handle SO scenarios
+    if (shots[0][i] == "SO") {
+      formattedShots.homeSavedShots = shots[2][6] - score[1];
+      formattedShots.awaySavedShots =
+        formattedShots.awayTotalShots - formattedShots.homeScore;
+      formattedShots.awaySavePercentage =
+        formattedShots.homeSavedShots / formattedShots.homeTotalShots;
+      formattedShots.homeSavePercentage =
+        formattedShots.awaySavedShots / formattedShots.awayTotalShots;
+      let m = Math.round(((shots[1][6] - score[0]) / shots[1][6]) * 100) / 100;
+      let n = m.toString();
+      formattedShots.homeSavePercentage = n.replace(/^0+/, '');
+      let o = Math.round(((shots[2][6] - score[1]) / shots[2][6]) * 100) / 100;
+      let p = o.toString();
+      formattedShots.awaySavePercentage = p.replace(/^0+/, '');
+    }
   }
-  
   return formattedShots;
 }
 
