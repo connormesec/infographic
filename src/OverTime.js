@@ -23,9 +23,9 @@ function OverTime({data}) {
     if (data[9] == false) {
     return (
         <div>
-        <div id="screenshot">
+        {/* <div id="screenshot">
           <Screenshot />
-        </div>
+        </div> */}
         <p class="h7">Your image preview is below</p>
         <DownloadImage />
         <div className="AppBody">
@@ -67,6 +67,9 @@ function OverTime({data}) {
             <div className="awayScore">
               <AwayScore data={data} />
             </div>
+          </div>
+          <div className="border">
+            
           </div>
           <div
             className="homePlayerScores"

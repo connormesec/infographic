@@ -27,15 +27,15 @@ console.log(table)
     console.log(homeMisses + homeScores + homeTotalShots)
     return (
         <div>
-        <div>
+        <div className="shootoutRectangleLeft">
           <h3>
-            Shootout <strong>{awayMisses} / {awayTotalShots}</strong>
+          Shootout: <strong> {homeScores} / {homeTotalShots} </strong>
           </h3>
         </div>
-        <div>
-        <h3>
-        Shootout <strong> {homeMisses} / {homeTotalShots} </strong>
-        </h3>
+        <div className="shootoutRectangleRight">
+            <h3>
+            Shootout: <strong>{awayScores} / {awayTotalShots}</strong>  
+            </h3>
         </div>
       </div>
       );

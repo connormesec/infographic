@@ -288,7 +288,7 @@ async function scrape_table(url) {
                   .replace(/&#xA0;/g, '')
               );
             });
-          const regex = RegExp('.*(win).*|.*(loss).*|.*(tie).*|.*(otl).*|.*(sol).*', 'g');
+          const regex = /.*\(win\).*|.*\(loss\).*|.*\(tie\).*|.*\(otl\).*|.*\(sol\).*/g;
           for (let i = 0; i < rowValues.length; i++) {
             if (regex.test(rowValues[i])) {
               goalieValues.push(rowValues[i].replace(/\d+|\(.*\)/g, '').trim());
@@ -335,16 +335,19 @@ async function scrape_table(url) {
     .html()
     .split('<br>')[4]
     .split('<span class="big">');
+    console.log(unformattedTeamNames)
   for (let i = 0; i < unformattedTeamNames.length; i++) {
     let a = unformattedTeamNames[i].replace(/<(.|\n)*?>/g, '');
     let b = a.replace(/\d\sat\s/g, '');
-    let c = b.trim();
-    teamNames.push(c);
+    let c = b.replace(/[M1]|[M2]|[M3]/g, '');
+    let d = c.trim();
+    teamNames.push(d);
     let e = a.replace(/(?=at).*$/g, '');
-    let f = e.trim();
+    let f = e.trim()
     scores.push(f);
   }
   teamNames.pop();
+  console.log(teamNames)
   scores.shift();
 
   // Get game date
@@ -411,6 +414,9 @@ function shotTableValidator(shotTable) {
     }
     if(shotTable[0][4] == "OT") {
       overtime = true;
+    }
+    if(shotTable[0][5] == "SO") {
+      shootoutBool = true;
     }
     console.log(shotTable)
   return shotTable;
@@ -531,6 +537,11 @@ function dataFilter(data) {
       console.log("Err: No total in the ot shots table")
       data[9] = true;
     }
+  }
+  //check to make sure the total shots is not zero
+  if (data[2][0][4] == 'T' && data[2][1][4] == 0 && data[2][1][4] == 0) {
+    console.log("Err: No total in the normal shots table")
+    data[9] = true;
   }
   //check to see if penalty table has 3 columns. If there are 3 columns we can assume all is well, if not, do the following...
   if (data[3][0].length !== 3) {

@@ -98,6 +98,20 @@
   padding: 20px 20px 0px 20px;
 }
 
+.shootoutRectangleLeft {
+  text-align: center;
+  float: left;
+  width: 600px;
+  padding-top: 10px;
+}
+
+.shootoutRectangleRight {
+  text-align: center;
+  float: right;
+  width: 600px;
+  padding-top: 10px;
+}
+
 .homeScore {
   float: left;
   width: 400px;
@@ -170,6 +184,13 @@
   float: left;
 }
 
+.border {
+  width: 1200px;
+  height: 5px;
+  background-color: silver;
+  float:left;
+}
+
 .homePlayerScores {
   width: 200px;
   height: 400px;
@@ -177,7 +198,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 5px solid silver;
 }
 
 .lineChart {
@@ -186,7 +206,6 @@
   background-color: #282c34;
   border-bottom: 5px solid silver;
   float: left;
-  border-top: 5px solid silver;
 }
 
 .awayPlayerScores {
@@ -196,7 +215,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 5px solid silver;
 }
 
 .underPlayerScores {

@@ -68,11 +68,11 @@ function Shootout({ data }) {
                             <AwayScore data={data} />
                         </div>
                     </div>
-                    <div>
+                    <div className="border">
+                    </div>
                         <div className="shootoutHolder">
                             <ShootOutRatio data={data} />
                         </div>
-                    </div>
                     <div
                         className="homePlayerScores"
                         style={{
