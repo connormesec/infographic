@@ -29,46 +29,42 @@ function Shootout({ data }) {
                 <p class="h7">Your image preview is below</p>
                 <DownloadImage />
                 <div className="AppBody">
-                    <div
-                        className="homeWrapper"
+                    <div className='topThird'
                         style={{
-                            background: `linear-gradient(to right, ${data[8][0]}, #282c34)`
-                        }}
-                    >
-                        <div className="homeLogo">
-                            <HomeImage data={data} />
-                        </div>
-                        <div className="homeScore">
-                            <HomeScore data={data} />
-                        </div>
-                    </div>
-                    <div className="middleWrapper">
-                        <div className="header">
-                            <Header data={data} />
-                        </div>
-                        <div className="scoreTitleWrapper">
-                            <div className="scoreTitle">
-                                <ScoreTitle data={data} />
+                            background: `linear-gradient(to right, ${data[8][0]}, #00282c34, ${data[8][1]})`
+                        }}>
+                        <div className="homeWrapper">
+                            <div className="homeLogo">
+                                <HomeImage data={data} />
                             </div>
-                            <div className="scoringSummaryTitle">
-                                <GameDate data={data} />
+                            <div className="homeScore">
+                                <HomeScore data={data} />
                             </div>
                         </div>
-                    </div>
-                    <div
-                        className="awayWrapper"
-                        style={{
-                            background: `linear-gradient(to left, ${data[8][1]}, #282c34)`
-                        }}
-                    >
-                        <div className="awayLogo">
-                            <AwayImage data={data} />
+                        <div className="middleWrapper">
+                            <div className="header">
+                                <Header data={data} />
+                            </div>
+                            <div className="scoreTitleWrapper">
+                                <div className="scoreTitle">
+                                    <ScoreTitle data={data} />
+                                </div>
+                                <div className="scoringSummaryTitle">
+                                    <GameDate data={data} />
+                                </div>
+                            </div>
                         </div>
-                        <div className="awayScore">
-                            <AwayScore data={data} />
+                        <div className="awayWrapper">
+                            <div className="awayLogo">
+                                <AwayImage data={data} />
+                            </div>
+                            <div className="awayScore">
+                                <AwayScore data={data} />
+                            </div>
                         </div>
-                    </div>
+                    </div> 
                     <div className="border">
+                    </div>
                     </div>
                         <div className="shootoutHolder">
                             <ShootOutRatio data={data} />
@@ -109,58 +105,54 @@ function Shootout({ data }) {
                         <SavePercentage data={data} />
                     </div>
                 </div>
-            </div>
         );
     } else {
         return (
             <div>
-                <div id="screenshot">
-                    <Screenshot />
-                </div>
-                <p class="h7">Your image preview is below</p>
-                <DownloadImage />
-                <div className="AppBody">
-                    <div
-                        className="homeWrapper"
-                        style={{
-                            background: `linear-gradient(to right, ${data[8][0]}, #282c34)`
-                        }}
-                    >
-                        <div className="homeLogo">
-                            <HomeImage data={data} />
-                        </div>
-                        <div className="homeScore">
-                            <HomeScore data={data} />
-                        </div>
-                    </div>
-                    <div className="middleWrapper">
-                        <div className="header">
-                            <Header data={data} />
-                        </div>
-                        <div className="scoreTitleWrapper">
-                            <div className="scoreTitle">
-                                <ScoreTitle data={data} />
-                            </div>
-                            <div className="scoringSummaryTitle">
-                                <GameDate data={data} />
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        className="awayWrapper"
-                        style={{
-                            background: `linear-gradient(to left, ${data[8][1]}, #282c34)`
-                        }}
-                    >
-                        <div className="awayLogo">
-                            <AwayImage data={data} />
-                        </div>
-                        <div className="awayScore">
-                            <AwayScore data={data} />
-                        </div>
-                    </div>
-                </div>
+            <div id="screenshot">
+              <Screenshot />
             </div>
+            <p class="h7">Your image preview is below</p>
+            <DownloadImage />
+            <div className="AppBody">
+            <div className='topThird'
+                          style={{
+                              background: `linear-gradient(to right, ${data[8][0]} 5%, #00000000, ${data[8][1]} 95%)`
+                          }}>
+              <div
+                className="homeWrapper">
+                <div className="homeLogo">
+                  <HomeImage data={data} />
+                </div>
+                <div className="homeScore">
+                  <HomeScore data={data} />
+                </div>
+              </div>
+              <div className="middleWrapper">
+                <div className="header">
+                  <Header data={data} />
+                </div>
+                <div className="scoreTitleWrapper">
+                  <div className="scoreTitle">
+                    <ScoreTitle data={data} />
+                  </div>
+                  <div className="scoringSummaryTitle">
+                    <GameDate data={data} />
+                  </div>
+                </div>
+              </div>
+              <div
+                className="awayWrapper">
+                <div className="awayLogo">
+                  <AwayImage data={data} />
+                </div>
+                <div className="awayScore">
+                  <AwayScore data={data} />
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
         );
     }
 }

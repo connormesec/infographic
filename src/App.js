@@ -339,7 +339,7 @@ async function scrape_table(url) {
   for (let i = 0; i < unformattedTeamNames.length; i++) {
     let a = unformattedTeamNames[i].replace(/<(.|\n)*?>/g, '');
     let b = a.replace(/\d\sat\s/g, '');
-    let c = b.replace(/[M1]|[M2]|[M3]/g, '');
+    let c = b.replace(/\w*M1\w*|\w*M2\w*|\w*M3\w*/g, '');
     let d = c.trim();
     teamNames.push(d);
     let e = a.replace(/(?=at).*$/g, '');

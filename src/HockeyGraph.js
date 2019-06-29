@@ -86,8 +86,8 @@ function HockeyGraph(props) {
           size: 25,
           color: '#ffffff'
         },
-        plot_bgcolor: '#282c34',
-        paper_bgcolor: '#282c34',
+        plot_bgcolor: '#00000000',
+        paper_bgcolor: '#00000000',
         showlegend: false,
         xaxis: {
           color: 'white',

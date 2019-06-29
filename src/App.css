@@ -57,25 +57,28 @@
   position: relative;
   width: 1200px;
   overflow: hidden;
-  background-color: #282c34;
+  background-image: url('background.png');
+}
+
+.topThird {
+  width: 1200px;
+  height: 500px;
 }
 
 .homeWrapper {
   display: inline-block;
   vertical-align: middle;
-  float: left;
 }
 
 .middleWrapper {
   display: inline-block;
   vertical-align: middle;
-  float: left;
+ 
 }
 
 .awayWrapper {
   display: inline-block;
   vertical-align: middle;
-  float: right;
 }
 
 .homeLogo {
@@ -87,9 +90,9 @@
 .header {
   width: 400px;
   height: 200px;
-  background-color: #282c34;
   float: left;
   display: block;
+  text-align: center
 }
 
 .awayLogo {
@@ -124,12 +127,11 @@
 .scoreTitleWrapper {
   width: 400px;
   height: 300px;
-  
+  background-color: none;
 }
 
 .scoreTitle {
   float: left;
-  background-color: #282c34;
   width: 400px;
   height: 240px;
   display: flex;
@@ -158,7 +160,6 @@
 .ppGoals {
   height: 310px;
   width: 300px;
-  background-color: #282c34;
   float: left;
   display: block;
 }
@@ -166,21 +167,18 @@
 .ppMin {
   height: 310px;
   width: 300px;
-  background-color: #282c34;
   float: left;
 }
 
 .shotsGraph {
   height: 310px;
   width: 300px;
-  background-color: #282c34;
   float: left;
 }
 
 .savePercentage {
   height: 310px;
   width: 300px;
-  background-color: #282c34;
   float: left;
 }
 
@@ -203,7 +201,6 @@
 .lineChart {
   width: 800px;
   height: 400px;
-  background-color: #282c34;
   border-bottom: 5px solid silver;
   float: left;
 }
@@ -221,7 +218,6 @@
   width: 200px;
   height: 60px;
   border-bottom: 5px solid silver;
-  background-color: #282c34;
   float: left;
 }
 
@@ -258,8 +254,6 @@ h1 {
 h2 {
   color: white;
   margin: 0px;
-  padding-top: 30px;
-  font-size: 130px;
   font-family: 'Aldrich', sans-serif;
   text-shadow: 5px 5px 10px black;
   -ms-transform: scaleY(1.3); /* IE 9 */
