@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ShootOutRatio({ data }) {
+function homeShootOutRatio({ data }) {
     const table = data[10];
     let awayScores = 0;
     let awayMisses = 0;
@@ -22,24 +22,15 @@ console.log(table)
             homeScores = ++homeScores;
         }
     }
-    let awayTotalShots = awayMisses + awayScores;
     let homeTotalShots = homeMisses + homeScores;
-    console.log(homeMisses + homeScores + homeTotalShots)
     return (
-        <div>
-        <div className="shootoutRectangleLeft">
+        
           <h3>
           Shootout: <strong> {homeScores} / {homeTotalShots} </strong>
           </h3>
-        </div>
-        <div className="shootoutRectangleRight">
-            <h3>
-            Shootout: <strong>{awayScores} / {awayTotalShots}</strong>  
-            </h3>
-        </div>
-      </div>
+     
       );
 
 }
 
-export default ShootOutRatio;
+export default homeShootOutRatio;
