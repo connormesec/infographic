@@ -38,7 +38,7 @@ function formatData(data) {
   formattedShots.awaySavePercentage = p.replace(/^0+/, '');
   //handle OT scenarios
   for (let i = 0; i < shots[0].length; i++) {
-    if (shots[0][i] == "OT") {
+    if (shots[0][i] === "OT") {
       formattedShots.homeSavedShots = shots[2][5] - score[1];
       formattedShots.awaySavedShots =
         formattedShots.awayTotalShots - formattedShots.homeScore;
@@ -54,7 +54,7 @@ function formatData(data) {
       formattedShots.awaySavePercentage = p.replace(/^0+/, '');
     }
      //handle SO scenarios
-    if (shots[0][i] == "SO") {
+    if (shots[0][i] === "SO") {
       formattedShots.homeSavedShots = shots[2][6] - score[1];
       formattedShots.awaySavedShots =
         formattedShots.awayTotalShots - formattedShots.homeScore;

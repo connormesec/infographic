@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Header from './Header';
-import HockeyPlot from './HockeyPlot';
 import HockeyGraph from './HockeyGraph';
 import PenaltyMinutesGraph from './penaltyMinutesGraph';
 import ScoreTitle from './ScoreTitle';
@@ -20,7 +19,7 @@ import OvertimePlot from './OvertimePlot';
 
 function OverTime({data}) {
   console.log('overtime')
-    if (data[9] == false) {
+    if (data[9] === false) {
       return (
         <div>
             <div id="screenshot">

@@ -34,6 +34,20 @@ body {
   background-color: rgb(43, 78, 133);
 }
 
+#logo {
+  color: #00c7e4;
+}
+.logo {
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  align-items: center;
+  list-style-type: none;
+  font-size: 1.5em;
+  margin-right: auto;
+  margin-left: 30px;
+}
+
 .nav {
   text-decoration: none;
   color: #fff;

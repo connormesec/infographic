@@ -18,14 +18,14 @@ function formatData(data) {
   //TODO make these loops not suck so much, maybe just find the array key that has the "T" (total)
   //handle OT scenarios
   for (let i = 0; i < shots[0].length; i++) {
-    if (shots[0][i] == "OT") {
+    if (shots[0][i] === "OT") {
       formattedShots.awayShots = [shots[1][5]];
       formattedShots.homeShots = [shots[2][5]];
     }
   }
   //handle OT scenarios
   for (let i = 0; i < shots[0].length; i++) {
-    if (shots[0][i] == "SO") {
+    if (shots[0][i] === "SO") {
       formattedShots.awayShots = [shots[1][6]];
       formattedShots.homeShots = [shots[2][6]];
     }

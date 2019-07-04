@@ -22,7 +22,7 @@ function formatData(data) {
   console.log(formattedPenaltyMinutes.homePenaltyMinutes)
 
   //handle cases where there are no penalties
-  if (formattedPenaltyMinutes.homePenaltyMinutes == 0 && formattedPenaltyMinutes.awayPenaltyMinutes == 0) {
+  if (formattedPenaltyMinutes.homePenaltyMinutes === 0 && formattedPenaltyMinutes.awayPenaltyMinutes === 0) {
     formattedPenaltyMinutes.homePenaltyMinutes = [1];
     formattedPenaltyMinutes.awayPenaltyMinutes = [1];
     formattedPenaltyMinutes.opacity = [0];

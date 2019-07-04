@@ -21,12 +21,12 @@ import HomeShootoutRatio from './homeShootoutRatio';
 
 function Shootout({ data }) {
     console.log("we are at the shootout component")
-    if (data[9] == false) {
+    if (data[9] === false) {
         return (
             <div>
-                {/* <div id="screenshot">
+                <div id="screenshot">
                     <Screenshot />
-                </div> */}
+                </div>
                 <p class="h7">Your image preview is below</p>
                 <DownloadImage />
                 <div className="AppBody">

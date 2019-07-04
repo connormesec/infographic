@@ -76,16 +76,14 @@ function Plots({ url }) {
   }, []);
 
   if (!data) return <div> Loading... </div>;
-  console.log(noShots)
-  //need more conditions
   
-  if (shootoutBool == true) {
+  if (shootoutBool === true) {
     return (
       <div className="App">
         <Shootout data={data}/>
       </div>
     );
-  } else if (overtime == true) {
+  } else if (overtime === true) {
     return (
       <div className="App">
         <OverTime data={data}/>
@@ -399,7 +397,7 @@ function removeItems(p1) {
 }
 
 function shotTableValidator(shotTable) {
-   if (shotTable[0].length == 2 && shotTable[0][1] == 'Total') {
+   if (shotTable[0].length === 2 && shotTable[0][1] === 'Total') {
       let homeShotPlaceholder = parseInt(shotTable[2][1]) / 3;
       let awayShotPlaceholder = parseInt(shotTable[1][1]) / 3;
       shotTable[0].splice(1, 0, '1');
@@ -412,10 +410,10 @@ function shotTableValidator(shotTable) {
       shotTable[2].splice(2, 0, homeShotPlaceholder.toString() );
       shotTable[2].splice(3, 0, homeShotPlaceholder.toString() );
     }
-    if(shotTable[0][4] == "OT") {
+    if(shotTable[0][4] === "OT") {
       overtime = true;
     }
-    if(shotTable[0][5] == "SO") {
+    if(shotTable[0][5] === "SO") {
       shootoutBool = true;
     }
     console.log(shotTable)
@@ -498,11 +496,11 @@ function getCoordinates(shots, p5) {
 
 function dataFilter(data) {
   //check for shutouts
-  if (data[0] === undefined || data[0].length == 0) {
+  if (data[0] === undefined || data[0].length === 0) {
     // array empty or does not exist
     data[0].push(['', '', '', '', '', '', ''])
   }
-  if (data[1] === undefined || data[1].length == 0) {
+  if (data[1] === undefined || data[1].length === 0) {
     data[1].push(['', '', '', '', '', '', ''])
   }
   //check team names for a shootout (SHO) and remove that line
@@ -528,18 +526,18 @@ function dataFilter(data) {
   if (data[2].length !== 3 || data[2][0].length !== 5) {
     console.log('The shots table is whack ' + data[2][0].length);
     //check to see if shots table was filled out
-    if (data[2] === undefined || data[2].length == 0) {
+    if (data[2] === undefined || data[2].length === 0) {
       // array empty or does not exist then some fun stuff is going to happen
       console.log("Err: the shots table is empty")
       data[9] = true;
     }
-    if (data[2][0][5] == 'T' && data[2][1][5] == 0 && data[2][1][5] == 0) {
+    if (data[2][0][5] === 'T' && data[2][1][5] === 0 && data[2][1][5] === 0) {
       console.log("Err: No total in the ot shots table")
       data[9] = true;
     }
   }
   //check to make sure the total shots is not zero
-  if (data[2][0][4] == 'T' && data[2][1][4] == 0 && data[2][1][4] == 0) {
+  if (data[2][0][4] === 'T' && data[2][1][4] === 0 && data[2][1][4] === 0) {
     console.log("Err: No total in the normal shots table")
     data[9] = true;
   }
@@ -555,22 +553,22 @@ function dataFilter(data) {
     console.log('Penalty Table PASSED its check');
   }
   //check team names to make sure there are two strings here
-  if (data[4].length == 2 && data[4].every(function(i){ return typeof i === "string" })) {
+  if (data[4].length === 2 && data[4].every(function(i){ return typeof i === "string" })) {
     console.log('Team Names PASSED its check');
   }
   //check team scores to make sure there are two ints here
-  if (data[5].length == 2 && data[5].every(function(i){ return typeof i === "string" })) {
+  if (data[5].length === 2 && data[5].every(function(i){ return typeof i === "string" })) {
     console.log('Team Scores PASSED its check');
   }else{
     data[9] = true;
   }
-  if (data[6].length == 2 && data[6].every(function(i){ return typeof i === "string" })) {
+  if (data[6].length === 2 && data[6].every(function(i){ return typeof i === "string" })) {
     console.log('Goalie Name PASSED its check');
   }else{
     //noShots = true;
   }
   //check game date to make sure it's a string and doesn't contain any funky characters
-  if (typeof data[7] === "string" && /[~`!#$%\^&*+=\-\[\]\\';/{}|\\":<>\?]/g.test(data[7]) === false) {
+  if (typeof data[7] === "string" && /[~`!#$%^&*+=\-[\]\\';/{}|\\":<>?]/g.test(data[7]) === false) {
     console.log('Game Date PASSED its check');
   }
 

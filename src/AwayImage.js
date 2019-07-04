@@ -11,7 +11,7 @@ function formatData(data) {
 function AwayImage(props) {
   const data = formatData(props.data);
   
-  return <img src={`images/${data.name}.png`} />;
+  return <img src={`images/${data.name}.png`} alt={`Away team logo`} />;
 }
 
 export default AwayImage;

@@ -12,6 +12,7 @@ const routing = (
       <div id="navbarWrapper">
       <div id="navbar">
         <ul class="nav-tabs">
+          <div class="logo"><p id="logo">| ACHA INFOGRAPHIC GENERATOR |</p></div>
           <li class="navList">
             <Link class="nav" to="/">Home</Link>
           </li>

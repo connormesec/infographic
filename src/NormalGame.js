@@ -16,10 +16,9 @@ import HomeImage from './HomeImage';
 import AwayImage from './AwayImage';
 import GameDate from './GameDate';
 import DownloadImage from './DownloadImage';
-import Background from './background.png';
 
 function NormalGame({ data }) {
-    if (data[9] == false) {
+    if (data[9] === false) {
         return (
             <div>
                 <div id="screenshot">
