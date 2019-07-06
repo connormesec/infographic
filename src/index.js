@@ -10,21 +10,21 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 const routing = (
     <Router>
-      <div id="navbarWrapper">
-      <div id="navbar">
-        <ul class="nav-tabs">
-          <div class="logo"><p id="logo">| ACHA INFOGRAPHIC GENERATOR |</p></div>
-          <li class="navList">
-            <Link class="nav" to="/">Home</Link>
+      <div className="navbarWrapper">
+      <div className="navbar">
+        <ul className="nav-tabs">
+          <div className="logo"><p id="logo">| ACHA INFOGRAPHIC GENERATOR |</p></div>
+          <li className="navList">
+            <Link className="nav" to="/">Home</Link>
           </li>
-          <li class="navList">
-            <Link class="nav" to="/howToUse">How To Use</Link>
+          <li className="navList">
+            <Link className="nav" to="/howToUse">How To Use</Link>
           </li>
-          <li class="navList">
-            <Link class="nav" to="/about">About</Link>
+          <li className="navList">
+            <Link className="nav" to="/about">About</Link>
           </li>
-          <li class="navList">
-            <Link class="nav" to="/contact">Contact</Link>
+          <li className="navList">
+            <Link className="nav" to="/contact">Contact</Link>
           </li>
         </ul>
       </div>

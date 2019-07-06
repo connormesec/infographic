@@ -23,8 +23,8 @@ function App() {
   if (!url) {
     return (
       <div className="contentWrapper">
-        <div>
-          <p class="h7">
+        
+          <p className="h7">
             <strong>Infographics</strong> provide a clean, visually appealing
             way to show game scores and results
           </p>
@@ -50,8 +50,8 @@ function App() {
           >
             Generate
           </button>
-        </div>
-        <p class="h7">
+        
+        <p className="h7">
           See <strong>examples</strong> below...
         </p>
       </div>
@@ -65,7 +65,6 @@ function Plots({ url }) {
 
   async function fetchTableData() {
     const data = await scrape_table(url);
-    console.log(data);
     const filteredData = dataFilter(data);
     console.log(filteredData);
     setData(filteredData);
@@ -537,8 +536,13 @@ function dataFilter(data) {
     }
   }
   //check to make sure the total shots is not zero
-  if (data[2][0][4] === 'T' && data[2][1][4] === 0 && data[2][1][4] === 0) {
-    console.log("Err: No total in the normal shots table")
+  if (data[2][0][4] == 'T' && data[2][1][4] == 0 && data[2][1][4] == 0) {
+    console.error("Err: No total in the normal shots table")
+    data[9] = true;
+  }
+  //check to make sure the total shots of OT is not zero
+  if (data[2][0][5] == 'T' && data[2][1][5] == 0 && data[2][1][5] == 0) {
+    console.error("Err: No total in the OT shots table")
     data[9] = true;
   }
   //check to see if penalty table has 3 columns. If there are 3 columns we can assume all is well, if not, do the following...

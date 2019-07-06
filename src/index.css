@@ -13,7 +13,7 @@ body {
   padding: 0px 50px
 }
 
-#navbar {
+.navbar {
   position: fixed;
   overflow: hidden;
   height: auto;
@@ -23,14 +23,14 @@ body {
   z-index: 1;
 }
 
-#navbar .nav {
+.navbar .nav {
   display: block;
   background-color: rgb(48, 48, 48);
   padding: 1.5em 2em;
   transition: 300ms;
 }
 
-#navbar .nav:hover {
+.navbar .nav:hover {
   background-color: rgb(43, 78, 133);
 }
 
