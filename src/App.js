@@ -50,7 +50,11 @@ function App() {
           >
             Generate
           </button>
-        
+        <p className="h7">
+        <strong>Test links:</strong> copy and paste one of the links below into the generator to see an example.</p>
+          <kbd>http://pointstreak.com/prostats/gamesheet_full.html?gameid=3390133</kbd><br></br> 
+          <kbd>http://pointstreak.com/prostats/gamesheet_full.html?gameid=3388750</kbd><br></br> 
+          <kbd>http://pointstreak.com/prostats/gamesheet_full.html?gameid=3424857</kbd><br></br>  
         <p className="h7">
           See <strong>examples</strong> below...
         </p>
