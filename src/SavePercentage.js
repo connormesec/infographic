@@ -161,6 +161,10 @@ function SavePercentage(props) {
           textangle: 45
         }
       }}
+      config={{
+        staticPlot: true,
+        displayModeBar: false,
+      }}
     />
   );
 }
