@@ -92,6 +92,10 @@ function ShotsGraph(props) {
           showticklabels: false
         }
       }}
+      config = {{
+        staticPlot: true,
+        displayModeBar: false,
+      }}
     />
   );
 }

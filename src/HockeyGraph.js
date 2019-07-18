@@ -110,6 +110,10 @@ function HockeyGraph(props) {
           showticklabels: false
         }
       }}
+      config={{
+        staticPlot: true,
+        displayModeBar: false,
+      }}
     />
   );
 }

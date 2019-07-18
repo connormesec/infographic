@@ -166,6 +166,10 @@ function OvertimePlot(props) {
           }
         }
       }}
+      config = {{
+        staticPlot: true,
+        displayModeBar: false,
+      }}
     />
   );
 }

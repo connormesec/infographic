@@ -172,6 +172,10 @@ function HockeyPlot(props) {
           }
         }
       }}
+      config = {{
+        staticPlot: true,
+        displayModeBar: false,
+      }}
     />
   );
 }

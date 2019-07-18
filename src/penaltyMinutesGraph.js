@@ -92,6 +92,10 @@ function PenaltyMinutesGraph(props) {
           showticklabels: false
         }
       }}
+      config = {{
+        staticPlot: true,
+        displayModeBar: false,
+      }}
     />
   );
 }
