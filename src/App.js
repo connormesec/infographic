@@ -4,6 +4,8 @@ import './App.css';
 import OverTime from './OverTime';
 import NormalGame from './NormalGame';
 import Shootout from './ShootOut';
+import homeimage from './homePageImage.png';
+import $ from 'jquery';
 
 const request = require('request');
 const cheerio = require('cheerio');
@@ -15,6 +17,9 @@ let noShots = false;
 let overtime = false;
 let shootout = [];
 let shootoutBool = false;
+
+const googleurl = 'https://script.google.com/macros/s/AKfycbw7liZvs_NMJKXvlrTKK6aA8ex-6e_f7YQbLhpgnAlvu4eMYrEi/exec';
+/// Placeholder text for the inputs, must match columns of google spreadsheet
 
 function App() {
   const [url, setUrl] = useState();
@@ -34,10 +39,9 @@ function App() {
             placeholder="Paste in a URL to generate an infographic"
             ref={ref => (textInputRef = ref)}
             onKeyPress={(ev) => {
-              console.log(`Pressed keyCode ${ev.key}`);
               if (ev.key === 'Enter') {
-                // Do code here
                 setUrl(textInputRef.value);
+                sendToSpreadSheet(textInputRef.value);
                 ev.preventDefault();
               }
             }}
@@ -46,6 +50,7 @@ function App() {
             className="button"
             onClick={() => {
               setUrl(textInputRef.value);
+              sendToSpreadSheet(textInputRef.value);
             }}
           >
             Generate
@@ -58,6 +63,7 @@ function App() {
         <p className="h7">
           See <strong>examples</strong> below...
         </p>
+        <img src={homeimage}></img>
       </div>
     );
   }
@@ -99,6 +105,17 @@ function Plots({ url }) {
       </div>
     );
   }
+}
+
+function sendToSpreadSheet(text) {
+  let timestamp_end = new Date();
+  const payload = "timestamp=" + timestamp_end + "&URL=" + text;
+  $.ajax({
+    url: googleurl,
+    method: "GET",
+    dataType: "json",
+    data: payload,
+  })
 }
 
 function getWebsiteHtml(url) {
@@ -582,6 +599,5 @@ function dataFilter(data) {
 
   return(data);
 }
-
 
 export default App;
