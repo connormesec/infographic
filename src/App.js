@@ -63,7 +63,7 @@ function App() {
         <p className="h7">
           See <strong>examples</strong> below...
         </p>
-        <img src={homeimage}></img>
+        <img src={homeimage} alt={''}></img>
       </div>
     );
   }
