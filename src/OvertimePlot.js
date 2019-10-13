@@ -115,6 +115,10 @@ function OvertimePlot(props) {
       layout={{
         width: 800,
         height: 400,
+        title: {
+          text: 'Shots + Goals',
+          font: { family: 'Courier New, monospace', size: 30, color: 'white' }
+        },
         staticPlot: true,
         plot_bgcolor: 'rgba(0,0,0,0)',
         paper_bgcolor: 'rgba(0,0,0,0)',
