@@ -191,9 +191,10 @@
 
 .lineChart {
   width: 800px;
-  height: 400px;
+  height: 390px;
   border-bottom: 5px solid silver;
   float: left;
+  padding-top: 10px;
 }
 
 .awayPlayerScores {

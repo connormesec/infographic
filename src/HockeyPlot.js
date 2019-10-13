@@ -109,8 +109,6 @@ function HockeyPlot(props) {
           x: data.scores[1].x,
           y: data.scores[1].y,
           mode: 'markers+text',
-          //text: data.scores[1].title,
-          //textposition: data.homeLabel,
           textfont: { color: 'white', size: 20 },
           marker: {
             color: data.awayColor,
@@ -122,11 +120,15 @@ function HockeyPlot(props) {
       layout={{
         width: 800,
         height: 400,
+        title: {
+          text: 'Shots + Goals',
+          font: { family: 'Courier New, monospace', size: 30, color: 'white' }
+        },
         staticPlot: true,
         plot_bgcolor: 'rgba(0,0,0,0)',
         paper_bgcolor: 'rgba(0,0,0,0)',
         showlegend: false,
-        margin: { r: 50, t: 20, b: 50, l: 50 },
+        margin: { r: 50, t: 40, b: 50, l: 50 },
         xaxis: {
           color: '#aaa',
           autotick: false,
