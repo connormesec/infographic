@@ -123,7 +123,7 @@ function OvertimePlot(props) {
         plot_bgcolor: 'rgba(0,0,0,0)',
         paper_bgcolor: 'rgba(0,0,0,0)',
         showlegend: false,
-        margin: { r: 50, t: 20, b: 50, l: 50 },
+        margin: { r: 50, t: 40, b: 50, l: 50 },
         xaxis: {
           color: '#aaa',
           autotick: false,
