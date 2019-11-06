@@ -36,11 +36,11 @@ function App() {
           <input
             className="field"
             type="url"
-            placeholder="Paste in a URL to generate an infographic"
+            placeholder="Paste in a game ID to generate an infographic"
             ref={ref => (textInputRef = ref)}
             onKeyPress={(ev) => {
               if (ev.key === 'Enter') {
-                setUrl(textInputRef.value);
+                setUrl('http://pointstreak.com/prostats/gamesheet_full.html?gameid=' + textInputRef.value);
                 sendToSpreadSheet(textInputRef.value);
                 ev.preventDefault();
               }
@@ -49,7 +49,7 @@ function App() {
           <button
             className="button"
             onClick={() => {
-              setUrl(textInputRef.value);
+              setUrl('http://pointstreak.com/prostats/gamesheet_full.html?gameid=' + textInputRef.value);
               sendToSpreadSheet(textInputRef.value);
             }}
           >
