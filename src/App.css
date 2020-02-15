@@ -52,6 +52,11 @@
   outline: none !important;
 }
 
+.hide-scrollbar {
+  overflow: -moz-hidden-unscrollable;
+  overflow: hidden;
+}
+
 .AppBody {
   text-align: center;
   position: relative;
