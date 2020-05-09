@@ -5,7 +5,7 @@ function DownloadImage() {
     <button
       className="button"
       onClick={() => {
-        saveAs(document.getElementsByTagName('canvas')[0].toDataURL(), 'file-name.png');
+        saveAs(document.getElementsByTagName('canvas')[0].toBlob(), 'file-name.png');
       }}
     >
       Download Image
