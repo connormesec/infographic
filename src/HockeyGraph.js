@@ -1,49 +1,26 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-function formatData(data) {
-  const penalties = data[3];
-  const color = data[8];
-
-  const formattedPenalties = {
-    homeTeamName: [penalties[2][1].replace('-', '/')],
-    awayTeamName: [penalties[1][1].replace('-', '/')],
-    totalHomePenalties: [],
-    totalAwayPenalties: [],
-    ppGoalsHome: [],
-    ppGoalsAway: [],
-    homeColor: color[0],
-    awayColor: color[1]
-  };
-
-  let a = [penalties[1][1].split('-'), penalties[2][1].split('-')];
-  formattedPenalties.totalHomePenalties = [Number(a[1][1] - a[1][0])];
-  formattedPenalties.totalAwayPenalties = [Number(a[0][1] - a[0][0])];
-  formattedPenalties.ppGoalsHome = [a[1][0]];
-  formattedPenalties.ppGoalsAway = [a[0][0]];
-
-  return formattedPenalties;
-}
-
 function HockeyGraph(props) {
-  const data = formatData(props.data);
-
+  const data = props.data;
+  let homeTitle = data.highLevelStats.homeTeam.stats.powerPlayGoals + '/' + data.highLevelStats.homeTeam.stats.powerPlayOpportunities + '\u200b';
+  let awayTitle = data.highLevelStats.visitingTeam.stats.powerPlayGoals + '/' + data.highLevelStats.visitingTeam.stats.powerPlayOpportunities + '\u200b';
   return (
     <Plot
       data={[
         {
-          x: [data.homeTeamName + '\u200b'],
-          y: data.ppGoalsHome,
+          x: [homeTitle],
+          y: [data.highLevelStats.homeTeam.stats.powerPlayGoals],
           type: 'bar',
           mode: 'lines+points',
           marker: {
-            color: data.homeColor,
+            color: data.additional.home.color,
             line: { color: 'white', width: 2 }
           }
         },
         {
-          x: [data.homeTeamName + '\u200b'],
-          y: data.totalHomePenalties,
+          x: [homeTitle],
+          y: [data.highLevelStats.homeTeam.stats.powerPlayOpportunities - data.highLevelStats.homeTeam.stats.powerPlayGoals],
           type: 'bar',
           mode: 'lines+points',
           marker: {
@@ -53,18 +30,18 @@ function HockeyGraph(props) {
           }
         },
         {
-          x: data.awayTeamName,
-          y: data.ppGoalsAway,
+          x: [awayTitle],
+          y: [data.highLevelStats.visitingTeam.stats.powerPlayGoals],
           type: 'bar',
           mode: 'lines+points',
           marker: {
-            color: data.awayColor,
+            color: data.additional.away.color,
             line: { color: 'white', width: 2 }
           }
         },
         {
-          x: data.awayTeamName,
-          y: data.totalAwayPenalties,
+          x: [awayTitle],
+          y: [data.highLevelStats.visitingTeam.stats.powerPlayOpportunities - data.highLevelStats.visitingTeam.stats.powerPlayGoals],
           type: 'bar',
           mode: 'lines+points',
           marker: {

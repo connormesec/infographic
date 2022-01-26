@@ -3,13 +3,13 @@ import './App.css';
 import Header from './Header';
 import HockeyPlot from './HockeyPlot';
 import HockeyGraph from './HockeyGraph';
-import PenaltyMinutesGraph from './penaltyMinutesGraph';
+import PenaltyMinutesGraph from './PenaltyMinutesGraph';
 import ScoreTitle from './ScoreTitle';
 import SavePercentage from './SavePercentage';
 import HomeScore from './HomeScore';
 import AwayScore from './AwayScore';
 import Screenshot from './Screenshot';
-import ShotsGraph from './shotsGraph';
+import ShotsGraph from './ShotsGraph';
 import HomePlayerScores from './HomePlayerScores';
 import AwayPlayerScores from './AwayPlayerScores';
 import HomeImage from './HomeImage';
@@ -18,18 +18,18 @@ import GameDate from './GameDate';
 import DownloadImage from './DownloadImage';
 
 function NormalGame({ data }) {
-    if (data[9] === false) {
+    if (true === true) {
         return (
             <div>
                 <div id="screenshot">
                     <Screenshot />
                 </div>
-                <p class="h7">Your image preview is below. Refresh to start over.</p>
-                <DownloadImage />
+                <p className="h7">Your image preview is below. Refresh to start over.</p>
+                <DownloadImage  data={data} />
                 <div className="AppBody">
                     <div className='topThird'
                         style={{
-                            background: `linear-gradient(to right, ${data[8][0]} 5%, #00000000, ${data[8][1]} 95%)`
+                            background: `linear-gradient(to right, ${data.additional.home.color} 5%, #00000000, ${data.additional.away.color} 95%)`
                         }}>
                         <div className="homeWrapper">
                             <div className="homeLogo">
@@ -66,7 +66,7 @@ function NormalGame({ data }) {
                     <div
                         className="homePlayerScores"
                         style={{
-                            background: `linear-gradient(to right, ${data[8][0]}, #00000000)`
+                            background: `linear-gradient(to right, ${data.additional.home.color}, #00000000)`
                         }}
                     >
                         <div>
@@ -79,7 +79,7 @@ function NormalGame({ data }) {
                     <div
                         className="awayPlayerScores"
                         style={{
-                            background: `linear-gradient(to left, ${data[8][1]}, #00000000)`
+                            background: `linear-gradient(to left, ${data.additional.away.color}, #00000000)`
                         }}
                     >
                         <div>
@@ -107,13 +107,14 @@ function NormalGame({ data }) {
             <div id="screenshot">
               <Screenshot />
             </div>
-            <p class="h7">Your image preview is below. Refresh to start over.</p>
+            <p className="h7">Your image preview is below. Refresh to start over.</p>
             <DownloadImage />
             <div className="AppBody">
             <div className='topThird'
-                          style={{
-                              background: `linear-gradient(to right, ${data[8][0]} 5%, #00000000, ${data[8][1]} 95%)`
-                          }}>
+                        //   style={{
+                        //       background: `linear-gradient(to right, ${data[8][0]} 5%, #00000000, ${data[8][1]} 95%)`
+                        //   }}
+                          >
               <div
                 className="homeWrapper">
                 <div className="homeLogo">

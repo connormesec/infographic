@@ -1,7 +1,7 @@
 import React from 'react';
 
 function ScoreTitle({ data }) {
-  const [awayTeam, homeTeam] = [data[4][0], data[4][1]];
+  const [awayTeam, homeTeam] = [data.highLevelStats.visitingTeam.info.nickname, data.highLevelStats.homeTeam.info.nickname];
 
   return ghettoAssFontSizing(awayTeam, homeTeam);
 }
@@ -21,8 +21,6 @@ function ghettoAssFontSizing(away, home) {
   } else {
     n = '35';
   }
-
-  console.log(`There are ${characters} characters and n = ${n}`);
 
   return (
     <div>

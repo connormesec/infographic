@@ -1,7 +1,7 @@
 import React from 'react';
 
 function AwayScore({ data }) {
-  const awayScore = data[5][0];
+  const awayScore = data.highLevelStats.visitingTeam.stats.goals;
   return <h1>{awayScore}</h1>;
 }
 

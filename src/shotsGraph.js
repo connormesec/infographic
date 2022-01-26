@@ -1,64 +1,31 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-function formatData(data) {
-  const shots = data[2];
-  const colors = data[8];
-
-  const formattedShots = {
-    homeShots: [],
-    awayShots: [],
-    homeColor: colors[0],
-    awayColor: colors[1]
-  };
-
-  formattedShots.awayShots = [shots[1][4]];
-  formattedShots.homeShots = [shots[2][4]];
-  
-  //TODO make these loops not suck so much, maybe just find the array key that has the "T" (total)
-  //handle OT scenarios
-  for (let i = 0; i < shots[0].length; i++) {
-    if (shots[0][i] === "OT") {
-      formattedShots.awayShots = [shots[1][5]];
-      formattedShots.homeShots = [shots[2][5]];
-    }
-  }
-  //handle OT scenarios
-  for (let i = 0; i < shots[0].length; i++) {
-    if (shots[0][i] === "SO") {
-      formattedShots.awayShots = [shots[1][6]];
-      formattedShots.homeShots = [shots[2][6]];
-    }
-  }
-
-  return formattedShots;
-}
-
 function ShotsGraph(props) {
-  const data = formatData(props.data);
+  const data = props.data;
   return (
     <Plot
       data={[
         //Home Team Shots
         {
-          x: [data.homeShots  + '\u200b'],
-          y: data.homeShots,
+          x: [data.highLevelStats.homeTeam.stats.shots  + '\u200b'],
+          y: [data.highLevelStats.homeTeam.stats.shots],
            
           type: 'bar',
           mode: 'lines+points',
           marker: {
-            color: data.homeColor,
+            color: data.additional.home.color,
             line: { color: 'white', width: 2 }
           }
         },
         //Away Team Shots
         {
-          x: [data.awayShots],
-          y: data.awayShots,
+          x: [data.highLevelStats.visitingTeam.stats.shots + '\u200b'],
+          y: [data.highLevelStats.visitingTeam.stats.shots],
           type: 'bar',
           mode: 'lines+points',
           marker: {
-            color: data.awayColor,
+            color: data.additional.away.color,
             line: { color: 'white', width: 2 }
           }
         }

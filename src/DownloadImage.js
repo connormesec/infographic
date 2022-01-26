@@ -1,11 +1,13 @@
 import React from 'react';
 
-function DownloadImage() {
+function DownloadImage(props) {
+  const data = props.data;
+  let fileName = `${data.highLevelStats.homeTeam.info.abbreviation}vs${data.highLevelStats.visitingTeam.info.abbreviation}_${data.highLevelStats.details.GameDateISO8601.split('T')[0]}.png`;
   return (
     <button
       className="button"
       onClick={() => {
-        saveAs(document.getElementsByTagName('canvas')[0].toBlob(), 'file-name.png');
+        downloadCanvasAsImage(fileName);
       }}
     >
       Download Image
@@ -13,24 +15,19 @@ function DownloadImage() {
   );
 }
 
-function saveAs(uri, filename) {
-  var link = document.createElement('a');
 
-  if (typeof link.download === 'string') {
-    link.href = uri;
-    link.download = filename;
-
-    //Firefox requires the link to be in the body
-    document.body.appendChild(link);
-
-    //simulate click
-    link.click();
-
-    //remove the link when done
-    document.body.removeChild(link);
-  } else {
-    window.open(uri);
-  }
+function downloadCanvasAsImage(fileName) {
+  let downloadLink = document.createElement('a');
+  downloadLink.setAttribute('download', fileName);
+  let canvas = document.getElementsByTagName('canvas')[0];
+  canvas.toBlob(function(blob) {
+    let url = URL.createObjectURL(blob);
+    console.log(url)
+    downloadLink.setAttribute('href', url);
+    downloadLink.click();
+  },'image/jpeg', 0.5);
 }
+
+
 
 export default DownloadImage;
