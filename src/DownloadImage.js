@@ -6,6 +6,7 @@ function DownloadImage(props) {
   return (
     <button
       className="button"
+      id="download_button"
       onClick={() => {
         downloadCanvasAsImage(fileName);
       }}
@@ -14,7 +15,6 @@ function DownloadImage(props) {
     </button>
   );
 }
-
 
 function downloadCanvasAsImage(fileName) {
   let downloadLink = document.createElement('a');
@@ -27,7 +27,5 @@ function downloadCanvasAsImage(fileName) {
     downloadLink.click();
   },'image/jpeg', 0.5);
 }
-
-
 
 export default DownloadImage;
