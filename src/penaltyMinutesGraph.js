@@ -3,7 +3,6 @@ import Plot from 'react-plotly.js';
 
 function PenaltyMinutesGraph(props) {
   const data = props.data;
-
   return (
     <Plot
       data={[

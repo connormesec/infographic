@@ -3,8 +3,9 @@ import Plot from 'react-plotly.js';
 
 function HockeyGraph(props) {
   const data = props.data;
-  let homeTitle = data.highLevelStats.homeTeam.stats.powerPlayGoals + '/' + data.highLevelStats.homeTeam.stats.powerPlayOpportunities + '\u200b';
-  let awayTitle = data.highLevelStats.visitingTeam.stats.powerPlayGoals + '/' + data.highLevelStats.visitingTeam.stats.powerPlayOpportunities + '\u200b';
+  console.log(data)
+  let homeTitle = data.highLevelStats.homeTeam.stats.powerPlayGoals + '/' + data.highLevelStats.visitingTeam.stats.infractionCount + '\u200b';
+  let awayTitle = data.highLevelStats.visitingTeam.stats.powerPlayGoals + '/' + data.highLevelStats.homeTeam.stats.infractionCount + '\u200b';
   return (
     <Plot
       data={[
@@ -20,7 +21,7 @@ function HockeyGraph(props) {
         },
         {
           x: [homeTitle],
-          y: [data.highLevelStats.homeTeam.stats.powerPlayOpportunities - data.highLevelStats.homeTeam.stats.powerPlayGoals],
+          y: [data.highLevelStats.visitingTeam.stats.infractionCount - data.highLevelStats.homeTeam.stats.powerPlayGoals],
           type: 'bar',
           mode: 'lines+points',
           marker: {
@@ -41,7 +42,7 @@ function HockeyGraph(props) {
         },
         {
           x: [awayTitle],
-          y: [data.highLevelStats.visitingTeam.stats.powerPlayOpportunities - data.highLevelStats.visitingTeam.stats.powerPlayGoals],
+          y: [data.highLevelStats.homeTeam.stats.infractionCount - data.highLevelStats.visitingTeam.stats.powerPlayGoals],
           type: 'bar',
           mode: 'lines+points',
           marker: {
