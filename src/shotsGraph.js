@@ -8,7 +8,7 @@ function ShotsGraph(props) {
       data={[
         //Home Team Shots
         {
-          x: [data.highLevelStats.homeTeam.stats.shots  + '\u200b'],
+          x: [data.highLevelStats.homeTeam.stats.shots  + '\u200b\u200b'], //add aditional character or else Plotly will stack bars with same value
           y: [data.highLevelStats.homeTeam.stats.shots],
            
           type: 'bar',

@@ -3,12 +3,13 @@ import Plot from 'react-plotly.js';
 
 function PenaltyMinutesGraph(props) {
   const data = props.data;
+  console.log(data);
   return (
     <Plot
       data={[
         //Home Team Shots
         {
-          x: [data.highLevelStats.homeTeam.stats.penaltyMinuteCount + '\u200b'],
+          x: [data.highLevelStats.homeTeam.stats.penaltyMinuteCount + '\u200b\u200b'], //add aditional character or else Plotly will stack bars with same value
           y: [data.highLevelStats.homeTeam.stats.penaltyMinuteCount],
           type: 'bar',
           mode: 'lines+points',

@@ -4,7 +4,7 @@ import Plot from 'react-plotly.js';
 function HockeyGraph(props) {
   const data = props.data;
   console.log(data)
-  let homeTitle = data.highLevelStats.homeTeam.stats.powerPlayGoals + '/' + data.highLevelStats.visitingTeam.stats.infractionCount + '\u200b';
+  let homeTitle = data.highLevelStats.homeTeam.stats.powerPlayGoals + '/' + data.highLevelStats.visitingTeam.stats.infractionCount + '\u200b\u200b'; //add aditional character or else Plotly will stack bars with same value
   let awayTitle = data.highLevelStats.visitingTeam.stats.powerPlayGoals + '/' + data.highLevelStats.homeTeam.stats.infractionCount + '\u200b';
   return (
     <Plot

@@ -22,7 +22,6 @@ function downloadCanvasAsImage(fileName) {
   let canvas = document.getElementsByTagName('canvas')[0];
   canvas.toBlob(function(blob) {
     let url = URL.createObjectURL(blob);
-    console.log(url)
     downloadLink.setAttribute('href', url);
     downloadLink.click();
   },'image/jpeg', 0.5);

@@ -28,7 +28,7 @@ function SavePercentage(props) {
     <Plot
       data={[
         {
-          x: ['.' + homeSavePercentage.toString().split('.')[1] + '\u200b'],
+          x: ['.' + homeSavePercentage.toString().split('.')[1] + '\u200b\u200b'], //add aditional character or else Plotly will stack bars with same value
           y: [homeSavePercentage],
           type: 'bar',
           mode: 'lines+points',
