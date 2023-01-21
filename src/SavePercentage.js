@@ -41,7 +41,7 @@ function SavePercentage(props) {
           }
         },
         {
-          x: ['.' + homeSavePercentage.toString().split('.')[1] + '\u200b'],
+          x: ['.' + homeSavePercentage.toString().split('.')[1] + '\u200b\u200b'],
           y: [ 1- homeSavePercentage],
           type: 'bar',
           mode: 'lines+points',
