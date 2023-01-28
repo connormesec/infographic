@@ -6,6 +6,7 @@ import NormalGame from './NormalGame';
 import Shootout from './ShootOut';
 import homeimage from './homePageImage.png';
 import $ from 'jquery';
+import BoxGraphic from './BoxGraphic';
 
 const axios = require('axios');
 
@@ -15,8 +16,6 @@ let teamColors = [];
 let noShots = false;
 let shootoutBool = false;
 
-const googleurl = 'https://script.google.com/macros/s/AKfycbw7liZvs_NMJKXvlrTKK6aA8ex-6e_f7YQbLhpgnAlvu4eMYrEi/exec';
-/// Placeholder text for the inputs, must match columns of google spreadsheet
 
 function App() {
   const [url, setUrl] = useState();
@@ -38,7 +37,6 @@ function App() {
           onKeyPress={(ev) => {
             if (ev.key === 'Enter') {
               setUrl(textInputRef.value);
-              //sendToSpreadSheet(textInputRef.value);
               ev.preventDefault();
             }
           }}
@@ -47,7 +45,6 @@ function App() {
           className="button"
           onClick={() => {
             setUrl(textInputRef.value);
-            //sendToSpreadSheet(textInputRef.value);
           }}
         >
           Generate
@@ -108,37 +105,17 @@ function Plots({ url }) {
       </div>
     );
   } else {
+    console.log(data)
     return (
       <div className="App">
-        <NormalGame data={data} />
+        <div><NormalGame data={data} /></div>
+        
+        <div><BoxGraphic data={data} /></div>
       </div>
     );
   }
 }
 
-// function sendToSpreadSheet(text) {
-//   let timestamp_end = new Date();
-//   const payload = "timestamp=" + timestamp_end + "&URL=" + text;
-//   $.ajax({
-//     url: googleurl,
-//     method: "GET",
-//     dataType: "json",
-//     data: payload,
-//   })
-// }
-
-function getWebsiteHtml(url) {
-  // return new Promise((resolve, reject) => {
-  //   request(url, function(error, response, html) {
-  //     if (!error && response.statusCode === 200) {
-  //       resolve(html);
-  //     } else {
-  //       console.log(error);
-  //       reject('no');
-  //     }
-  //   });
-  // });
-}
 
 function getTeamLogoAndColors(homeName, awayName) {
   let json = require('./test.json');

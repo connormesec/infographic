@@ -18,7 +18,7 @@ import GameDate from './GameDate';
 import DownloadImage from './DownloadImage';
 
 function NormalGame({ data }) {
-    if (true === true) {
+    if (true === true) { //Todo: fix this
         return (
             <div>
                 <div id="screenshot">
@@ -110,11 +110,7 @@ function NormalGame({ data }) {
             <p className="h7">Your image preview is below. Refresh to start over.</p>
             <DownloadImage />
             <div className="AppBody">
-            <div className='topThird'
-                        //   style={{
-                        //       background: `linear-gradient(to right, ${data[8][0]} 5%, #00000000, ${data[8][1]} 95%)`
-                        //   }}
-                          >
+            <div className='topThird'>
               <div
                 className="homeWrapper">
                 <div className="homeLogo">

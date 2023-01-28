@@ -31,7 +31,7 @@
   border-width: 1px;
 }
 
-.button, .button:focus {
+.button, .button:focus, .button2, .button2:focus {
   width: 300px;
   height: 70px;
   font-size: 30px;
@@ -371,6 +371,80 @@ input[type=email], textarea {
 
 .contact:hover {
   background-color:  #00a6c0;;
+}
+
+.BoxGraphic {
+  width: 1210px;
+  height: 500px;
+  background-color: #ececec;
+}
+
+.bg_Background {
+  width: 1210px;
+  height: 500px;
+  background-color: #ececec;
+}
+.bg_TopNamesContianer {
+padding-top: 10px;
+    display: flex;                  /* establish flex container */
+  flex-direction: row;            /* default value; can be omitted */
+  flex-wrap: nowrap;              /* default value; can be omitted */
+  justify-content: space-evenly; 
+}
+.bg_TopLeftContainer, .bg_TopRightContainer {
+	display: flex;   
+}
+.bg_LeftLogoBox, .bg_RightLogoBox {
+	height: 80px;
+	width: 100px;
+    background-color: red;
+}
+.bg_LeftLogoNameDividerStripe{
+	height:80px;
+    width: 80px;
+   overflow: hidden;
+    background:
+    linear-gradient(50deg, red 52px, #ececec 53px, #ececec 62px,#ffffff 63px);
+}
+.bg_RightLogoNameDividerStripe{
+	height:80px;
+    width: 80px;
+    background:
+    linear-gradient(310deg, red 45%, #ececec 46%, #ececec 54%,#ffffff 55%);
+}
+.bg_LeftNameRect, .bg_RightNameRect {
+	height: 80px;
+	width: 310px;
+    background-color: #ffffff;
+}
+.bg_LeftScoreBox, .bg_RightScoreBox {
+	width: 80px;
+    height: 80px;
+    background-color: #ffffff;
+}
+.bg_MiddleDataContianer {
+	padding-top: 10px;
+    display: flex;                  /* establish flex container */
+  flex-direction: row;            /* default value; can be omitted */
+  flex-wrap: nowrap;              /* default value; can be omitted */
+  justify-content: space-evenly; /* switched from default (flex-start, see below) */
+}
+.bg_DataBox {
+	height: 200px;
+    width: 200px;
+    background-color: #ffffff;
+}
+.bg_ScoreBox {
+	height: 200px;
+    width: 320px;
+    background-color: #ffffff;
+}
+.bg_TitleBar {
+position:relative;
+  transform:translateY(-50%);
+  border: 2px solid #d1d1d1;
+  width: 70%;
+  margin: auto;
 }
 
 
