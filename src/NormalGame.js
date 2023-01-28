@@ -24,7 +24,6 @@ function NormalGame({ data }) {
                 <div id="screenshot">
                     <Screenshot />
                 </div>
-                <p className="h7">Your image preview is below. Refresh to start over.</p>
                 <DownloadImage  data={data} />
                 <div className="AppBody">
                     <div className='topThird'

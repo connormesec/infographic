@@ -105,12 +105,10 @@ function Plots({ url }) {
       </div>
     );
   } else {
-    console.log(data)
     return (
       <div className="App">
-        <div><NormalGame data={data} /></div>
-        
-        <div><BoxGraphic data={data} /></div>
+        <BoxGraphic data={data} />
+        <NormalGame data={data} />
       </div>
     );
   }
